@@ -15,7 +15,7 @@ use OpenApi\Annotations as OA;
  *
  * @author  Evelline <evelline.kristiani@ukrida.ac.id>
  */
-class AuthController extends Controller
+class AuthController extends APIController
 {
     /**
      * @OA\Post(
@@ -56,7 +56,7 @@ class AuthController extends Controller
             $request['password']        =   Hash::make($request['password']);
             $request['remember_token']  =   \Illuminate\Support\Str::random(10);
             $user       = User::create($request->toArray());
-            $token      = $user->createToken('MY REST API Password Grant Client')->accessToken; // string inside createToken is the token name
+            $token      = $user->createToken('Laravel Password Grant Client')->accessToken; // string inside createToken is the token name
             return response()->json(
                 array('name' => $request->name, 'email' => $request->get('email'), 'token' => $token), 
                 200
@@ -104,9 +104,9 @@ class AuthController extends Controller
             $user = User::where('email', $request->email)->first();
             if ($user) {
                 if (Hash::check($request->password, $user->password)) {
-                    $token = $user->createToken('MY REST API Password Grant Client')->accessToken;
+                    $token = $user->createToken('Laravel Password Grant Client')->accessToken;
                     return response()->json(
-                        array('email' => $request->get('email'), 'token' => $token), 
+                        array('data' => $user, 'token' => $token), 
                         200
                     );
                 } else {
@@ -135,15 +135,6 @@ class AuthController extends Controller
      *         response=200,
      *         description="successful",
      *         @OA\JsonContent()
-     *     ),
-     *     @OA\Parameter(
-     *         name="email",
-     *         in="path",
-     *         description="User Email",
-     *         required=true,
-     *         @OA\Schema(
-     *             type="string",
-     *         )
      *     ),
      *     security={{"passport_token_ready":{},"passport":{}}}
      * )
