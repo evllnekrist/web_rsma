@@ -1,4 +1,4 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://img.freepik.com/premium-vector/caduceus-logo-vector-health-care-hospital_516670-132.jpg" width="400" alt="Health Related"></a></p>
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://image.pngaaa.com/488/264488-middle.png" width="400" alt="Health Related"></a></p>
 
 
 ## Developer Note
