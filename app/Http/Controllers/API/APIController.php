@@ -110,18 +110,36 @@ class APIController extends Controller
       }
     }
 
-    public function post_common(Request $request, $model, $rules){
+    public function post_common(Request $request, $model, $rules, $file_indexes){
         try {
             $validator = Validator::make($request->all(), $rules); 
             if ($validator->fails()) {
                 throw new HttpException(400, $validator->messages()->first());
             }
-            $model  = 'App\Models\\'.$model;
-            $body = $request->all();
+            $default_folder     = strtolower($model);
+            $model              = 'App\Models\\'.$model;
+            $body               = $request->all();
             $body['created_by'] = \Auth::user()->id;
             $body['created_at'] = new \DateTime();
-            $item = app($model)->create($body);
-            return response()->json(array('data'=>$item,'message'=>'Created successfully'), 200);
+            $item               = app($model)->create($body);
+            
+            if(!empty($file_indexes)){
+                foreach($file_indexes as $index){ // https://laracasts.com/discuss/channels/laravel/how-direct-upload-file-in-storage-folder
+                  if($request->file($index)){
+                    $filename_with_ext = $request->file($index)->getClientOriginalName(); // Get filename with the extension
+                    $filename = pathinfo($filename_with_ext, PATHINFO_FILENAME); // Get just filename
+                    $extension = $request->file($index)->getClientOriginalExtension(); // Get just ext
+                    $filename_to_store = str_replace('/','-',$default_folder).$item->id.'.'.$extension;
+                    $path = $request->file($index)->storeAs('public/'.$default_folder,$filename_to_store); // Upload Image
+                    $body[$index] = '/storage//'.$default_folder.'/'.$filename_to_store;
+                  }else{
+                    unset($body[$index]);
+                  }
+                }
+                $item2 = app($model)::where('id',$item->id)->update($body);
+            }
+
+            return response()->json(array('data'=>$item,'data2'=>$item2,'message'=>'Created successfully'), 200);
         } catch(\Exception $exception) {
             throw new HttpException(400, "Invalid data : {$exception->getMessage()}");
         }

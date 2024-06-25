@@ -81,6 +81,7 @@ class PageController extends APIController
      *     tags={"page"},
      *     summary="Store a newly created item",
      *     operationId="store",
+     *     @OA\MediaType(mediaType="multipart/form-data"),
      *     @OA\Response(
      *         response=400,
      *         description="Invalid input",
@@ -91,13 +92,28 @@ class PageController extends APIController
      *         description="Successful",
      *         @OA\JsonContent()
      *     ),
+     *     @OA\Parameter(
+     *         name="img_main",
+     *         in="query",
+     *         description="The image to upload",
+     *         @OA\Schema(
+     *             type="file",
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="file_main",
+     *         in="query",
+     *         description="The file to upload",
+     *         @OA\Schema(
+     *             type="file",
+     *         )
+     *     ),
      *     @OA\RequestBody(
      *         required=true,
      *         description="Request body description",
      *         @OA\JsonContent(
      *             ref="#/components/schemas/Page",
-     *             example={"slug": "eating-clean", "title": "Eating Clean", "layout": "img-body", 
-     *                      "img_main": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/page/1482170055i/33511107.jpg", 
+     *             example={"slug": "eating-clean", "title": "Eating Clean", "layout": "img-body", "img_link": "", 
      *                      "body": "<p>Menjadi sehat adalah impian semua orang. Makanan yang selama ini kita pikir sehat ternyata belum tentu <i>‘sehat’</i> bagi tubuh kita.</p>"}
      *         ),
      *     ),
@@ -111,7 +127,7 @@ class PageController extends APIController
             'title'  => 'required|unique:pages',
             'layout'  => 'required',
         ];
-        return $this->post_common($request, $this->model, $rules);
+        return $this->post_common($request, $this->model, $rules, ['img_main','file_main']);
     }
 
     /**
