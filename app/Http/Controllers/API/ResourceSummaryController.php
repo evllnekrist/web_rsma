@@ -10,7 +10,7 @@ use OpenApi\Annotations as OA;
 /**
  * Class ResourceSummaryController.
  *
- * @author  Evelline <evelline.kristiani@ukrida.ac.id>
+ * @author  Evelline <ev.attoff@gmail.com>
  */
 class ResourceSummaryController extends APIController
 {

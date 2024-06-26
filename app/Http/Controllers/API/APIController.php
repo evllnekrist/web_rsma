@@ -10,7 +10,7 @@ use OpenApi\Annotations as OA;
 
 /**
  * @OA\Info(
- *      version="1.0",
+ *      version="VER 1.0",
  *      title="RS Mas Amsyar WEB API", 
  *      description="
  * > Footprint 1.0 (2024 June 25) `Developed along with the web frontend to be consumed by and also enabled integration with 3rd party API in the future`
@@ -21,8 +21,8 @@ use OpenApi\Annotations as OA;
  *          }
  *      },
  *      @OA\Contact(
- *          name="Evelline UKRIDA",
- *          email="evelline.kristiani@ukrida.ac.id"
+ *          name="Evelline Krist.",
+ *          email="ev.attoff@gmail.com"
  *      ),
  * )
  */

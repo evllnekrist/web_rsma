@@ -10,7 +10,7 @@ use OpenApi\Annotations as OA;
 /**
  * Class SatisfactionController.
  *
- * @author  Evelline <evelline.kristiani@ukrida.ac.id>
+ * @author  Evelline <ev.attoff@gmail.com>
  */
 class SatisfactionController extends APIController
 {

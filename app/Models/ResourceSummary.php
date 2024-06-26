@@ -10,7 +10,7 @@ use OpenApi\Annotations as OA;
 /**
  * Class ResourceSummary.
  * 
- * @author  Evelline <evelline.kristiani@ukrida.ac.id>
+ * @author  Evelline <ev.attoff@gmail.com>
  * 
  * @OA\Schema(
  *     description="ResourceSummary model",

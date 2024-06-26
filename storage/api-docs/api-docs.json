@@ -4,10 +4,10 @@
         "title": "RS Mas Amsyar WEB API",
         "description": "\r\n * > Footprint 1.0 (2024 June 25) `Developed along with the web frontend to be consumed by and also enabled integration with 3rd party API in the future`\r\n * > Footprint x (2024 xx xx) `this-is-footnote-format-please-continue-on-next-dev`",
         "contact": {
-            "name": "Evelline UKRIDA",
-            "email": "evelline.kristiani@ukrida.ac.id"
+            "name": "Evelline Krist.",
+            "email": "ev.attoff@gmail.com"
         },
-        "version": "1.0",
+        "version": "VER 1.0",
         "x-logo": {
             "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Laravel.svg/985px-Laravel.svg.png"
         }
