@@ -27,20 +27,21 @@ class Article extends Model
 
     protected $table = 'articles';
     protected $fillable = [
-        'category_id',
+        'type',
+        'status',
         'slug',
         'title',
         'content',
-        'status',
-        'type',
         'keywords',
         'img_main',
-        'icon',
         'caption',
         'sequence',
         'portal_user_id',
-        'created_at',
         'post_at',
         'publish_at',
+        'created_at',
+        'created_by',
+        'updated_at',
+        'created_by',
     ];
 }

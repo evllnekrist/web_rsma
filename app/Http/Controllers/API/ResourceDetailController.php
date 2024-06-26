@@ -4,23 +4,23 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Page;
+use App\Models\ResourceDetail;
 use OpenApi\Annotations as OA;
 
 /**
- * Class PageController.
+ * Class ResourceDetailController.
  *
  * @author  Evelline <evelline.kristiani@ukrida.ac.id>
  */
-class PageController extends APIController
+class ResourceDetailController extends APIController
 {
-    protected $model = 'Page';
+    protected $model = 'ResourceDetail';
     /**
      * @OA\Get(
-     *     path="/api/page",
-     *     tags={"Page"},
+     *     path="/api/resource-detail",
+     *     tags={"Resource Detail"},
      *     summary="Display a listing of items",
-     *     operationId="pageIndex",
+     *     operationId="resourceDetailIndex",
      *     @OA\Response(
      *         response=200,
      *         description="successful",
@@ -70,17 +70,17 @@ class PageController extends APIController
      */
     public function index(Request $request)
     {
-        $filter['equal']  = ['slug'];
-        $filter['search'] = ['title'];
+        $filter['equal']  = ['key'];
+        $filter['search'] = ['name'];
         return $this->get_list_common($request, $this->model, $filter, []);
     }
 
     /**
      * @OA\Post(
-     *     path="/api/page",
-     *     tags={"Page"},
+     *     path="/api/resource-detail",
+     *     tags={"Resource Detail"},
      *     summary="Store a newly created item",
-     *     operationId="pageStore",
+     *     operationId="resource-detailStore",
      *     @OA\MediaType(mediaType="multipart/form-data"),
      *     @OA\Response(
      *         response=400,
@@ -98,40 +98,31 @@ class PageController extends APIController
      *             mediaType="multipart/form-data",
      *             @OA\Schema(
      *                 @OA\Property(
-     *                     property="slug",
+     *                     property="key",
      *                     type="string",
-     *                     example="clean-eating",
+     *                     example="dokter-tht",
      *                 ),
      *                 @OA\Property(
-     *                     property="title",
+     *                     property="name",
      *                     type="string",
-     *                     example="Clean Eating",
+     *                     example="Person 1",
      *                 ),
      *                 @OA\Property(
-     *                     property="layout",
+     *                     property="description",
      *                     type="string",
-     *                     example="img_body",
+     *                     example=""
      *                 ),
      *                 @OA\Property(
-     *                     description="Image to upload",
-     *                     property="img_main",
-     *                     type="file",
-     *                 ),
-     *                 @OA\Property(
-     *                     description="File to upload",
-     *                     property="file_main",
-     *                     type="file",
-     *                 ),
-     *                 @OA\Property(
-     *                     property="file_link",
+     *                     property="link",
      *                     type="string",
+     *                     example=""
      *                 ),
      *                 @OA\Property(
-     *                     property="body",
-     *                     type="string",
-     *                     example="<p>Menjadi sehat adalah impian semua orang. Makanan yang selama ini kita pikir sehat ternyata belum tentu <i>`sehat`</i> bagi tubuh kita.</p>"
+     *                     property="sequence",
+     *                     type="integer",
+     *                     example=""
      *                 ),
-     *                 required={"slug","title","layout"}
+     *                 required={"name"}
      *             )
      *         )
      *     ),
@@ -141,19 +132,17 @@ class PageController extends APIController
     public function store(Request $request)
     {
         $rules = [
-            'slug'  => 'required|unique:pages',
-            'title'  => 'required|unique:pages',
-            'layout'  => 'required',
+            'name'  => 'required',
         ];
-        return $this->post_common($request, $this->model, $rules, ['img_main','file_main']);
+        return $this->post_common($request, $this->model, $rules);
     }
 
     /**
      * @OA\Get(
-     *     path="/api/page/{id}",
-     *     tags={"Page"},
+     *     path="/api/resource-detail/{id}",
+     *     tags={"Resource Detail"},
      *     summary="Display the specified item",
-     *     operationId="pageShow",
+     *     operationId="resource-detailShow",
      *     @OA\Response(
      *         response=404,
      *         description="Item not found",
@@ -187,10 +176,10 @@ class PageController extends APIController
 
     /**
      * @OA\Post(
-     *     path="/api/page/{id}",
-     *     tags={"Page"},
+     *     path="/api/resource-detail/{id}",
+     *     tags={"Resource Detail"},
      *     summary="Update the specified item",
-     *     operationId="pageUpdate",
+     *     operationId="resource-detailUpdate",
      *     @OA\MediaType(mediaType="multipart/form-data"),
      *     @OA\Response(
      *         response=404,
@@ -223,35 +212,31 @@ class PageController extends APIController
      *             mediaType="multipart/form-data",
      *             @OA\Schema(
      *                 @OA\Property(
-     *                     property="title",
+     *                     property="key",
      *                     type="string",
-     *                     example="[EDITED] Clean Eating",
+     *                     example="dokter-tht-edited",
      *                 ),
      *                 @OA\Property(
-     *                     property="layout",
+     *                     property="name",
      *                     type="string",
-     *                     example="img_body",
+     *                     example="[EDITED] Person 1",
      *                 ),
      *                 @OA\Property(
-     *                     description="Image to upload",
-     *                     property="img_main",
-     *                     type="file",
-     *                 ),
-     *                 @OA\Property(
-     *                     description="File to upload",
-     *                     property="file_main",
-     *                     type="file",
-     *                 ),
-     *                 @OA\Property(
-     *                     property="file_link",
+     *                     property="description",
      *                     type="string",
+     *                     example=""
      *                 ),
      *                 @OA\Property(
-     *                     property="body",
+     *                     property="link",
      *                     type="string",
-     *                     example="<p>[EDITED]</p><p>Menjadi sehat adalah impian semua orang. Makanan yang selama ini kita pikir sehat ternyata belum tentu <i>`sehat`</i> bagi tubuh kita.</p>"
+     *                     example=""
      *                 ),
-     *                 required={"title","layout"}
+     *                 @OA\Property(
+     *                     property="sequence",
+     *                     type="integer",
+     *                     example=""
+     *                 ),
+     *                 required={"name"}
      *             )
      *         )
      *     ),
@@ -261,19 +246,18 @@ class PageController extends APIController
     public function update(Request $request, $id)
     {
         $rules = [
-            'title'  => 'required|unique:pages',
-            'layout'  => 'required',
+            'name'  => 'required',
         ];
-        return $this->put_common($request, $id, $this->model, $rules, ['img_main','file_main']);
+        return $this->put_common($request, $id, $this->model, $rules);
 
     }
     
     /**
      * @OA\Delete(
-     *     path="/api/page/{id}",
-     *     tags={"Page"},
+     *     path="/api/resource-detail/{id}",
+     *     tags={"Resource Detail"},
      *     summary="Remove the specified item",
-     *     operationId="pageDestroy",
+     *     operationId="resource-detailDestroy",
      *     @OA\Response(
      *         response=404,
      *         description="Item not found",

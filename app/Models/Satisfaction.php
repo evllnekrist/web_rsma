@@ -30,7 +30,7 @@ class Satisfaction extends Model
         'name',
         'email',
         'title',
-        'desc',
+        'description',
         'created_at',
         'created_by',
         'updated_at',

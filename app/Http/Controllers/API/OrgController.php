@@ -4,23 +4,23 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Page;
+use App\Models\Org;
 use OpenApi\Annotations as OA;
 
 /**
- * Class PageController.
+ * Class OrgController.
  *
  * @author  Evelline <evelline.kristiani@ukrida.ac.id>
  */
-class PageController extends APIController
+class OrgController extends APIController
 {
-    protected $model = 'Page';
+    protected $model = 'Org';
     /**
      * @OA\Get(
-     *     path="/api/page",
-     *     tags={"Page"},
+     *     path="/api/org",
+     *     tags={"Organizational Structure"},
      *     summary="Display a listing of items",
-     *     operationId="pageIndex",
+     *     operationId="orgIndex",
      *     @OA\Response(
      *         response=200,
      *         description="successful",
@@ -70,17 +70,17 @@ class PageController extends APIController
      */
     public function index(Request $request)
     {
-        $filter['equal']  = ['slug'];
-        $filter['search'] = ['title'];
+        $filter['equal']  = ['id'];
+        $filter['search'] = ['name','job_title'];
         return $this->get_list_common($request, $this->model, $filter, []);
     }
 
     /**
      * @OA\Post(
-     *     path="/api/page",
-     *     tags={"Page"},
+     *     path="/api/org",
+     *     tags={"Organizational Structure"},
      *     summary="Store a newly created item",
-     *     operationId="pageStore",
+     *     operationId="orgStore",
      *     @OA\MediaType(mediaType="multipart/form-data"),
      *     @OA\Response(
      *         response=400,
@@ -98,19 +98,18 @@ class PageController extends APIController
      *             mediaType="multipart/form-data",
      *             @OA\Schema(
      *                 @OA\Property(
-     *                     property="slug",
-     *                     type="string",
-     *                     example="clean-eating",
+     *                     property="parent_id",
+     *                     type="integer",
      *                 ),
      *                 @OA\Property(
-     *                     property="title",
+     *                     property="name",
      *                     type="string",
-     *                     example="Clean Eating",
+     *                     example="Rhenald Kasali",
      *                 ),
      *                 @OA\Property(
-     *                     property="layout",
+     *                     property="job_title",
      *                     type="string",
-     *                     example="img_body",
+     *                     example="Head of ABC",
      *                 ),
      *                 @OA\Property(
      *                     description="Image to upload",
@@ -118,20 +117,16 @@ class PageController extends APIController
      *                     type="file",
      *                 ),
      *                 @OA\Property(
-     *                     description="File to upload",
-     *                     property="file_main",
-     *                     type="file",
+     *                     property="desc_title",
+     *                     type="string",
+     *                     example="<b>The Desc Title</b>"
      *                 ),
      *                 @OA\Property(
-     *                     property="file_link",
+     *                     property="desc_body",
      *                     type="string",
+     *                     example="<p><i>`Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...`</i></p>"
      *                 ),
-     *                 @OA\Property(
-     *                     property="body",
-     *                     type="string",
-     *                     example="<p>Menjadi sehat adalah impian semua orang. Makanan yang selama ini kita pikir sehat ternyata belum tentu <i>`sehat`</i> bagi tubuh kita.</p>"
-     *                 ),
-     *                 required={"slug","title","layout"}
+     *                 required={"job_title"}
      *             )
      *         )
      *     ),
@@ -141,19 +136,17 @@ class PageController extends APIController
     public function store(Request $request)
     {
         $rules = [
-            'slug'  => 'required|unique:pages',
-            'title'  => 'required|unique:pages',
-            'layout'  => 'required',
+            'job_title'  => 'required|unique:orgs',
         ];
-        return $this->post_common($request, $this->model, $rules, ['img_main','file_main']);
+        return $this->post_common($request, $this->model, $rules, ['img_main']);
     }
 
     /**
      * @OA\Get(
-     *     path="/api/page/{id}",
-     *     tags={"Page"},
+     *     path="/api/org/{id}",
+     *     tags={"Organizational Structure"},
      *     summary="Display the specified item",
-     *     operationId="pageShow",
+     *     operationId="orgShow",
      *     @OA\Response(
      *         response=404,
      *         description="Item not found",
@@ -187,10 +180,10 @@ class PageController extends APIController
 
     /**
      * @OA\Post(
-     *     path="/api/page/{id}",
-     *     tags={"Page"},
+     *     path="/api/org/{id}",
+     *     tags={"Organizational Structure"},
      *     summary="Update the specified item",
-     *     operationId="pageUpdate",
+     *     operationId="orgUpdate",
      *     @OA\MediaType(mediaType="multipart/form-data"),
      *     @OA\Response(
      *         response=404,
@@ -223,14 +216,18 @@ class PageController extends APIController
      *             mediaType="multipart/form-data",
      *             @OA\Schema(
      *                 @OA\Property(
-     *                     property="title",
-     *                     type="string",
-     *                     example="[EDITED] Clean Eating",
+     *                     property="parent_id",
+     *                     type="integer",
      *                 ),
      *                 @OA\Property(
-     *                     property="layout",
+     *                     property="name",
      *                     type="string",
-     *                     example="img_body",
+     *                     example="[EDITED] Rhenald Kasali",
+     *                 ),
+     *                 @OA\Property(
+     *                     property="job_title",
+     *                     type="string",
+     *                     example="[EDITED] Head of ABC",
      *                 ),
      *                 @OA\Property(
      *                     description="Image to upload",
@@ -238,20 +235,16 @@ class PageController extends APIController
      *                     type="file",
      *                 ),
      *                 @OA\Property(
-     *                     description="File to upload",
-     *                     property="file_main",
-     *                     type="file",
+     *                     property="desc_title",
+     *                     type="string",
+     *                     example="<b>[EDITED] The Desc Title</b>"
      *                 ),
      *                 @OA\Property(
-     *                     property="file_link",
+     *                     property="desc_body",
      *                     type="string",
+     *                     example="<p>[EDITED]</p><p><i>`Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...`</i></p>"
      *                 ),
-     *                 @OA\Property(
-     *                     property="body",
-     *                     type="string",
-     *                     example="<p>[EDITED]</p><p>Menjadi sehat adalah impian semua orang. Makanan yang selama ini kita pikir sehat ternyata belum tentu <i>`sehat`</i> bagi tubuh kita.</p>"
-     *                 ),
-     *                 required={"title","layout"}
+     *                 required={"job_title"}
      *             )
      *         )
      *     ),
@@ -261,19 +254,18 @@ class PageController extends APIController
     public function update(Request $request, $id)
     {
         $rules = [
-            'title'  => 'required|unique:pages',
-            'layout'  => 'required',
+            'job_title'  => 'required|unique:orgs',
         ];
-        return $this->put_common($request, $id, $this->model, $rules, ['img_main','file_main']);
+        return $this->put_common($request, $id, $this->model, $rules, ['img_main']);
 
     }
     
     /**
      * @OA\Delete(
-     *     path="/api/page/{id}",
-     *     tags={"Page"},
+     *     path="/api/org/{id}",
+     *     tags={"Organizational Structure"},
      *     summary="Remove the specified item",
-     *     operationId="pageDestroy",
+     *     operationId="orgDestroy",
      *     @OA\Response(
      *         response=404,
      *         description="Item not found",

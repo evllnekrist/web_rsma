@@ -30,7 +30,7 @@ class Option extends Model
         'value',
         'value2',
         'label',
-        'desc',
+        'description',
         'img_main',
         'created_at',
         'created_by',

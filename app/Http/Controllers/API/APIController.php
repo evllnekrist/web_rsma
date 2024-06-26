@@ -121,25 +121,36 @@ class APIController extends Controller
             $body               = $request->all();
             $body['created_by'] = \Auth::user()->id;
             $body['created_at'] = new \DateTime();
+            $item2              = null;
             $item               = app($model)->create($body);
+            $pk                 = app($model)->getKeyName();
+            if($pk != 'id'){ 
+                $id = $request->get($pk);
+            }else{
+                $id = $item->$pk;
+            }
             
             if(!empty($file_indexes)){
+                if($request->file($file_indexes[0])){
+                  $body2          = array();
+                }
                 foreach($file_indexes as $index){ // https://laracasts.com/discuss/channels/laravel/how-direct-upload-file-in-storage-folder
                   if($request->file($index)){
                     $filename_with_ext = $request->file($index)->getClientOriginalName(); // Get filename with the extension
                     $filename = pathinfo($filename_with_ext, PATHINFO_FILENAME); // Get just filename
                     $extension = $request->file($index)->getClientOriginalExtension(); // Get just ext
-                    $filename_to_store = str_replace('/','-',$default_folder).$item->id.'.'.$extension;
+                    $filename_to_store = $id.'-'.$index.'.'.$extension;
                     $path = $request->file($index)->storeAs('public/'.$default_folder,$filename_to_store); // Upload Image
-                    $body[$index] = '/storage//'.$default_folder.'/'.$filename_to_store;
-                  }else{
-                    unset($body[$index]);
+                    $body2[$index] = '/storage/'.$default_folder.'/'.$filename_to_store;
                   }
                 }
-                $item2 = app($model)::where('id',$item->id)->update($body);
+                if($request->file($file_indexes[0])){
+                  $item2          = $model::where($pk,$id)->first();
+                  $item2->fill($body2)->save();
+                }
             }
 
-            return response()->json(array('data'=>$item,'data2'=>$item2,'message'=>'Created successfully'), 200);
+            return response()->json(array('data'=>($item2?$item2:$item),'message'=>'Created successfully'), 200);
         } catch(\Exception $exception) {
             throw new HttpException(400, "Invalid data : {$exception->getMessage()}");
         }
@@ -154,24 +165,41 @@ class APIController extends Controller
         return $item;
     }
 
-    public function put_common(Request $request, $id, $model, $rules){
-        $model  = 'App\Models\\'.$model;
-        $item   = $model::where(app($model)->getKeyName(),$id)->first();
+    public function put_common(Request $request, $id, $model, $rules, $file_indexes){
+        $default_folder     = strtolower($model);
+        $model              = 'App\Models\\'.$model;
+        $item               = $model::where(app($model)->getKeyName(),$id)->first();
         if(!$item){
             throw new HttpException(404, 'Item not found');
         }
 
-        try {
-            $validator = Validator::make($request->all(), $rules); 
+        // try {
+            $body               = $request->all();
+            $validator = Validator::make($body, $rules); 
             if ($validator->fails()) {
                 throw new HttpException(400, $validator->messages()->first());
             }
-           $item->fill($request->all())->save();
-           return response()->json(array('data'=>$item,'message'=>'Updated successfully'), 200);
+            $body['updated_by'] = \Auth::user()->id;
+            $body['updated_at'] = new \DateTime();
 
-        } catch(\Exception $exception) {
-           throw new HttpException(400, "Invalid data : {$exception->getMessage()}");
-        }
+            if(!empty($file_indexes)){
+                foreach($file_indexes as $index){ // https://laracasts.com/discuss/channels/laravel/how-direct-upload-file-in-storage-folder
+                  if($request->file($index)){
+                    $filename_with_ext = $request->file($index)->getClientOriginalName(); // Get filename with the extension
+                    $filename = pathinfo($filename_with_ext, PATHINFO_FILENAME); // Get just filename
+                    $extension = $request->file($index)->getClientOriginalExtension(); // Get just ext
+                    $filename_to_store = $id.'-'.$index.'.'.$extension;
+                    $path = $request->file($index)->storeAs('public/'.$default_folder,$filename_to_store); // Upload Image
+                    $body[$index] = '/storage/'.$default_folder.'/'.$filename_to_store;
+                  }
+                }
+            }
+            $item->fill($body)->save();
+            return response()->json(array('data'=>$item,'message'=>'Updated successfully'), 200);
+
+        // } catch(\Exception $exception) {
+        //    throw new HttpException(400, "Invalid data : {$exception->getMessage()}");
+        // }
     }
 
     public function delete_common($id, $model){
@@ -182,6 +210,8 @@ class APIController extends Controller
         }
 
         try {
+            $item->deleted_by = \Auth::user()->id;
+            $item->save();
             $item->delete();
             return response()->json(array('message'=>'Deleted successfully'), 200);
 

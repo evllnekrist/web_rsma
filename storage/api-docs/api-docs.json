@@ -13,132 +13,14 @@
         }
     },
     "paths": {
-        "/api/user/register": {
-            "post": {
-                "tags": [
-                    "user"
-                ],
-                "summary": "Register new user & get token",
-                "operationId": "register",
-                "requestBody": {
-                    "description": "Request body description",
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/User"
-                            },
-                            "example": {
-                                "name": "Augusta Ada Byron",
-                                "email": "ada.lovelace@gmail.com",
-                                "password": "Ba88a93$",
-                                "password_confirmation": "Ba88a93$123"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "400": {
-                        "description": "Invalid input",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "201": {
-                        "description": "Successful",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/user/login": {
-            "post": {
-                "tags": [
-                    "user"
-                ],
-                "summary": "Log in to existing user & get token",
-                "operationId": "login",
-                "requestBody": {
-                    "description": "Request body description",
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/User"
-                            },
-                            "example": {
-                                "email": "ada.lovelace@gmail.com",
-                                "password": "Ba88a93$"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "400": {
-                        "description": "Invalid input",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "200": {
-                        "description": "successful",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/user/logout": {
-            "post": {
-                "tags": [
-                    "user"
-                ],
-                "summary": "Log out & destroy self token",
-                "operationId": "logout",
-                "responses": {
-                    "400": {
-                        "description": "Invalid input",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "200": {
-                        "description": "successful",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "passport_token_ready": [],
-                        "passport": []
-                    }
-                ]
-            }
-        },
-        "/api/page": {
+        "/api/article": {
             "get": {
                 "tags": [
-                    "page"
+                    "Article",
+                    "News"
                 ],
                 "summary": "Display a listing of items",
-                "operationId": "index",
+                "operationId": "articleIndex",
                 "parameters": [
                     {
                         "name": "_page",
@@ -194,42 +76,71 @@
             },
             "post": {
                 "tags": [
-                    "page"
+                    "Article",
+                    "News"
                 ],
                 "summary": "Store a newly created item",
-                "operationId": "store",
-                "parameters": [
-                    {
-                        "name": "img_main",
-                        "in": "query",
-                        "description": "The image to upload",
-                        "schema": {
-                            "type": "file"
-                        }
-                    },
-                    {
-                        "name": "file_main",
-                        "in": "query",
-                        "description": "The file to upload",
-                        "schema": {
-                            "type": "file"
-                        }
-                    }
-                ],
+                "operationId": "articleStore",
                 "requestBody": {
-                    "description": "Request body description",
                     "required": true,
                     "content": {
-                        "application/json": {
+                        "multipart/form-data": {
                             "schema": {
-                                "$ref": "#/components/schemas/Page"
-                            },
-                            "example": {
-                                "slug": "eating-clean",
-                                "title": "Eating Clean",
-                                "layout": "img-body",
-                                "img_link": "",
-                                "body": "<p>Menjadi sehat adalah impian semua orang. Makanan yang selama ini kita pikir sehat ternyata belum tentu <i>‘sehat’</i> bagi tubuh kita.</p>"
+                                "required": [
+                                    "type",
+                                    "title"
+                                ],
+                                "properties": {
+                                    "portal_user_id": {
+                                        "type": "integer",
+                                        "example": ""
+                                    },
+                                    "sequence": {
+                                        "type": "integer",
+                                        "example": ""
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "example": "news"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "submited"
+                                    },
+                                    "slug": {
+                                        "type": "string",
+                                        "example": "title-of-the-news"
+                                    },
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Title of The News"
+                                    },
+                                    "keywords": {
+                                        "type": "string",
+                                        "example": "keyword,keyword2,keyword3"
+                                    },
+                                    "content": {
+                                        "type": "string",
+                                        "example": "<p><i>`Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...`</i></p>"
+                                    },
+                                    "img_main": {
+                                        "description": "Image to upload",
+                                        "type": "file"
+                                    },
+                                    "caption": {
+                                        "type": "string",
+                                        "example": "here is the caption..."
+                                    },
+                                    "post_at": {
+                                        "type": "string",
+                                        "example": "2024-06-28 08:00:00"
+                                    },
+                                    "publish_at": {
+                                        "type": "string",
+                                        "example": "2024-06-28 08:00:00"
+                                    }
+                                },
+                                "type": "object"
                             }
                         }
                     }
@@ -260,13 +171,14 @@
                 ]
             }
         },
-        "/api/page/{id}": {
+        "/api/article/{id}": {
             "get": {
                 "tags": [
-                    "page"
+                    "Article",
+                    "News"
                 ],
                 "summary": "Display the specified item",
-                "operationId": "show",
+                "operationId": "articleShow",
                 "parameters": [
                     {
                         "name": "id",
@@ -305,12 +217,13 @@
                     }
                 }
             },
-            "put": {
+            "post": {
                 "tags": [
-                    "page"
+                    "Article",
+                    "News"
                 ],
                 "summary": "Update the specified item",
-                "operationId": "update",
+                "operationId": "articleUpdate",
                 "parameters": [
                     {
                         "name": "id",
@@ -318,24 +231,71 @@
                         "description": "Identifier of item that needs to be updated",
                         "required": true,
                         "schema": {
-                            "type": "string"
+                            "type": "string",
+                            "example": "clean-eating"
                         }
                     }
                 ],
                 "requestBody": {
-                    "description": "Request body description",
                     "required": true,
                     "content": {
-                        "application/json": {
+                        "multipart/form-data": {
                             "schema": {
-                                "$ref": "#/components/schemas/Page"
-                            },
-                            "example": {
-                                "slug": "eating-clean-edited",
-                                "title": "Eating Clean EDITED",
-                                "layout": "img-body",
-                                "img_main": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/page/1482170055i/33511107.jpg",
-                                "body": "<p>Menjadi sehat adalah impian semua orang. Makanan yang selama ini kita pikir sehat ternyata belum tentu <i>‘sehat’</i> bagi tubuh kita.</p>"
+                                "required": [
+                                    "type",
+                                    "title"
+                                ],
+                                "properties": {
+                                    "portal_user_id": {
+                                        "type": "integer",
+                                        "example": ""
+                                    },
+                                    "sequence": {
+                                        "type": "integer",
+                                        "example": ""
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "example": "news"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "submited"
+                                    },
+                                    "slug": {
+                                        "type": "string",
+                                        "example": "title-of-the-news-edited"
+                                    },
+                                    "title": {
+                                        "type": "string",
+                                        "example": "[EDITED] Title of The News"
+                                    },
+                                    "keywords": {
+                                        "type": "string",
+                                        "example": "keyword,keyword2,keyword3,some-new-keyword-because-now-its-edited"
+                                    },
+                                    "content": {
+                                        "type": "string",
+                                        "example": "<p>[EDITED]</p><p><i>`Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...`</i></p>"
+                                    },
+                                    "img_main": {
+                                        "description": "Image to upload",
+                                        "type": "file"
+                                    },
+                                    "caption": {
+                                        "type": "string",
+                                        "example": "[EDITED] here is the caption..."
+                                    },
+                                    "post_at": {
+                                        "type": "string",
+                                        "example": "2024-06-28 08:00:00"
+                                    },
+                                    "publish_at": {
+                                        "type": "string",
+                                        "example": "2024-06-28 08:00:00"
+                                    }
+                                },
+                                "type": "object"
                             }
                         }
                     }
@@ -375,10 +335,2029 @@
             },
             "delete": {
                 "tags": [
-                    "page"
+                    "Article",
+                    "News"
                 ],
                 "summary": "Remove the specified item",
-                "operationId": "destroy",
+                "operationId": "articleDestroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Identifier of item that needs to be removed",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "Item not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport_token_ready": [],
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/api/user/register": {
+            "post": {
+                "tags": [
+                    "User Authentication"
+                ],
+                "summary": "Register new user & get token",
+                "operationId": "register",
+                "requestBody": {
+                    "description": "Request body description",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            },
+                            "example": {
+                                "name": "Augusta Ada Byron",
+                                "email": "ada.lovelace@gmail.com",
+                                "password": "Ba88a93$",
+                                "password_confirmation": "Ba88a93$123"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/user/login": {
+            "post": {
+                "tags": [
+                    "User Authentication"
+                ],
+                "summary": "Log in to existing user & get token",
+                "operationId": "login",
+                "requestBody": {
+                    "description": "Request body description",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            },
+                            "example": {
+                                "email": "ada.lovelace@gmail.com",
+                                "password": "Ba88a93$"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/user/logout": {
+            "post": {
+                "tags": [
+                    "User Authentication"
+                ],
+                "summary": "Log out & destroy self token",
+                "operationId": "logout",
+                "responses": {
+                    "400": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport_token_ready": [],
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/api/option": {
+            "get": {
+                "tags": [
+                    "Option"
+                ],
+                "summary": "Display a listing of items",
+                "operationId": "optionIndex",
+                "parameters": [
+                    {
+                        "name": "_page",
+                        "in": "query",
+                        "description": "current page",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": 1
+                        }
+                    },
+                    {
+                        "name": "_limit",
+                        "in": "query",
+                        "description": "max item in a page",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": 10
+                        }
+                    },
+                    {
+                        "name": "_search",
+                        "in": "query",
+                        "description": "word to search",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "_dir",
+                        "in": "query",
+                        "description": "order by direction",
+                        "required": false,
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Option"
+                ],
+                "summary": "Store a newly created item",
+                "operationId": "optionStore",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "type",
+                                    "value"
+                                ],
+                                "properties": {
+                                    "type": {
+                                        "type": "string",
+                                        "example": "PAGE_LAYOUT_FORMAT"
+                                    },
+                                    "value": {
+                                        "type": "string",
+                                        "example": "body"
+                                    },
+                                    "value2": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "label": {
+                                        "type": "string",
+                                        "example": "konten editor saja"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "img_main": {
+                                        "description": "Image to upload",
+                                        "type": "file"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport_token_ready": [],
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/api/option/{id}": {
+            "get": {
+                "tags": [
+                    "Option"
+                ],
+                "summary": "Display the specified item",
+                "operationId": "optionShow",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Identifier of item that needs to be displayed",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "Item not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Option"
+                ],
+                "summary": "Update the specified item",
+                "operationId": "optionUpdate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Identifier of item that needs to be updated",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "clean-eating"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "type",
+                                    "value"
+                                ],
+                                "properties": {
+                                    "type": {
+                                        "type": "string",
+                                        "example": "PAGE_LAYOUT_FORMAT_EDITED"
+                                    },
+                                    "value": {
+                                        "type": "string",
+                                        "example": "body-edited"
+                                    },
+                                    "value2": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "label": {
+                                        "type": "string",
+                                        "example": "[EDITED] konten editor saja"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "img_main": {
+                                        "description": "Image to upload",
+                                        "type": "file"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "404": {
+                        "description": "Item not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport_token_ready": [],
+                        "passport": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Option"
+                ],
+                "summary": "Remove the specified item",
+                "operationId": "optionDestroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Identifier of item that needs to be removed",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "Item not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport_token_ready": [],
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/api/org": {
+            "get": {
+                "tags": [
+                    "Organizational Structure"
+                ],
+                "summary": "Display a listing of items",
+                "operationId": "orgIndex",
+                "parameters": [
+                    {
+                        "name": "_page",
+                        "in": "query",
+                        "description": "current page",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": 1
+                        }
+                    },
+                    {
+                        "name": "_limit",
+                        "in": "query",
+                        "description": "max item in a page",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": 10
+                        }
+                    },
+                    {
+                        "name": "_search",
+                        "in": "query",
+                        "description": "word to search",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "_dir",
+                        "in": "query",
+                        "description": "order by direction",
+                        "required": false,
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Organizational Structure"
+                ],
+                "summary": "Store a newly created item",
+                "operationId": "orgStore",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "job_title"
+                                ],
+                                "properties": {
+                                    "parent_id": {
+                                        "type": "integer"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Rhenald Kasali"
+                                    },
+                                    "job_title": {
+                                        "type": "string",
+                                        "example": "Head of ABC"
+                                    },
+                                    "img_main": {
+                                        "description": "Image to upload",
+                                        "type": "file"
+                                    },
+                                    "desc_title": {
+                                        "type": "string",
+                                        "example": "<b>The Desc Title</b>"
+                                    },
+                                    "desc_body": {
+                                        "type": "string",
+                                        "example": "<p><i>`Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...`</i></p>"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport_token_ready": [],
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/api/org/{id}": {
+            "get": {
+                "tags": [
+                    "Organizational Structure"
+                ],
+                "summary": "Display the specified item",
+                "operationId": "orgShow",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Identifier of item that needs to be displayed",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "Item not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Organizational Structure"
+                ],
+                "summary": "Update the specified item",
+                "operationId": "orgUpdate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Identifier of item that needs to be updated",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "clean-eating"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "job_title"
+                                ],
+                                "properties": {
+                                    "parent_id": {
+                                        "type": "integer"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "[EDITED] Rhenald Kasali"
+                                    },
+                                    "job_title": {
+                                        "type": "string",
+                                        "example": "[EDITED] Head of ABC"
+                                    },
+                                    "img_main": {
+                                        "description": "Image to upload",
+                                        "type": "file"
+                                    },
+                                    "desc_title": {
+                                        "type": "string",
+                                        "example": "<b>[EDITED] The Desc Title</b>"
+                                    },
+                                    "desc_body": {
+                                        "type": "string",
+                                        "example": "<p>[EDITED]</p><p><i>`Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...`</i></p>"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "404": {
+                        "description": "Item not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport_token_ready": [],
+                        "passport": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Organizational Structure"
+                ],
+                "summary": "Remove the specified item",
+                "operationId": "orgDestroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Identifier of item that needs to be removed",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "Item not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport_token_ready": [],
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/api/page": {
+            "get": {
+                "tags": [
+                    "Page"
+                ],
+                "summary": "Display a listing of items",
+                "operationId": "pageIndex",
+                "parameters": [
+                    {
+                        "name": "_page",
+                        "in": "query",
+                        "description": "current page",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": 1
+                        }
+                    },
+                    {
+                        "name": "_limit",
+                        "in": "query",
+                        "description": "max item in a page",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": 10
+                        }
+                    },
+                    {
+                        "name": "_search",
+                        "in": "query",
+                        "description": "word to search",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "_dir",
+                        "in": "query",
+                        "description": "order by direction",
+                        "required": false,
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Page"
+                ],
+                "summary": "Store a newly created item",
+                "operationId": "pageStore",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "slug",
+                                    "title",
+                                    "layout"
+                                ],
+                                "properties": {
+                                    "slug": {
+                                        "type": "string",
+                                        "example": "clean-eating"
+                                    },
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Clean Eating"
+                                    },
+                                    "layout": {
+                                        "type": "string",
+                                        "example": "img_body"
+                                    },
+                                    "img_main": {
+                                        "description": "Image to upload",
+                                        "type": "file"
+                                    },
+                                    "file_main": {
+                                        "description": "File to upload",
+                                        "type": "file"
+                                    },
+                                    "file_link": {
+                                        "type": "string"
+                                    },
+                                    "body": {
+                                        "type": "string",
+                                        "example": "<p>Menjadi sehat adalah impian semua orang. Makanan yang selama ini kita pikir sehat ternyata belum tentu <i>`sehat`</i> bagi tubuh kita.</p>"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport_token_ready": [],
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/api/page/{id}": {
+            "get": {
+                "tags": [
+                    "Page"
+                ],
+                "summary": "Display the specified item",
+                "operationId": "pageShow",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Identifier of item that needs to be displayed",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "Item not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Page"
+                ],
+                "summary": "Update the specified item",
+                "operationId": "pageUpdate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Identifier of item that needs to be updated",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "clean-eating"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "layout"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "[EDITED] Clean Eating"
+                                    },
+                                    "layout": {
+                                        "type": "string",
+                                        "example": "img_body"
+                                    },
+                                    "img_main": {
+                                        "description": "Image to upload",
+                                        "type": "file"
+                                    },
+                                    "file_main": {
+                                        "description": "File to upload",
+                                        "type": "file"
+                                    },
+                                    "file_link": {
+                                        "type": "string"
+                                    },
+                                    "body": {
+                                        "type": "string",
+                                        "example": "<p>[EDITED]</p><p>Menjadi sehat adalah impian semua orang. Makanan yang selama ini kita pikir sehat ternyata belum tentu <i>`sehat`</i> bagi tubuh kita.</p>"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "404": {
+                        "description": "Item not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport_token_ready": [],
+                        "passport": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Page"
+                ],
+                "summary": "Remove the specified item",
+                "operationId": "pageDestroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Identifier of item that needs to be removed",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "Item not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport_token_ready": [],
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/api/resource-detail": {
+            "get": {
+                "tags": [
+                    "Resource Detail"
+                ],
+                "summary": "Display a listing of items",
+                "operationId": "resourceDetailIndex",
+                "parameters": [
+                    {
+                        "name": "_page",
+                        "in": "query",
+                        "description": "current page",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": 1
+                        }
+                    },
+                    {
+                        "name": "_limit",
+                        "in": "query",
+                        "description": "max item in a page",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": 10
+                        }
+                    },
+                    {
+                        "name": "_search",
+                        "in": "query",
+                        "description": "word to search",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "_dir",
+                        "in": "query",
+                        "description": "order by direction",
+                        "required": false,
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Resource Detail"
+                ],
+                "summary": "Store a newly created item",
+                "operationId": "resource-detailStore",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "key": {
+                                        "type": "string",
+                                        "example": "dokter-tht"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Person 1"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "link": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "sequence": {
+                                        "type": "integer",
+                                        "example": ""
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport_token_ready": [],
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/api/resource-detail/{id}": {
+            "get": {
+                "tags": [
+                    "Resource Detail"
+                ],
+                "summary": "Display the specified item",
+                "operationId": "resource-detailShow",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Identifier of item that needs to be displayed",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "Item not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Resource Detail"
+                ],
+                "summary": "Update the specified item",
+                "operationId": "resource-detailUpdate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Identifier of item that needs to be updated",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "clean-eating"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "key": {
+                                        "type": "string",
+                                        "example": "dokter-tht-edited"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "[EDITED] Person 1"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "link": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "sequence": {
+                                        "type": "integer",
+                                        "example": ""
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "404": {
+                        "description": "Item not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport_token_ready": [],
+                        "passport": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Resource Detail"
+                ],
+                "summary": "Remove the specified item",
+                "operationId": "resource-detailDestroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Identifier of item that needs to be removed",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "Item not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport_token_ready": [],
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/api/resource-summary": {
+            "get": {
+                "tags": [
+                    "Resource Summary"
+                ],
+                "summary": "Display a listing of items",
+                "operationId": "resourceSummaryIndex",
+                "parameters": [
+                    {
+                        "name": "_page",
+                        "in": "query",
+                        "description": "current page",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": 1
+                        }
+                    },
+                    {
+                        "name": "_limit",
+                        "in": "query",
+                        "description": "max item in a page",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": 10
+                        }
+                    },
+                    {
+                        "name": "_search",
+                        "in": "query",
+                        "description": "word to search",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "_dir",
+                        "in": "query",
+                        "description": "order by direction",
+                        "required": false,
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Resource Summary"
+                ],
+                "summary": "Store a newly created item",
+                "operationId": "resource-summaryStore",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "type": {
+                                        "type": "string",
+                                        "example": "human"
+                                    },
+                                    "key": {
+                                        "type": "string",
+                                        "example": "dokter-tht"
+                                    },
+                                    "key_label": {
+                                        "type": "string",
+                                        "example": "Dokter THT"
+                                    },
+                                    "amount": {
+                                        "type": "integer",
+                                        "example": 2
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "link": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "sequence": {
+                                        "type": "integer",
+                                        "example": ""
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport_token_ready": [],
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/api/resource-summary/{id}": {
+            "get": {
+                "tags": [
+                    "Resource Summary"
+                ],
+                "summary": "Display the specified item",
+                "operationId": "resource-summaryShow",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Identifier of item that needs to be displayed",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "Item not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Resource Summary"
+                ],
+                "summary": "Update the specified item",
+                "operationId": "resource-summaryUpdate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Identifier of item that needs to be updated",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "clean-eating"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "type": {
+                                        "type": "string",
+                                        "example": "human-edited"
+                                    },
+                                    "key": {
+                                        "type": "string",
+                                        "example": "dokter-tht-edited"
+                                    },
+                                    "key_label": {
+                                        "type": "string",
+                                        "example": "[EDITED] Dokter THT"
+                                    },
+                                    "amount": {
+                                        "type": "integer",
+                                        "example": 2
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "link": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "sequence": {
+                                        "type": "integer",
+                                        "example": ""
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "404": {
+                        "description": "Item not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport_token_ready": [],
+                        "passport": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Resource Summary"
+                ],
+                "summary": "Remove the specified item",
+                "operationId": "resource-summaryDestroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Identifier of item that needs to be removed",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "Item not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport_token_ready": [],
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/api/satisfaction": {
+            "get": {
+                "tags": [
+                    "Satisfaction"
+                ],
+                "summary": "Display a listing of items",
+                "operationId": "satisfactionIndex",
+                "parameters": [
+                    {
+                        "name": "_page",
+                        "in": "query",
+                        "description": "current page",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": 1
+                        }
+                    },
+                    {
+                        "name": "_limit",
+                        "in": "query",
+                        "description": "max item in a page",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": 10
+                        }
+                    },
+                    {
+                        "name": "_search",
+                        "in": "query",
+                        "description": "word to search",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "_dir",
+                        "in": "query",
+                        "description": "order by direction",
+                        "required": false,
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Satisfaction"
+                ],
+                "summary": "Store a newly created item",
+                "operationId": "satisfactionStore",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "star"
+                                ],
+                                "properties": {
+                                    "star": {
+                                        "type": "integer",
+                                        "example": 4
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Nadjwa Shihab"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "nadjwa172@narasi.co.id"
+                                    },
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Nice!"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Saya suka pelayanannya cepat. Saya jalur tunai sih."
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport_token_ready": [],
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/api/satisfaction/{id}": {
+            "get": {
+                "tags": [
+                    "Satisfaction"
+                ],
+                "summary": "Display the specified item",
+                "operationId": "satisfactionShow",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Identifier of item that needs to be displayed",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "Item not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Satisfaction"
+                ],
+                "summary": "Update the specified item",
+                "operationId": "satisfactionUpdate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Identifier of item that needs to be updated",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "clean-eating"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "star"
+                                ],
+                                "properties": {
+                                    "star": {
+                                        "type": "integer",
+                                        "example": 4
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "[EDITED] Nadjwa Shihab"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "nadjwa172@narasi.co.id"
+                                    },
+                                    "title": {
+                                        "type": "string",
+                                        "example": "[EDITED] Nice!"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "[EDITED] Saya suka pelayanannya cepat. Saya jalur tunai sih."
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "404": {
+                        "description": "Item not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport_token_ready": [],
+                        "passport": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Satisfaction"
+                ],
+                "summary": "Remove the specified item",
+                "operationId": "satisfactionDestroy",
                 "parameters": [
                     {
                         "name": "id",
@@ -461,6 +2440,20 @@
                 ],
                 "xml": {
                     "name": "Page"
+                }
+            },
+            "ResourceDetail": {
+                "title": "ResourceDetail model",
+                "description": "ResourceDetail model",
+                "xml": {
+                    "name": "ResourceDetail"
+                }
+            },
+            "ResourceSummary": {
+                "title": "ResourceSummary model",
+                "description": "ResourceSummary model",
+                "xml": {
+                    "name": "ResourceSummary"
                 }
             },
             "Satisfaction": {

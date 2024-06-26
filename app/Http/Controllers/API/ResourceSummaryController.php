@@ -4,23 +4,23 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Page;
+use App\Models\ResourceSummary;
 use OpenApi\Annotations as OA;
 
 /**
- * Class PageController.
+ * Class ResourceSummaryController.
  *
  * @author  Evelline <evelline.kristiani@ukrida.ac.id>
  */
-class PageController extends APIController
+class ResourceSummaryController extends APIController
 {
-    protected $model = 'Page';
+    protected $model = 'ResourceSummary';
     /**
      * @OA\Get(
-     *     path="/api/page",
-     *     tags={"Page"},
+     *     path="/api/resource-summary",
+     *     tags={"Resource Summary"},
      *     summary="Display a listing of items",
-     *     operationId="pageIndex",
+     *     operationId="resourceSummaryIndex",
      *     @OA\Response(
      *         response=200,
      *         description="successful",
@@ -70,17 +70,17 @@ class PageController extends APIController
      */
     public function index(Request $request)
     {
-        $filter['equal']  = ['slug'];
-        $filter['search'] = ['title'];
+        $filter['equal']  = ['id'];
+        $filter['search'] = ['name','job_title'];
         return $this->get_list_common($request, $this->model, $filter, []);
     }
 
     /**
      * @OA\Post(
-     *     path="/api/page",
-     *     tags={"Page"},
+     *     path="/api/resource-summary",
+     *     tags={"Resource Summary"},
      *     summary="Store a newly created item",
-     *     operationId="pageStore",
+     *     operationId="resource-summaryStore",
      *     @OA\MediaType(mediaType="multipart/form-data"),
      *     @OA\Response(
      *         response=400,
@@ -98,40 +98,41 @@ class PageController extends APIController
      *             mediaType="multipart/form-data",
      *             @OA\Schema(
      *                 @OA\Property(
-     *                     property="slug",
+     *                     property="type",
      *                     type="string",
-     *                     example="clean-eating",
+     *                     example="human",
      *                 ),
      *                 @OA\Property(
-     *                     property="title",
+     *                     property="key",
      *                     type="string",
-     *                     example="Clean Eating",
+     *                     example="dokter-tht",
      *                 ),
      *                 @OA\Property(
-     *                     property="layout",
+     *                     property="key_label",
      *                     type="string",
-     *                     example="img_body",
+     *                     example="Dokter THT",
      *                 ),
      *                 @OA\Property(
-     *                     description="Image to upload",
-     *                     property="img_main",
-     *                     type="file",
+     *                     property="amount",
+     *                     type="integer",
+     *                     example=2
      *                 ),
      *                 @OA\Property(
-     *                     description="File to upload",
-     *                     property="file_main",
-     *                     type="file",
-     *                 ),
-     *                 @OA\Property(
-     *                     property="file_link",
+     *                     property="description",
      *                     type="string",
+     *                     example=""
      *                 ),
      *                 @OA\Property(
-     *                     property="body",
+     *                     property="link",
      *                     type="string",
-     *                     example="<p>Menjadi sehat adalah impian semua orang. Makanan yang selama ini kita pikir sehat ternyata belum tentu <i>`sehat`</i> bagi tubuh kita.</p>"
+     *                     example=""
      *                 ),
-     *                 required={"slug","title","layout"}
+     *                 @OA\Property(
+     *                     property="sequence",
+     *                     type="integer",
+     *                     example=""
+     *                 ),
+     *                 required={"name"}
      *             )
      *         )
      *     ),
@@ -141,19 +142,17 @@ class PageController extends APIController
     public function store(Request $request)
     {
         $rules = [
-            'slug'  => 'required|unique:pages',
-            'title'  => 'required|unique:pages',
-            'layout'  => 'required',
+            'label'  => 'required',
         ];
-        return $this->post_common($request, $this->model, $rules, ['img_main','file_main']);
+        return $this->post_common($request, $this->model, $rules);
     }
 
     /**
      * @OA\Get(
-     *     path="/api/page/{id}",
-     *     tags={"Page"},
+     *     path="/api/resource-summary/{id}",
+     *     tags={"Resource Summary"},
      *     summary="Display the specified item",
-     *     operationId="pageShow",
+     *     operationId="resource-summaryShow",
      *     @OA\Response(
      *         response=404,
      *         description="Item not found",
@@ -187,10 +186,10 @@ class PageController extends APIController
 
     /**
      * @OA\Post(
-     *     path="/api/page/{id}",
-     *     tags={"Page"},
+     *     path="/api/resource-summary/{id}",
+     *     tags={"Resource Summary"},
      *     summary="Update the specified item",
-     *     operationId="pageUpdate",
+     *     operationId="resource-summaryUpdate",
      *     @OA\MediaType(mediaType="multipart/form-data"),
      *     @OA\Response(
      *         response=404,
@@ -223,35 +222,41 @@ class PageController extends APIController
      *             mediaType="multipart/form-data",
      *             @OA\Schema(
      *                 @OA\Property(
-     *                     property="title",
+     *                     property="type",
      *                     type="string",
-     *                     example="[EDITED] Clean Eating",
+     *                     example="human-edited",
      *                 ),
      *                 @OA\Property(
-     *                     property="layout",
+     *                     property="key",
      *                     type="string",
-     *                     example="img_body",
+     *                     example="dokter-tht-edited",
      *                 ),
      *                 @OA\Property(
-     *                     description="Image to upload",
-     *                     property="img_main",
-     *                     type="file",
-     *                 ),
-     *                 @OA\Property(
-     *                     description="File to upload",
-     *                     property="file_main",
-     *                     type="file",
-     *                 ),
-     *                 @OA\Property(
-     *                     property="file_link",
+     *                     property="key_label",
      *                     type="string",
+     *                     example="[EDITED] Dokter THT",
      *                 ),
      *                 @OA\Property(
-     *                     property="body",
-     *                     type="string",
-     *                     example="<p>[EDITED]</p><p>Menjadi sehat adalah impian semua orang. Makanan yang selama ini kita pikir sehat ternyata belum tentu <i>`sehat`</i> bagi tubuh kita.</p>"
+     *                     property="amount",
+     *                     type="integer",
+     *                     example=2
      *                 ),
-     *                 required={"title","layout"}
+     *                 @OA\Property(
+     *                     property="description",
+     *                     type="string",
+     *                     example=""
+     *                 ),
+     *                 @OA\Property(
+     *                     property="link",
+     *                     type="string",
+     *                     example=""
+     *                 ),
+     *                 @OA\Property(
+     *                     property="sequence",
+     *                     type="integer",
+     *                     example=""
+     *                 ),
+     *                 required={"name"}
      *             )
      *         )
      *     ),
@@ -261,19 +266,18 @@ class PageController extends APIController
     public function update(Request $request, $id)
     {
         $rules = [
-            'title'  => 'required|unique:pages',
-            'layout'  => 'required',
+            'label'  => 'required',
         ];
-        return $this->put_common($request, $id, $this->model, $rules, ['img_main','file_main']);
+        return $this->put_common($request, $id, $this->model, $rules);
 
     }
     
     /**
      * @OA\Delete(
-     *     path="/api/page/{id}",
-     *     tags={"Page"},
+     *     path="/api/resource-summary/{id}",
+     *     tags={"Resource Summary"},
      *     summary="Remove the specified item",
-     *     operationId="pageDestroy",
+     *     operationId="resource-summaryDestroy",
      *     @OA\Response(
      *         response=404,
      *         description="Item not found",

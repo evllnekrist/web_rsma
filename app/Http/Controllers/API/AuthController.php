@@ -20,7 +20,7 @@ class AuthController extends APIController
     /**
      * @OA\Post(
      *     path="/api/user/register",
-     *     tags={"user"},
+     *     tags={"User Authentication"},
      *     summary="Register new user & get token",
      *     operationId="register",
      *     @OA\Response(
@@ -69,7 +69,7 @@ class AuthController extends APIController
     /**
      * @OA\Post(
      *     path="/api/user/login",
-     *     tags={"user"},
+     *     tags={"User Authentication"},
      *     summary="Log in to existing user & get token",
      *     operationId="login",
      *     @OA\Response(
@@ -123,7 +123,7 @@ class AuthController extends APIController
     /**
      * @OA\Post(
      *     path="/api/user/logout",
-     *     tags={"user"},
+     *     tags={"User Authentication"},
      *     summary="Log out & destroy self token",
      *     operationId="logout",
      *     @OA\Response(
