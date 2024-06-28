@@ -120,10 +120,10 @@
 			loop:true,
 			margin:0,
 			nav:true,
-			smartSpeed: 500,
+			smartSpeed: 1000,
 			autoHeight: true,
 			autoplay: true,
-			autoplayTimeout:5000,
+			autoplayTimeout:10000,
 			navText: [ '<span class="fa fa-angle-left"></span>', '<span class="fa fa-angle-right"></span>' ],
 			responsive:{
 				0:{

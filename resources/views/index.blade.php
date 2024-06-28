@@ -1,11 +1,11 @@
-@extends('layouts.app-medicoz', ['breadcrumbs'=>[['label'=>'Kelola Akses'],['label'=>'Data']]])
+@extends('layouts.app-default', ['breadcrumbs'=>[['label'=>'Kelola Akses'],['label'=>'Data']]])
 @section('title', 'Dashboard')
 @section('content')
             <!-- Bnner Section -->
             <section class="banner-section">
                 <div class="banner-carousel owl-carousel owl-theme default-arrows dark">
                     <!-- Slide Item -->
-                    <div class="slide-item" style="background-image: url(images/main-slider/2-1.jpg);">
+                    <div class="slide-item" style="background-image: url({{asset('asset/images/gallery/rsma-dji.webp')}});">
                         <div class="auto-container">
                             <div class="content-outer">
                                 <div class="content-box">
@@ -17,17 +17,17 @@
                             </div>
                         </div>
                     </div>
-
                     <!-- Slide Item -->
-                    <div class="slide-item" style="background-image: url(images/main-slider/2-2.jpg);">
+                    <div class="slide-item" style="background-image: url({{asset('asset/images/gallery/rsma-administrasi.webp')}});">
                         <div class="auto-container">
                             <div class="content-outer">
-                                <div class="content-box">
-                                    <span class="title">Welcome Our Hospital</span>
-                                    <h2>We Are Provide Total <span>Healthcare</span> Solutions</h2>
-                                    <div class="text">behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind.</div>
-                                    <div class="btn-box"><a href="#" class="theme-btn btn-style-one bg-tealblue"><span class="btn-title">About Us</span></a></div>
-                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide Item -->
+                    <div class="slide-item" style="background-image: url({{asset('asset/images/gallery/rsma-interior.webp')}});">
+                        <div class="auto-container">
+                            <div class="content-outer">
                             </div>
                         </div>
                     </div>
@@ -93,7 +93,7 @@
                         <!-- Images Column -->
                         <div class="image-column col-xl-6 col-lg-5 col-md-12 col-sm-12">
                             <div class="image-box">
-                                <figure class="image"><img src="images/resource/image-5.jpg" alt=""></figure>
+                                <figure class="image"><img src="{{asset('asset/images/resource/image-5.jpg')}}" alt=""></figure>
                                 <div class="icon-box"><span class="icon flaticon-doctor"></span></div>
                             </div>
                         </div>
@@ -162,7 +162,7 @@
                             <div class="service-block-two">
                                 <div class="inner-box">
                                     <div class="image-box">
-                                        <figure class="image"><a href="department-detail.html"><img src="images/resource/service-1.jpg" alt=""></a></figure>
+                                        <figure class="image"><a href="department-detail.html"><img src="{{asset('asset/images/resource/service-1.jpg')}}" alt=""></a></figure>
                                     </div>
                                     <div class="lower-content">
                                         <div class="title-box">
@@ -179,7 +179,7 @@
                             <div class="service-block-two">
                                 <div class="inner-box">
                                     <div class="image-box">
-                                        <figure class="image"><a href="department-detail.html"><img src="images/resource/service-2.jpg" alt=""></a></figure>
+                                        <figure class="image"><a href="department-detail.html"><img src="{{asset('asset/images/resource/service-2.jpg')}}" alt=""></a></figure>
                                     </div>
                                     <div class="lower-content">
                                         <div class="title-box">
@@ -196,7 +196,7 @@
                             <div class="service-block-two">
                                 <div class="inner-box">
                                     <div class="image-box">
-                                        <figure class="image"><a href="department-detail.html"><img src="images/resource/service-3.jpg" alt=""></a></figure>
+                                        <figure class="image"><a href="department-detail.html"><img src="{{asset('asset/images/resource/service-3.jpg')}}" alt=""></a></figure>
                                     </div>
                                     <div class="lower-content">
                                         <div class="title-box">
@@ -250,9 +250,9 @@
                             <!-- Portfolio Block -->
                             <div class="portfolio-block all mix detal-care dental col-lg-4 col-md-6 col-sm-12">
                                 <div class="image-box">
-                                    <figure class="image"><img src="images/gallery/1-1.jpg" alt=""></figure>
+                                    <figure class="image"><img src="{{asset('asset/images/gallery/1-1.jpg')}}" alt=""></figure>
                                     <div class="overlay">
-                                        <a href="images/gallery/1-1.jpg" class="icon-box lightbox-image"><span class="fa fa-expand"></span></a>
+                                        <a href="{{asset('asset/images/gallery/1-1.jpg')}}" class="icon-box lightbox-image"><span class="fa fa-expand"></span></a>
                                         <div class="title-box">
                                             <h5>Diagnostic Imagine</h5>
                                             <div class="cat">
@@ -267,9 +267,9 @@
                             <!-- Portfolio Block -->
                             <div class="portfolio-block all mix cancer cardiology eye-care col-lg-4 col-md-6 col-sm-12">
                                 <div class="image-box">
-                                    <figure class="image"><img src="images/gallery/1-2.jpg" alt=""></figure>
+                                    <figure class="image"><img src="{{asset('asset/images/gallery/1-2.jpg')}}" alt=""></figure>
                                     <div class="overlay">
-                                        <a href="images/gallery/1-1.jpg" class="icon-box lightbox-image"><span class="fa fa-expand"></span></a>
+                                        <a href="{{asset('asset/images/gallery/1-1.jpg')}}" class="icon-box lightbox-image"><span class="fa fa-expand"></span></a>
                                         <div class="title-box">
                                             <h5>Diagnostic Imagine</h5>
                                             <div class="cat">
@@ -284,9 +284,9 @@
                             <!-- Portfolio Block -->
                             <div class="portfolio-block all mix detal-care dental cardiology col-lg-4 col-md-6 col-sm-12">
                                 <div class="image-box">
-                                    <figure class="image"><img src="images/gallery/1-3.jpg" alt=""></figure>
+                                    <figure class="image"><img src="{{asset('asset/images/gallery/1-3.jpg')}}" alt=""></figure>
                                     <div class="overlay">
-                                        <a href="images/gallery/1-1.jpg" class="icon-box lightbox-image"><span class="fa fa-expand"></span></a>
+                                        <a href="{{asset('asset/images/gallery/1-1.jpg')}}" class="icon-box lightbox-image"><span class="fa fa-expand"></span></a>
                                         <div class="title-box">
                                             <h5>Diagnostic Imagine</h5>
                                             <div class="cat">
@@ -301,9 +301,9 @@
                             <!-- Portfolio Block -->
                             <div class="portfolio-block all mix cancer dental eye-care col-lg-4 col-md-6 col-sm-12">
                                 <div class="image-box">
-                                    <figure class="image"><img src="images/gallery/1-4.jpg" alt=""></figure>
+                                    <figure class="image"><img src="{{asset('asset/images/gallery/1-4.jpg')}}" alt=""></figure>
                                     <div class="overlay">
-                                        <a href="images/gallery/1-1.jpg" class="icon-box lightbox-image"><span class="fa fa-expand"></span></a>
+                                        <a href="{{asset('asset/images/gallery/1-1.jpg')}}" class="icon-box lightbox-image"><span class="fa fa-expand"></span></a>
                                         <div class="title-box">
                                             <h5>Diagnostic Imagine</h5>
                                             <div class="cat">
@@ -318,9 +318,9 @@
                             <!-- Portfolio Block -->
                             <div class="portfolio-block all mix detal-care cardiology col-lg-4 col-md-6 col-sm-12">
                                 <div class="image-box">
-                                    <figure class="image"><img src="images/gallery/1-5.jpg" alt=""></figure>
+                                    <figure class="image"><img src="{{asset('asset/images/gallery/1-5.jpg')}}" alt=""></figure>
                                     <div class="overlay">
-                                        <a href="images/gallery/1-1.jpg" class="icon-box lightbox-image"><span class="fa fa-expand"></span></a>
+                                        <a href="{{asset('asset/images/gallery/1-1.jpg')}}" class="icon-box lightbox-image"><span class="fa fa-expand"></span></a>
                                         <div class="title-box">
                                             <h5>Diagnostic Imagine</h5>
                                             <div class="cat">
@@ -335,9 +335,9 @@
                             <!-- Portfolio Block -->
                             <div class="portfolio-block all mix cancer cardiology eye-care col-lg-4 col-md-6 col-sm-12">
                                 <div class="image-box">
-                                    <figure class="image"><img src="images/gallery/1-6.jpg" alt=""></figure>
+                                    <figure class="image"><img src="{{asset('asset/images/gallery/1-6.jpg')}}" alt=""></figure>
                                     <div class="overlay">
-                                        <a href="images/gallery/1-1.jpg" class="icon-box lightbox-image"><span class="fa fa-expand"></span></a>
+                                        <a href="{{asset('asset/images/gallery/1-1.jpg')}}" class="icon-box lightbox-image"><span class="fa fa-expand"></span></a>
                                         <div class="title-box">
                                             <h5>Diagnostic Imagine</h5>
                                             <div class="cat">
@@ -450,7 +450,7 @@
                                         <strong>Dental Care</strong>
                                         <p> 8:00 am - 9:00 am <br> Room: 303</p>
                                         <div class="doctor-info">
-                                            <figure class="thumb"><img src="images/resource/doctor-thumb.jpg" alt=""></figure>
+                                            <figure class="thumb"><img src="{{asset('asset/images/resource/doctor-thumb.jpg')}}" alt=""></figure>
                                             <h4 class="name">Dr. Tania Riham</h4>
                                             <a href="#" class="theme-btn btn-style-one bg-tealblue"><span class="btn-title">Appointment</span></a>
                                         </div>
@@ -460,7 +460,7 @@
                                         <strong>Orthopaedics</strong>
                                         <p> 8:00 am - 9:00 am <br> Room: 303</p>
                                         <div class="doctor-info">
-                                            <figure class="thumb"><img src="images/resource/doctor-thumb.jpg" alt=""></figure>
+                                            <figure class="thumb"><img src="{{asset('asset/images/resource/doctor-thumb.jpg')}}" alt=""></figure>
                                             <h4 class="name">Dr. Tania Riham</h4>
                                             <a href="#" class="theme-btn btn-style-one bg-tealblue"><span class="btn-title">Appointment</span></a>
                                         </div>
@@ -470,7 +470,7 @@
                                         <strong>Medicine</strong>
                                         <p> 8:00 am - 9:00 am <br> Room: 303</p>
                                         <div class="doctor-info">
-                                            <figure class="thumb"><img src="images/resource/doctor-thumb.jpg" alt=""></figure>
+                                            <figure class="thumb"><img src="{{asset('asset/images/resource/doctor-thumb.jpg')}}" alt=""></figure>
                                             <h4 class="name">Dr. Tania Riham</h4>
                                             <a href="#" class="theme-btn btn-style-one bg-tealblue"><span class="btn-title">Appointment</span></a>
                                         </div>
@@ -480,7 +480,7 @@
                                         <strong>Orthopaedics</strong>
                                         <p> 8:00 am - 9:00 am <br> Room: 303</p>
                                         <div class="doctor-info">
-                                            <figure class="thumb"><img src="images/resource/doctor-thumb.jpg" alt=""></figure>
+                                            <figure class="thumb"><img src="{{asset('asset/images/resource/doctor-thumb.jpg')}}" alt=""></figure>
                                             <h4 class="name">Dr. Tania Riham</h4>
                                             <a href="#" class="theme-btn btn-style-one bg-tealblue"><span class="btn-title">Appointment</span></a>
                                         </div>
@@ -495,7 +495,7 @@
                                         <strong>Gynecology</strong>
                                         <p> 9:00 am - 10:00 am <br> Room: 301</p>
                                         <div class="doctor-info">
-                                            <figure class="thumb"><img src="images/resource/doctor-thumb.jpg" alt=""></figure>
+                                            <figure class="thumb"><img src="{{asset('asset/images/resource/doctor-thumb.jpg')}}" alt=""></figure>
                                             <h4 class="name">Dr. Tania Riham</h4>
                                             <a href="#" class="theme-btn btn-style-one bg-tealblue"><span class="btn-title">Appointment</span></a>
                                         </div>
@@ -505,7 +505,7 @@
                                         <strong>Cardiology</strong>
                                         <p> 9:00 am - 10:00 am <br> Room: 301</p>
                                         <div class="doctor-info">
-                                            <figure class="thumb"><img src="images/resource/doctor-thumb.jpg" alt=""></figure>
+                                            <figure class="thumb"><img src="{{asset('asset/images/resource/doctor-thumb.jpg')}}" alt=""></figure>
                                             <h4 class="name">Dr. Tania Riham</h4>
                                             <a href="#" class="theme-btn btn-style-one bg-tealblue"><span class="btn-title">Appointment</span></a>
                                         </div>
@@ -515,7 +515,7 @@
                                         <strong>Dental Care</strong>
                                         <p> 9:00 am - 10:00 am <br> Room: 301</p>
                                         <div class="doctor-info">
-                                            <figure class="thumb"><img src="images/resource/doctor-thumb.jpg" alt=""></figure>
+                                            <figure class="thumb"><img src="{{asset('asset/images/resource/doctor-thumb.jpg')}}" alt=""></figure>
                                             <h4 class="name">Dr. Tania Riham</h4>
                                             <a href="#" class="theme-btn btn-style-one bg-tealblue"><span class="btn-title">Appointment</span></a>
                                         </div>
@@ -530,7 +530,7 @@
                                         <strong>Dental Care</strong>
                                         <p> 8:00 am - 9:00 am <br> Room: 303</p>
                                         <div class="doctor-info">
-                                            <figure class="thumb"><img src="images/resource/doctor-thumb.jpg" alt=""></figure>
+                                            <figure class="thumb"><img src="{{asset('asset/images/resource/doctor-thumb.jpg')}}" alt=""></figure>
                                             <h4 class="name">Dr. Tania Riham</h4>
                                             <a href="#" class="theme-btn btn-style-one bg-tealblue"><span class="btn-title">Appointment</span></a>
                                         </div>
@@ -540,7 +540,7 @@
                                         <strong>Orthopaedics</strong>
                                         <p> 8:00 am - 9:00 am <br> Room: 303</p>
                                         <div class="doctor-info">
-                                            <figure class="thumb"><img src="images/resource/doctor-thumb.jpg" alt=""></figure>
+                                            <figure class="thumb"><img src="{{asset('asset/images/resource/doctor-thumb.jpg')}}" alt=""></figure>
                                             <h4 class="name">Dr. Tania Riham</h4>
                                             <a href="#" class="theme-btn btn-style-one bg-tealblue"><span class="btn-title">Appointment</span></a>
                                         </div>
@@ -550,7 +550,7 @@
                                         <strong>Medicine</strong>
                                         <p> 8:00 am - 9:00 am <br> Room: 303</p>
                                         <div class="doctor-info">
-                                            <figure class="thumb"><img src="images/resource/doctor-thumb.jpg" alt=""></figure>
+                                            <figure class="thumb"><img src="{{asset('asset/images/resource/doctor-thumb.jpg')}}" alt=""></figure>
                                             <h4 class="name">Dr. Tania Riham</h4>
                                             <a href="#" class="theme-btn btn-style-one bg-tealblue"><span class="btn-title">Appointment</span></a>
                                         </div>
@@ -560,7 +560,7 @@
                                         <strong>Orthopaedics</strong>
                                         <p> 8:00 am - 9:00 am <br> Room: 303</p>
                                         <div class="doctor-info">
-                                            <figure class="thumb"><img src="images/resource/doctor-thumb.jpg" alt=""></figure>
+                                            <figure class="thumb"><img src="{{asset('asset/images/resource/doctor-thumb.jpg')}}" alt=""></figure>
                                             <h4 class="name">Dr. Tania Riham</h4>
                                             <a href="#" class="theme-btn btn-style-one bg-tealblue"><span class="btn-title">Appointment</span></a>
                                         </div>
@@ -575,7 +575,7 @@
                                         <strong>Gynecology</strong>
                                         <p> 9:00 am - 10:00 am <br> Room: 301</p>
                                         <div class="doctor-info">
-                                            <figure class="thumb"><img src="images/resource/doctor-thumb.jpg" alt=""></figure>
+                                            <figure class="thumb"><img src="{{asset('asset/images/resource/doctor-thumb.jpg')}}" alt=""></figure>
                                             <h4 class="name">Dr. Tania Riham</h4>
                                             <a href="#" class="theme-btn btn-style-one bg-tealblue"><span class="btn-title">Appointment</span></a>
                                         </div>
@@ -585,7 +585,7 @@
                                         <strong>Cardiology</strong>
                                         <p> 9:00 am - 10:00 am <br> Room: 301</p>
                                         <div class="doctor-info">
-                                            <figure class="thumb"><img src="images/resource/doctor-thumb.jpg" alt=""></figure>
+                                            <figure class="thumb"><img src="{{asset('asset/images/resource/doctor-thumb.jpg')}}" alt=""></figure>
                                             <h4 class="name">Dr. Tania Riham</h4>
                                             <a href="#" class="theme-btn btn-style-one bg-tealblue"><span class="btn-title">Appointment</span></a>
                                         </div>
@@ -595,7 +595,7 @@
                                         <strong>Dental Care</strong>
                                         <p> 9:00 am - 10:00 am <br> Room: 301</p>
                                         <div class="doctor-info">
-                                            <figure class="thumb"><img src="images/resource/doctor-thumb.jpg" alt=""></figure>
+                                            <figure class="thumb"><img src="{{asset('asset/images/resource/doctor-thumb.jpg')}}" alt=""></figure>
                                             <h4 class="name">Dr. Tania Riham</h4>
                                             <a href="#" class="theme-btn btn-style-one bg-tealblue"><span class="btn-title">Appointment</span></a>
                                         </div>
@@ -610,7 +610,7 @@
                                         <strong>Dental Care</strong>
                                         <p> 8:00 am - 9:00 am <br> Room: 303</p>
                                         <div class="doctor-info">
-                                            <figure class="thumb"><img src="images/resource/doctor-thumb.jpg" alt=""></figure>
+                                            <figure class="thumb"><img src="{{asset('asset/images/resource/doctor-thumb.jpg')}}" alt=""></figure>
                                             <h4 class="name">Dr. Tania Riham</h4>
                                             <a href="#" class="theme-btn btn-style-one bg-tealblue"><span class="btn-title">Appointment</span></a>
                                         </div>
@@ -620,7 +620,7 @@
                                         <strong>Orthopaedics</strong>
                                         <p> 8:00 am - 9:00 am <br> Room: 303</p>
                                         <div class="doctor-info">
-                                            <figure class="thumb"><img src="images/resource/doctor-thumb.jpg" alt=""></figure>
+                                            <figure class="thumb"><img src="{{asset('asset/images/resource/doctor-thumb.jpg')}}" alt=""></figure>
                                             <h4 class="name">Dr. Tania Riham</h4>
                                             <a href="#" class="theme-btn btn-style-one bg-tealblue"><span class="btn-title">Appointment</span></a>
                                         </div>
@@ -630,7 +630,7 @@
                                         <strong>Medicine</strong>
                                         <p> 8:00 am - 9:00 am <br> Room: 303</p>
                                         <div class="doctor-info">
-                                            <figure class="thumb"><img src="images/resource/doctor-thumb.jpg" alt=""></figure>
+                                            <figure class="thumb"><img src="{{asset('asset/images/resource/doctor-thumb.jpg')}}" alt=""></figure>
                                             <h4 class="name">Dr. Tania Riham</h4>
                                             <a href="#" class="theme-btn btn-style-one bg-tealblue"><span class="btn-title">Appointment</span></a>
                                         </div>
@@ -640,7 +640,7 @@
                                         <strong>Orthopaedics</strong>
                                         <p> 8:00 am - 9:00 am <br> Room: 303</p>
                                         <div class="doctor-info">
-                                            <figure class="thumb"><img src="images/resource/doctor-thumb.jpg" alt=""></figure>
+                                            <figure class="thumb"><img src="{{asset('asset/images/resource/doctor-thumb.jpg')}}" alt=""></figure>
                                             <h4 class="name">Dr. Tania Riham</h4>
                                             <a href="#" class="theme-btn btn-style-one bg-tealblue"><span class="btn-title">Appointment</span></a>
                                         </div>
@@ -655,7 +655,7 @@
                                         <strong>Gynecology</strong>
                                         <p> 9:00 am - 10:00 am <br> Room: 301</p>
                                         <div class="doctor-info">
-                                            <figure class="thumb"><img src="images/resource/doctor-thumb.jpg" alt=""></figure>
+                                            <figure class="thumb"><img src="{{asset('asset/images/resource/doctor-thumb.jpg')}}" alt=""></figure>
                                             <h4 class="name">Dr. Tania Riham</h4>
                                             <a href="#" class="theme-btn btn-style-one bg-tealblue"><span class="btn-title">Appointment</span></a>
                                         </div>
@@ -665,7 +665,7 @@
                                         <strong>Cardiology</strong>
                                         <p> 9:00 am - 10:00 am <br> Room: 301</p>
                                         <div class="doctor-info">
-                                            <figure class="thumb"><img src="images/resource/doctor-thumb.jpg" alt=""></figure>
+                                            <figure class="thumb"><img src="{{asset('asset/images/resource/doctor-thumb.jpg')}}" alt=""></figure>
                                             <h4 class="name">Dr. Tania Riham</h4>
                                             <a href="#" class="theme-btn btn-style-one bg-tealblue"><span class="btn-title">Appointment</span></a>
                                         </div>
@@ -675,7 +675,7 @@
                                         <strong>Dental Care</strong>
                                         <p> 9:00 am - 10:00 am <br> Room: 301</p>
                                         <div class="doctor-info">
-                                            <figure class="thumb"><img src="images/resource/doctor-thumb.jpg" alt=""></figure>
+                                            <figure class="thumb"><img src="{{asset('asset/images/resource/doctor-thumb.jpg')}}" alt=""></figure>
                                             <h4 class="name">Dr. Tania Riham</h4>
                                             <a href="#" class="theme-btn btn-style-one bg-tealblue"><span class="btn-title">Appointment</span></a>
                                         </div>
@@ -690,7 +690,7 @@
                                         <strong>Dental Care</strong>
                                         <p> 8:00 am - 9:00 am <br> Room: 303</p>
                                         <div class="doctor-info">
-                                            <figure class="thumb"><img src="images/resource/doctor-thumb.jpg" alt=""></figure>
+                                            <figure class="thumb"><img src="{{asset('asset/images/resource/doctor-thumb.jpg')}}" alt=""></figure>
                                             <h4 class="name">Dr. Tania Riham</h4>
                                             <a href="#" class="theme-btn btn-style-one bg-tealblue"><span class="btn-title">Appointment</span></a>
                                         </div>
@@ -700,7 +700,7 @@
                                         <strong>Orthopaedics</strong>
                                         <p> 8:00 am - 9:00 am <br> Room: 303</p>
                                         <div class="doctor-info">
-                                            <figure class="thumb"><img src="images/resource/doctor-thumb.jpg" alt=""></figure>
+                                            <figure class="thumb"><img src="{{asset('asset/images/resource/doctor-thumb.jpg')}}" alt=""></figure>
                                             <h4 class="name">Dr. Tania Riham</h4>
                                             <a href="#" class="theme-btn btn-style-one bg-tealblue"><span class="btn-title">Appointment</span></a>
                                         </div>
@@ -710,7 +710,7 @@
                                         <strong>Medicine</strong>
                                         <p> 8:00 am - 9:00 am <br> Room: 303</p>
                                         <div class="doctor-info">
-                                            <figure class="thumb"><img src="images/resource/doctor-thumb.jpg" alt=""></figure>
+                                            <figure class="thumb"><img src="{{asset('asset/images/resource/doctor-thumb.jpg')}}" alt=""></figure>
                                             <h4 class="name">Dr. Tania Riham</h4>
                                             <a href="#" class="theme-btn btn-style-one bg-tealblue"><span class="btn-title">Appointment</span></a>
                                         </div>
@@ -720,7 +720,7 @@
                                         <strong>Orthopaedics</strong>
                                         <p> 8:00 am - 9:00 am <br> Room: 303</p>
                                         <div class="doctor-info">
-                                            <figure class="thumb"><img src="images/resource/doctor-thumb.jpg" alt=""></figure>
+                                            <figure class="thumb"><img src="{{asset('asset/images/resource/doctor-thumb.jpg')}}" alt=""></figure>
                                             <h4 class="name">Dr. Tania Riham</h4>
                                             <a href="#" class="theme-btn btn-style-one bg-tealblue"><span class="btn-title">Appointment</span></a>
                                         </div>
@@ -748,7 +748,7 @@
                         <div class="news-block col-lg-4 col-md-6 col-sm-12 wow fadeInUp">
                             <div class="inner-box">
                                 <div class="image-box">
-                                    <figure class="image"><a href="blog-post-image.html"><img src="images/resource/news-1.jpg" alt=""></a></figure>
+                                    <figure class="image"><a href="blog-post-image.html"><img src="{{asset('asset/images/resource/news-1.jpg')}}" alt=""></a></figure>
                                     <a href="#" class="date">Sep 19, 2020</a>
                                 </div>
                                 <div class="lower-content">
@@ -769,7 +769,7 @@
                         <div class="news-block col-lg-4 col-md-6 col-sm-12 wow fadeInUp">
                             <div class="inner-box">
                                 <div class="image-box">
-                                    <figure class="image"><a href="blog-post-image.html"><img src="images/resource/news-2.jpg" alt=""></a></figure>
+                                    <figure class="image"><a href="blog-post-image.html"><img src="{{asset('asset/images/resource/news-2.jpg')}}" alt=""></a></figure>
                                     <a href="#" class="date">Sep 19, 2020</a>
                                 </div>
                                 <div class="lower-content">
@@ -790,7 +790,7 @@
                         <div class="news-block col-lg-4 col-md-6 col-sm-12 wow fadeInUp">
                             <div class="inner-box">
                                 <div class="image-box">
-                                    <figure class="image"><a href="blog-post-image.html"><img src="images/resource/news-3.jpg" alt=""></a></figure>
+                                    <figure class="image"><a href="blog-post-image.html"><img src="{{asset('asset/images/resource/news-3.jpg')}}" alt=""></a></figure>
                                     <a href="#" class="date">Sep 19, 2020</a>
                                 </div>
                                 <div class="lower-content">
@@ -820,11 +820,11 @@
                     <div class="sponsors-outer">
                         <!--clients carousel-->
                         <ul class="clients-carousel owl-carousel owl-theme">
-                            <li class="slide-item"> <a href="#"><img src="images/clients/1.png" alt=""></a> </li>
-                            <li class="slide-item"> <a href="#"><img src="images/clients/2.png" alt=""></a> </li>
-                            <li class="slide-item"> <a href="#"><img src="images/clients/3.png" alt=""></a> </li>
-                            <li class="slide-item"> <a href="#"><img src="images/clients/4.png" alt=""></a> </li>
-                            <li class="slide-item"> <a href="#"><img src="images/clients/5.png" alt=""></a> </li>
+                            <li class="slide-item"> <a href="#"><img src="{{asset('asset/images/clients/1.png')}}" alt=""></a> </li>
+                            <li class="slide-item"> <a href="#"><img src="{{asset('asset/images/clients/2.png')}}" alt=""></a> </li>
+                            <li class="slide-item"> <a href="#"><img src="{{asset('asset/images/clients/3.png')}}" alt=""></a> </li>
+                            <li class="slide-item"> <a href="#"><img src="{{asset('asset/images/clients/4.png')}}" alt=""></a> </li>
+                            <li class="slide-item"> <a href="#"><img src="{{asset('asset/images/clients/5.png')}}" alt=""></a> </li>
                         </ul>
                     </div>
                 </div>
@@ -834,5 +834,5 @@
 @section('addition_css')
 @endsection
 @section('addition_script')
-    <script src="{{ asset('page/js/role-index.js').'?v='.date('YmdH').'1' }}"></script>
+    <script src="{{asset('asset/page/js/role-index.js').'?v='.date('YmdH').'1' }}"></script>
 @endsection

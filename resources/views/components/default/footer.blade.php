@@ -18,11 +18,9 @@
                                     <p>We are among the most qualified implant providers in the AUS with over 30 years of quality training and experience.</p>
                                 </div>
                                 <ul class="social-icon-three">
-                                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-skype"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                                    <li><a target="_blank" href="https://www.facebook.com/rsudmakasongan/"><span class="fab fa-facebook-f"></span></a></li>
+                                    <li><a target="_blank" href="https://twitter.com/rsudmakasongan"><span class="fab fa-twitter"></span></a></li>
+                                    <li><a target="_blank" href="https://www.instagram.com/rsudmakasongan/"><span class="fab fa-instagram"></span></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -124,14 +122,12 @@
             <div class="inner-container clearfix">
                 <div class="footer-nav">
                     <ul class="clearfix">
-                    <li><a href="index.html">Privacy Policy</a></li> 
-                    <li><a href="about-us.html">Contact</a></li> 
-                    <li><a href="services.html">Supplier</a></li>  
+                        <li><a href="{{url('cms')}}">CMS</a></li> 
                     </ul>
                 </div>
                 
                 <div class="copyright-text">
-                    <p>Copyright © 2020 <a href="#">Bold Touch</a>All Rights Reserved.</p>
+                    <p>Copyright © 2024 | <a href="#">Diskominfostandi Katingan</a> | All Rights Reserved.</p>
                 </div>
             </div>
         </div>
