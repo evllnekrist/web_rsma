@@ -123,4 +123,15 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'accept_mimes' => array(
+        'img' => array('image/png','image/jpg','image/jpeg','image/webp','image/heic','image/heif'),
+        'doc' => array(
+            'application/pdf',
+            'application/msword','application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'application/excel','application/vnd.ms-excel','application/x-excel','application/x-msexcel','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            'text/csv',
+            'application/mspowerpoint','application/powerpoint','application/vnd.ms-powerpoint','application/x-mspowerpoint','application/vnd.openxmlformats-officedocument.presentationml.presentation',
+        ),
+    ),
+
 ];
