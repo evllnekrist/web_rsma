@@ -1,36 +1,49 @@
 {{-- MAIN NAV --}}
     <div id="mySidenav" class="sidenav stripe-shadow-19">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        
+        <div class="logo">
+            <a href="{{url('/cms')}}"><img src="{{asset('asset/images/logo-rsma.webp')}}" style="height:120px" alt="logo RSUDMA"></a>
+        </div>
+        <hr style="background: black">
         <a  data-toggle="tooltip" data-placement="bottom" href="{{route('cms.page')}}" 
             title="Kelola halaman statis yang memiliki link sendiri">
+            <i class="fa fa-id-card mr-3 text-white" aria-hidden="true"></i>
             Halaman
         </a>
         <a  data-toggle="tooltip" data-placement="bottom" href="{{route('cms.post')}}" 
             title="Kelola Berita atau Artikel">
+            <i class="fa fa-newspaper mr-3 text-white" aria-hidden="true"></i>
             Berita / Artikel
         </a>
         <a  data-toggle="tooltip" data-placement="bottom" href="{{route('cms.resource-summary')}}" 
             title="Memastikan informasi sumber daya manusia atau infrastruktur terdata jenis dan jumlahnya">
+            <i class="fa fa-chart-bar mr-3 text-white" aria-hidden="true"></i>
             Ikhtisar Sumber Daya
         </a>
         <a  data-toggle="tooltip" data-placement="bottom" href="{{route('cms.resource-detail')}}" 
             title="Mendata detail sumber daya">
+            <i class="fa fa-chart-pie mr-3 text-white" aria-hidden="true"></i>
             Detail Sumber Daya
         </a>
         <a  data-toggle="tooltip" data-placement="bottom" href="{{route('cms.org')}}" 
             title="Mendata jabatan struktural organisasi">
+            <i class="fa fa-sitemap mr-3 text-white" aria-hidden="true"></i>
             Struktur Organisasi
         </a>
         <a  data-toggle="tooltip" data-placement="bottom" href="{{route('cms.satisfaction')}}" 
             title="Melihat data kepuasan yang diinput oleh pengguna publik web">
+            <i class="fa fa-smile mr-3 text-white" aria-hidden="true"></i>
             Survey Kepuasan
         </a>
         <a  data-toggle="tooltip" data-placement="bottom" href="{{route('cms.web-info')}}" 
             title="Mengatur informasi konfigurasi web">
+            <i class="fa fa-cog mr-3 text-white" aria-hidden="true"></i>
             Informasi Web
         </a>
         <a  data-toggle="tooltip" data-placement="bottom" href="{{route('cms.user')}}" 
             title="Kelola admin web">
+            <i class="fa fa-user mr-3 text-white" aria-hidden="true"></i>
             Pengguna Teregistrasi
         </a>
     </div>

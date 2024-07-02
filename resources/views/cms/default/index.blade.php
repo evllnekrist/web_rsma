@@ -1,5 +1,5 @@
 @extends('layouts.app-cms', $page_conf)
-@section('title', 'Struktur Organisasi')
+@section('title', $page_conf['breadcrumbs'][0]['label'])
 @section('content')
 
 <div class="row justify-content-center">

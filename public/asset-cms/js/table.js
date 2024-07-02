@@ -175,7 +175,9 @@ function getData(move_to_page=null){
             $('[name="_page"]').val(response.data.data.filter._page);
           // i::data pagination------------------------------------------------------------------------------END
         }else{
-          $(id_list).html('<h3 class="mt-5">Tidak ada data</h3>');
+          $(id_list).html(`<tr>
+                                <td colspan="100%" class="py-5"><center><i>tidak ada data</i></center></td>
+                            </tr>`);
         }
           
     }else{

@@ -264,7 +264,7 @@ class OrgController extends APIController
     public function update(Request $request, $id)
     {
         $rules = [
-            'job_title'  => 'required|unique:orgs',
+            'job_title'  => 'required',
         ];
         return $this->put_common($request, $id, $this->model, $rules, ['img_main']);
 

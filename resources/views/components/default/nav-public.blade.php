@@ -35,7 +35,7 @@
             <div class="main-box">
 
                 <div class="logo-box">
-                    <div class="logo"><a href="index.html"><img src="{{asset('asset/images/logo-rsma.webp')}}" style="height:120px" alt="logo RSUDMA"></a></div>
+                    <div class="logo"><a href="{{url('/')}}"><img src="{{asset('asset/images/logo-rsma.webp')}}" style="height:120px" alt="logo RSUDMA"></a></div>
                 </div>
 
                 <!--Nav Box-->

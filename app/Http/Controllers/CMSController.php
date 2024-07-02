@@ -5,6 +5,132 @@ use App\Models\Option;
 
 class CMSController extends Controller
 {
+    // -------------------- START::page --------------------
+    public function pagePrepare(){
+        $object = 'page';
+        $coll['layout']   = Option::where('type','PAGE_LAYOUT_FORMAT')->get();
+
+        return [
+            'object'=>$object,
+            'pk'=>app('App\Models\\'.$object)->getKeyName(),
+            'breadcrumbs'=>[
+                ['label'=>'Halaman','route'=>route('cms.'.$object)],
+            ],
+            'btn_add'=>[
+                'link'=>url('cms/'.$object.'/add'),
+            ],
+            'columns'=>[
+                [
+                    'type'=>'seq_number',
+                    'label'=>'No',
+                    'var_name'=>'id',
+                    'is_order'=>true,
+                ],
+                [
+                    'label'=>'Slug (alamat URL)',
+                    'var_name'=>'slug',
+                    'is_order'=>true,
+                    'search'=>[
+                        'type'=>'text'
+                    ],
+                ],
+                [
+                    'label'=>'Judul',
+                    'var_name'=>'title',
+                    'is_order'=>true,
+                    'search'=>[
+                        'type'=>'text'
+                    ],
+                ],
+                [
+                    'label'=>'Layout (tata letak)',
+                    'var_name'=>'layout',
+                    'is_order'=>true,
+                    'search'=>[
+                        'type'=>'text'
+                    ],
+                ],
+                [
+                    'type'=>'action',
+                    'label'=>'Aksi',
+                    'var_name'=>'id',
+                ],
+            ],
+            'inputs'=> [
+                [
+                    [
+                        'label'=>'Layout (tata letak)',
+                        'var_name'=>'type',
+                        'type'=>'select',
+                        'select_attr'=>[
+                            'options'=>$coll['layout'],
+                            'id'=>'value',
+                            'label'=>'label',
+                        ],
+                        'is_required'=>true,
+                    ],
+                    [
+                        'label'=>'Judul',
+                        'var_name'=>'title',
+                        'type'=>'text',
+                        'class'=>'convert-to-slug',
+                        'el_data'=> [
+                            'affects_to'=>'slug'
+                        ],
+                        'is_required'=>true,
+                    ],
+                    [
+                        'label'=>'Slug',
+                        'sublabel'=>'<span class="text-warning">tidak dapat diubah pada saat edit</span>',
+                        'var_name'=>'slug',
+                        'type'=>'text',
+                        'is_required'=>true,
+                        'on_edit'=>[
+                            'is_readonly'=>true 
+                        ]
+                    ],
+                    [
+                        'label'=>'Editor',
+                        'var_name'=>'body',
+                        'type'=>'editor',
+                    ],
+                ],
+                [
+                    [
+                        'label'=>'Foto',
+                        'var_name'=>'img_main',
+                        'type'=>'file',
+                    ],
+                    [
+                        'label'=>'File (PDF)',
+                        'var_name'=>'file_main',
+                        'type'=>'file',
+                    ],
+                ],
+            ],
+        ];
+    } 
+
+    public function pageIndex(){
+        $data = $this->pagePrepare();
+        $data['breadcrumbs'][1] = ['label'=>'Daftar Data'];
+        return view('cms.default.index',['page_conf'=>$data]);
+    } 
+
+    public function pageAdd(){
+        $data = $this->pagePrepare();
+        $data['breadcrumbs'][1] = ['label'=>'Tambah'];
+        return view('cms.default.add',['page_conf'=>$data]);
+    }  
+
+    public function pageEdit($id){
+        $data = $this->pagePrepare();
+        $data['breadcrumbs'][1] = ['label'=>'Edit'];
+        $data['selected'] = ('App\Models\Page')::find($id);
+        $data['id'] = $id;
+        return view('cms.default.edit',['page_conf'=>$data]);
+    }      
+    // ---------------------- END::page --------------------
     // -------------------- START::post --------------------
     public function postPrepare(){
         $object = 'post';
@@ -144,13 +270,13 @@ class CMSController extends Controller
     public function postIndex(){
         $data = $this->postPrepare();
         $data['breadcrumbs'][1] = ['label'=>'Daftar Data'];
-        return view('cms.post.index',['page_conf'=>$data]);
+        return view('cms.default.index',['page_conf'=>$data]);
     } 
 
     public function postAdd(){
         $data = $this->postPrepare();
         $data['breadcrumbs'][1] = ['label'=>'Tambah'];
-        return view('cms.post.add',['page_conf'=>$data]);
+        return view('cms.default.add',['page_conf'=>$data]);
     }  
 
     public function postEdit($id){
@@ -158,9 +284,9 @@ class CMSController extends Controller
         $data['breadcrumbs'][1] = ['label'=>'Edit'];
         $data['selected'] = ('App\Models\Post')::find($id);
         $data['id'] = $id;
-        return view('cms.post.edit',['page_conf'=>$data]);
+        return view('cms.default.edit',['page_conf'=>$data]);
     }      
-    // ---------------------- END::org --------------------
+    // ---------------------- END::post --------------------
     // -------------------- START::org --------------------
     public function orgPrepare(){
         $object = 'org';
@@ -269,13 +395,13 @@ class CMSController extends Controller
     public function orgIndex(){
         $data = $this->orgPrepare();
         $data['breadcrumbs'][1] = ['label'=>'Daftar Data'];
-        return view('cms.org.index',['page_conf'=>$data]);
+        return view('cms.default.index',['page_conf'=>$data]);
     } 
 
     public function orgAdd(){
         $data = $this->orgPrepare();
         $data['breadcrumbs'][1] = ['label'=>'Tambah'];
-        return view('cms.org.add',['page_conf'=>$data]);
+        return view('cms.default.add',['page_conf'=>$data]);
     }  
 
     public function orgEdit($id){
@@ -283,7 +409,7 @@ class CMSController extends Controller
         $data['breadcrumbs'][1] = ['label'=>'Edit'];
         $data['selected'] = ('App\Models\Org')::find($id);
         $data['id'] = $id;
-        return view('cms.org.edit',['page_conf'=>$data]);
+        return view('cms.default.edit',['page_conf'=>$data]);
     }      
     // ---------------------- END::org --------------------
 }

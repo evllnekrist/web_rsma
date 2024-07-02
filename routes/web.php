@@ -25,15 +25,9 @@ Route::prefix('cms')->middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::prefix('page')->group(function () {
-        Route::get('/', function () {
-            return view('cms.page.index');
-        })->name('cms.page');
-        Route::get('/add', function () {
-            return view('cms.page.add');
-        });
-        Route::get('/{id}', function () {
-            return view('cms.page.edit');
-        });
+        Route::get('/', [CMSController::class, 'pageIndex'])->name('cms.page');
+        Route::get('/add', [CMSController::class, 'pageAdd']);
+        Route::get('/{id}', [CMSController::class, 'pageEdit']);
     });
     Route::prefix('post')->group(function () {
         Route::get('/', [CMSController::class, 'postIndex'])->name('cms.post');
