@@ -27,6 +27,9 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
+        $user = ('App\Models\User')::where('email', $request->email)->first();
+        $token = $user->createToken('Laravel Password Grant Client')->accessToken;
+        $request->session()->put('_token_api',$token);
 
         return redirect()->intended(route('dashboard', absolute: false));
     }

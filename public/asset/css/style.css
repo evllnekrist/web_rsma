@@ -1525,7 +1525,7 @@ hr {
 
 .default-form .form-group {
   position: relative;
-  margin-bottom: 20px;
+  margin-bottom: 8px;
 }
 
 .default-form .form-group:last-child {
@@ -1549,6 +1549,8 @@ hr {
   height: 34px;
   background-color: #ffffff;
   border: 1px solid #e1e1e1;
+  /* border: 1px solid #aaa; */
+  border-radius: 4px;
   -webkit-transition: all 300ms ease;
   transition: all 300ms ease;
 }
@@ -1571,7 +1573,7 @@ hr {
 .default-form .form-group button {
   position: relative;
   display: inline-block;
-  min-width: 160px;
+  /* min-width: 160px; */
 }
 
 .default-form input.error:focus,

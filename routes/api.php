@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
-use App\Http\Controllers\API\ArticleController;
+use App\Http\Controllers\API\PostController;
 use App\Http\Controllers\API\OptionController;
 use App\Http\Controllers\API\OrgController;
 use App\Http\Controllers\API\PageController;
@@ -21,9 +21,9 @@ Route::prefix('user')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api');
 });
 
-Route::resource('article', ArticleController::class, ['only' => ['index', 'show']]);
-Route::post('/article/{id}', [ArticleController::class, 'update'])->middleware(['auth:api']);
-Route::resource('article', ArticleController::class, ['except' => ['index', 'show']])->middleware(['auth:api']);
+Route::resource('post', PostController::class, ['only' => ['index', 'show']]);
+Route::post('/post/{id}', [PostController::class, 'update'])->middleware(['auth:api']);
+Route::resource('post', PostController::class, ['except' => ['index', 'show']])->middleware(['auth:api']);
 
 Route::resource('option', OptionController::class, ['only' => ['index', 'show']]);
 Route::post('/option/{id}', [OptionController::class, 'update'])->middleware(['auth:api']);

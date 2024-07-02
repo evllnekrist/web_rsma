@@ -122,7 +122,7 @@
             <div class="inner-container clearfix">
                 <div class="footer-nav">
                     <ul class="clearfix">
-                        <li><a href="{{url('cms')}}">CMS</a></li> 
+                        <li><a href="{{route('login')}}">CMS</a></li> 
                     </ul>
                 </div>
                 

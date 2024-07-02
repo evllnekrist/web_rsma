@@ -53,7 +53,7 @@
             @endforeach
         </tr>
     </thead>
-    <tbody id="data-list">
+    <tbody id="data-list" data-object="{{@$object}}">
         <tr>
             <td colspan="{{sizeof($columns)}}">
                 <center><img src="{{asset('asset/images/loading.gif')}}"></center>

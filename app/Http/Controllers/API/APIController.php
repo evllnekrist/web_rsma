@@ -5,7 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpKernel\Exception\HttpException;
+// use Symfony\Component\HttpKernel\Exception\HttpException;
 use OpenApi\Annotations as OA;
 
 /**
@@ -114,11 +114,18 @@ class APIController extends Controller
         try {
             $validator = Validator::make($request->all(), $rules); 
             if ($validator->fails()) {
-                throw new HttpException(400, $validator->messages()->first());
+                // throw new HttpException(400, $validator->messages()->first());
+                return response()->json(array('message'=>$validator->messages()->first()),400);
             }
             $default_folder     = strtolower($model);
             $model              = 'App\Models\\'.$model;
             $body               = $request->all();
+            foreach (array_map('gettype', $body) as $key => $value) { // to find explodes value to be imploded before further action
+              if($value == 'array'){
+                $body[$key] = implode(',',$body[$key]);
+              }
+            }
+            // dump($body);return;
             $body['created_by'] = \Auth::user()->id;
             $body['created_at'] = new \DateTime();
             $item2              = null;
@@ -150,9 +157,10 @@ class APIController extends Controller
                 }
             }
 
-            return response()->json(array('data'=>($item2?$item2:$item),'message'=>'Created successfully'), 200);
+            return response()->json(array('data'=>($item2?$item2:$item),'message'=>'Berhasil ditambahkan!'), 200);
         } catch(\Exception $exception) {
-            throw new HttpException(400, "Invalid data : {$exception->getMessage()}");
+            // throw new HttpException(400, "Invalid data : {$exception->getMessage()}");
+            return response()->json(array('message'=>"Invalid data : {$exception->getMessage()}"),400);
         }
     }
 
@@ -160,7 +168,8 @@ class APIController extends Controller
         $model  = 'App\Models\\'.$model;
         $item   = $model::where(app($model)->getKeyName(),$id)->first();
         if(!$item){
-            throw new HttpException(404, 'Item not found');
+            // throw new HttpException(404, 'Item tidak ditemukan');
+            return response()->json(array('message'=>'Item tidak ditemukan'),404);
         }
         return $item;
     }
@@ -170,14 +179,20 @@ class APIController extends Controller
         $model              = 'App\Models\\'.$model;
         $item               = $model::where(app($model)->getKeyName(),$id)->first();
         if(!$item){
-            throw new HttpException(404, 'Item not found');
+            return response()->json(array('message'=>'Item tidak ditemukan'),404);
         }
-
-        // try {
+        // dd($request->all());
+        try {
             $body               = $request->all();
+            foreach (array_map('gettype', $body) as $key => $value) { // to find explodes value to be imploded before further action
+              if($value == 'array'){
+                $body[$key] = implode(',',$body[$key]);
+              }
+            }
+            // dump($body);return;
             $validator = Validator::make($body, $rules); 
             if ($validator->fails()) {
-                throw new HttpException(400, $validator->messages()->first());
+                return response()->json(array('message'=>$validator->messages()->first()),400);
             }
             $body['updated_by'] = \Auth::user()->id;
             $body['updated_at'] = new \DateTime();
@@ -195,28 +210,28 @@ class APIController extends Controller
                 }
             }
             $item->fill($body)->save();
-            return response()->json(array('data'=>$item,'message'=>'Updated successfully'), 200);
+            return response()->json(array('data'=>$item,'message'=>'Berhasil diubah!'), 200);
 
-        // } catch(\Exception $exception) {
-        //    throw new HttpException(400, "Invalid data : {$exception->getMessage()}");
-        // }
+        } catch(\Exception $exception) {
+          return response()->json(array('message'=>"Invalid data : {$exception->getMessage()}"),400);
+        }
     }
 
     public function delete_common($id, $model){
         $model  = 'App\Models\\'.$model;
         $item   = $model::where(app($model)->getKeyName(),$id)->first();
         if(!$item){
-            throw new HttpException(404, 'Item not found');
+            return response()->json(array('message'=>'Item tidak ditemukan'),404);
         }
 
         try {
             $item->deleted_by = \Auth::user()->id;
             $item->save();
             $item->delete();
-            return response()->json(array('message'=>'Deleted successfully'), 200);
+            return response()->json(array('message'=>'Berhasil dihapus!'), 200);
 
         } catch(\Exception $exception) {
-            throw new HttpException(400, "Invalid data : {$exception->getMessage()}");
+          return response()->json(array('message'=>"Invalid data : {$exception->getMessage()}"),400);
         }
     }
 }

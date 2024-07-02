@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
+        <meta name="tapi" content="{{Session::get('_token_api')}}">
         @include('components.default.head')
         <link href="{{asset('asset/css/style-custom.css')}}" rel="stylesheet">
+        <link href="{{asset('asset/plugins/summernote/summernote-bs4.min.css')}}" rel="stylesheet">
         @yield('addition_css')
     </head>
 
@@ -21,6 +23,7 @@
                 $('[data-toggle="tooltip"]').tooltip()
             })
         </script>
+        <script src="{{asset('asset/plugins/summernote/summernote-bs4.min.js')}}"></script>
         @yield('addition_script')
     </body>
 </html>

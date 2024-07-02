@@ -7,6 +7,7 @@
 <link href="{{asset('asset/css/style.css')}}" rel="stylesheet">
 <link href="{{asset('asset/css/responsive.css')}}" rel="stylesheet">
 <link href="{{asset('asset/css/iziToast.css')}}" rel="stylesheet">
+<link href="{{asset('asset/css/select2.min.css')}}" rel="stylesheet">
 <link href="{{asset('asset/css/color-themes/green.css')}}" rel="stylesheet" id="theme-color-file" >
 <link href="{{asset('asset/images/logo-rsma.webp')}}" rel="shortcut icon" type="image/x-icon">
 <link href="{{asset('asset/images/logo-rsma.webp')}}" rel="icon" type="image/x-icon">

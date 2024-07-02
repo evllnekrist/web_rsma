@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CMSController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -10,10 +11,13 @@ Route::get('/', function () {
 
 require __DIR__.'/auth.php';
 
+Route::middleware('guest')->get('/cms', function () {
+    return 'not found ...';
+});
+Route::middleware('auth')->get('/cms', function () {
+    return view('cms.index');
+})->name('dashboard');
 Route::prefix('cms')->middleware('auth')->group(function () {
-    Route::get('/', function () {
-        return view('cms.index');
-    })->name('dashboard');
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard-clean');
@@ -27,20 +31,14 @@ Route::prefix('cms')->middleware('auth')->group(function () {
         Route::get('/add', function () {
             return view('cms.page.add');
         });
-        Route::get('/edit', function () {
+        Route::get('/{id}', function () {
             return view('cms.page.edit');
         });
     });
-    Route::prefix('article')->group(function () {
-        Route::get('/', function () {
-            return view('cms.article.index');
-        })->name('cms.article');
-        Route::get('/add', function () {
-            return view('cms.article.add');
-        });
-        Route::get('/edit', function () {
-            return view('cms.article.edit');
-        });
+    Route::prefix('post')->group(function () {
+        Route::get('/', [CMSController::class, 'postIndex'])->name('cms.post');
+        Route::get('/add', [CMSController::class, 'postAdd']);
+        Route::get('/{id}', [CMSController::class, 'postEdit']);
     });
     Route::prefix('resource-summary')->group(function () {
         Route::get('/', function () {
@@ -49,7 +47,7 @@ Route::prefix('cms')->middleware('auth')->group(function () {
         Route::get('/add', function () {
             return view('cms.resource-summary.add');
         });
-        Route::get('/edit', function () {
+        Route::get('/{id}', function () {
             return view('cms.resource-summary.edit');
         });
     });
@@ -60,20 +58,14 @@ Route::prefix('cms')->middleware('auth')->group(function () {
         Route::get('/add', function () {
             return view('cms.resource-detail.add');
         });
-        Route::get('/edit', function () {
+        Route::get('/{id}', function () {
             return view('cms.resource-detail.edit');
         });
     });
     Route::prefix('org')->group(function () {
-        Route::get('/', function () {
-            return view('cms.org.index');
-        })->name('cms.org');
-        Route::get('/add', function () {
-            return view('cms.org.add');
-        });
-        Route::get('/edit', function () {
-            return view('cms.org.edit');
-        });
+        Route::get('/', [CMSController::class, 'orgIndex'])->name('cms.org');
+        Route::get('/add', [CMSController::class, 'orgAdd']);
+        Route::get('/{id}', [CMSController::class, 'orgEdit']);
     });
     Route::prefix('satisfaction')->group(function () {
         Route::get('/', function () {
@@ -82,7 +74,7 @@ Route::prefix('cms')->middleware('auth')->group(function () {
         Route::get('/add', function () {
             return view('cms.satisfaction.add');
         });
-        Route::get('/edit', function () {
+        Route::get('/{id}', function () {
             return view('cms.satisfaction.edit');
         });
     });
@@ -93,7 +85,7 @@ Route::prefix('cms')->middleware('auth')->group(function () {
         Route::get('/add', function () {
             return view('cms.web-info.add');
         });
-        Route::get('/edit', function () {
+        Route::get('/{id}', function () {
             return view('cms.web-info.edit');
         });
     });
@@ -104,7 +96,7 @@ Route::prefix('cms')->middleware('auth')->group(function () {
         Route::get('/add', function () {
             return view('cms.user.add');
         });
-        Route::get('/edit', function () {
+        Route::get('/{id}', function () {
             return view('cms.user.edit');
         });
     });

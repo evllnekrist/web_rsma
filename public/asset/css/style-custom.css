@@ -1,3 +1,8 @@
+input:read-only,
+select:read-only {
+  background-color: #f9f9f9 !important;
+}
+
 /* The side navigation menu */
 .sidenav {
     height: 100%; /* 100% Full-height */
@@ -53,7 +58,7 @@
   }
 
   .hidden{
-    display: none;
+    display: none !important;
   }
 
   .pagination {
@@ -135,7 +140,6 @@
   line-height: 1.5em;
   width: 300px;
   padding: 2em 1.5em;
-  margin-bottom: 2em;
   background: #58a;
 }
 
@@ -166,4 +170,8 @@
   transform-origin: bottom right;
   border-bottom-left-radius: inherit;
   box-shadow: -.2em .2em .3em -.1em rgba(0,0,0,.15);
+}
+
+req {
+  color: red;
 }

@@ -5,7 +5,7 @@
             title="Kelola halaman statis yang memiliki link sendiri">
             Halaman
         </a>
-        <a  data-toggle="tooltip" data-placement="bottom" href="{{route('cms.article')}}" 
+        <a  data-toggle="tooltip" data-placement="bottom" href="{{route('cms.post')}}" 
             title="Kelola Berita atau Artikel">
             Berita / Artikel
         </a>

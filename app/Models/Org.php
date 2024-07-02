@@ -27,6 +27,7 @@ class Org extends Model
     protected $table = 'orgs';
     protected $fillable = [
         'name',
+        'nip',
         'img_main',
         'desc_title',
         'desc_body',

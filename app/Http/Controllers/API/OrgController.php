@@ -107,6 +107,11 @@ class OrgController extends APIController
      *                     example="Rhenald Kasali",
      *                 ),
      *                 @OA\Property(
+     *                     property="nip",
+     *                     type="string",
+     *                     example="123456789012345678",
+     *                 ),
+     *                 @OA\Property(
      *                     property="job_title",
      *                     type="string",
      *                     example="Head of ABC",
@@ -223,6 +228,11 @@ class OrgController extends APIController
      *                     property="name",
      *                     type="string",
      *                     example="[EDITED] Rhenald Kasali",
+     *                 ),
+     *                 @OA\Property(
+     *                     property="nip",
+     *                     type="string",
+     *                     example="223456789012345678",
      *                 ),
      *                 @OA\Property(
      *                     property="job_title",

@@ -134,4 +134,9 @@ return [
         ),
     ),
 
+    'accept_extensions' => array(
+        'img' => array('.png','.jpg','.jpeg','.jfif','.webp','.heic','.heif'),
+        'doc' => array('.pdf','.doc','.docx','.xls','.xlsx','.csv','.ppt','.pptx'), 
+    ),
+
 ];
