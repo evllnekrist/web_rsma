@@ -70,8 +70,8 @@ class ResourceDetailController extends APIController
      */
     public function index(Request $request)
     {
-        $filter['equal']  = ['key'];
-        $filter['search'] = ['name'];
+        // $filter['equal']  = [];
+        $filter['search'] = ['key','name','description'];
         return $this->get_list_common($request, $this->model, $filter, []);
     }
 

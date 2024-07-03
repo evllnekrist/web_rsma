@@ -46,26 +46,26 @@ class APIController extends Controller
               }
             }
           }
-          if(isset($filter['equal_comma'])){ 
-            foreach ($filter['equal_comma'] as $key => $value) {
+          if(isset($filter['search'])){
+            foreach ($filter['search'] as $key => $value) {
               if(isset($data['filter']['_'.$value])){ 
-                  $data['products'] = $data['products']->whereRaw($value." LIKE '%".$data['filter']['_'.$value]."%'");
+                  $data['products'] = $data['products']->whereRaw("LOWER(".$value.") LIKE '%".strtolower($data['filter']['_'.$value])."%'");
               }
             }
           }
-          if(isset($filter['search'])){
-              if(isset($data['filter']['_search'])){
-                  $query = "(";
-                  for ($i=0; $i < sizeof($filter['search']); $i++) { 
-                      $query .= "LOWER(".($filter['search'][$i]).") LIKE '%".strtolower($data['filter']['_search'])."%'";
-                      if($i+1 < sizeof($filter['search'])){
-                          $query .= " or ";
-                      }
-                  }
-                  $query .= ')';
-                  $data['products'] = $data['products']->whereRaw($query);
-              }
-          }
+          // if(isset($filter['single_search'])){ // enable for db multi column single input search
+          //     if(isset($data['filter']['_search'])){
+          //         $query = "(";
+          //         for ($i=0; $i < sizeof($filter['single_search']); $i++) { 
+          //             $query .= "LOWER(".($filter['single_search'][$i]).") LIKE '%".strtolower($data['filter']['_search'])."%'";
+          //             if($i+1 < sizeof($filter['single_search'])){
+          //                 $query .= " or ";
+          //             }
+          //         }
+          //         $query .= ')';
+          //         $data['products'] = $data['products']->whereRaw($query);
+          //     }
+          // }
           if(isset($filter['search_jsonb'])){
               if(isset($data['filter']['_search'])){
                   $query = "("; $i = 0;

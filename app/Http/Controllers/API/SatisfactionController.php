@@ -70,7 +70,8 @@ class SatisfactionController extends APIController
      */
     public function index(Request $request)
     {
-        $filter['range']  = ['star'];
+        // $filter['range']  = ['star'];
+        $filter['equal']  = ['star'];
         $filter['search'] = ['name','title'];
         return $this->get_list_common($request, $this->model, $filter, []);
     }

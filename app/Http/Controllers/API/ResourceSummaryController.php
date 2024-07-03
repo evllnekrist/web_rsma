@@ -70,8 +70,8 @@ class ResourceSummaryController extends APIController
      */
     public function index(Request $request)
     {
-        $filter['equal']  = ['id'];
-        $filter['search'] = ['name','job_title'];
+        $filter['equal']  = ['amount'];
+        $filter['search'] = ['type','key_lable','description'];
         return $this->get_list_common($request, $this->model, $filter, []);
     }
 

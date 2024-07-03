@@ -62,7 +62,6 @@ function doDelete(id,name){
 }
 function getData(move_to_page=null){
   const object  = $(id_list).data('object');
-  console.log('COLUMNS',columns);
   $(id_list).html(loadingElementImg);
 
   if(move_to_page){
@@ -79,7 +78,7 @@ function getData(move_to_page=null){
   });
   // console.log('payload',payload); 
   // return;
-  axios.get(baseUrl+'/api/'+object, {param: payload}, apiHeaders)
+  axios.get(baseUrl+'/api/'+object, {params: payload}, apiHeaders)
   .then(function (response) {
     console.log('[DATA] response..',response.data);
     if(response.data.status) {
@@ -210,6 +209,23 @@ function getData(move_to_page=null){
     });
   });
 }
+
+$('._filter_search').on('keyup', function() {
+  let var_name = $(this).attr('name');
+  // console.log('#_filter_msg_'+var_name);
+  switch ($(this).attr('type')) {
+    case 'number': break;
+    default:
+      if($(this).val().length != 0 && $(this).val().length < 3){
+        $('#_filter_msg'+var_name).html('* pencarian minimal 3 karakter, direset pada isian kosong');
+        return;
+      }else{
+        $('#_filter_msg'+var_name).html('');
+      }
+      break;
+  }
+  getData();
+});
 
 $(function () {
   getData();

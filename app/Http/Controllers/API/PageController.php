@@ -70,8 +70,8 @@ class PageController extends APIController
      */
     public function index(Request $request)
     {
-        $filter['equal']  = ['slug'];
-        $filter['search'] = ['title'];
+        // $filter['equal']  = [];
+        $filter['search'] = ['slug','title','layout'];
         return $this->get_list_common($request, $this->model, $filter, []);
     }
 

@@ -70,7 +70,7 @@ class OrgController extends APIController
      */
     public function index(Request $request)
     {
-        $filter['equal']  = ['id'];
+        $filter['equal']  = ['parent_id'];
         $filter['search'] = ['name','job_title'];
         return $this->get_list_common($request, $this->model, $filter, []);
     }

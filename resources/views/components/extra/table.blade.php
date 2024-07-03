@@ -38,17 +38,19 @@
                 @if(!array_key_exists("search",$column))
                     <th></th>
                 @else
-                    @switch($column['search']['type'])
-                        @case('text')
-                            <th><input type="text" class="form-control"></th>
-                        @break
-                        @case('number')
-                            <th><input type="number" class="form-control" style="width:70px"></th>
-                        @break
-                        @default
-                            <th></th>
-                        @break
-                    @endswitch
+                    <th>
+                        @switch($column['search']['type'])
+                            @case('text')
+                                <input name="_{{$column['var_name']}}" type="text" class="_filter _filter_search form-control">
+                            @break
+                            @case('number')
+                                <input name="_{{$column['var_name']}}" type="number" class="_filter _filter_search form-control" style="width:70px">
+                            @break
+                            @default
+                            @break
+                        @endswitch
+                        <small id="_filter_msg_{{$column['var_name']}}"></small>
+                    </th>
                 @endif
             @endforeach
         </tr>
