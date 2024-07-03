@@ -12,12 +12,10 @@ let loadingElement = `<div class="mx-auto">memuat...</div>`;
 
 function nospace(event,changeWith=""){
     if((event.target.value).includes(' ')){
-        Swal.fire({
-            position: 'top-end',
-            icon: 'warning',
-            html: 'Input ini tidak menerima spasi'+(changeWith != ""?', otomatis diganti karakter '+changeWith:''),
-            showConfirmButton: false,
-            timer: 2000
+        iziToast.warning({
+            title: 'Whoops...',
+            message: 'Input ini tidak menerima spasi'+(changeWith != ""?', otomatis diganti karakter '+changeWith:''),
+            position: 'topRight',
         });
     }
     event.target.value =  event.target.value.replaceAll(" ",changeWith)
@@ -25,8 +23,8 @@ function nospace(event,changeWith=""){
 $('.nospace').on('keyup', function(event) {
     nospace(event);
 });
-$('.nospace_rw_underscore').on('keyup', function(event) {
-    nospace(event,'_');
+$('.nospace_rw_hypen').on('keyup', function(event) {
+    nospace(event,'-');
 });
 
 function numeric(event){
@@ -95,7 +93,7 @@ function inputFile(event){
                     <b>`+(event.target.files[i]['name']).split('.').pop().toUpperCase()+`</b>
                 </div>`;
         }
-        template += `<br><span>`+event.target.files[i]['name']+`</span>`;
+        template += `<span>`+event.target.files[i]['name']+`</span>`;
     }
     // console.log('template',template)
     $('#input-file-preview-'+iii).html(template);

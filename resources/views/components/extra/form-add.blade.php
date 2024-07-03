@@ -7,8 +7,12 @@
                 <b class="text-white"><i class="fa fa-caret-right"></i>&nbsp;&nbsp;{{$breadcrumbs[1]['label']}}</b>
             </div>
             <form action="#" method="post" id="form-add" data-object="{{@$object}}" class="row">
+                @php
+                    $file_count = 0;
+                @endphp
                 @for($i=0;$i<sizeof($inputs);$i++)
                     <div class="col-md-{{12/sizeof($inputs)}} col-sm-12">
+                        @if(sizeof($inputs[$i])>0)
                         <div class="appointment-form default-form">
                             @foreach ($inputs[$i] as $input)
                                 <div class="form-group">
@@ -40,6 +44,11 @@
                                             <input type="email" name="{{$input['var_name']}}" class="{{@$input['class']}}" placeholder="{{@$input['format']}}" 
                                                 {{@$input['is_required']?'required':''}} {{@$input['is_readonly']?'readonly':''}} {{@$input['is_hidden']?'hidden':''}}>
                                             @break
+                                        @case('password')
+                                            <input type="password" name="{{$input['var_name']}}" class="{{@$input['class']}}" placeholder="{{@$input['format']}}" autocomplete="off"
+                                                {{@$input['is_required']?'required':''}} {{@$input['is_readonly']?'readonly':''}} {{@$input['is_hidden']?'hidden':''}}>
+                                            <input type="password" name="{{$input['var_name']}}_confirmation" class="{{@$input['class']}}" placeholder="Konfirmasi: tulis password yang sama" autocomplete="off">
+                                            @break
                                         @case('textarea')
                                             <textarea name="{{$input['var_name']}}" class="{{@$input['class']}}" placeholder="{{@$input['format']}}" 
                                                 {{@$input['is_required']?'required':''}} style="{{@$input['height']?'height:'.@$input['height']:''}}"></textarea>
@@ -69,25 +78,33 @@
                                                 <div class="upload-container">
                                                     <div class="upload-container-in">
                                                         <div class="border-container-in">
-                                                            <div class="icons fa-4x mt-3" id="input-file-none-0">
+                                                            <div class="icons fa-4x mt-3" id="input-file-none-{{$file_count}}">
                                                                 <i class="fas fa-file-image" data-fa-transform="shrink-3 down-2 left-6 rotate--45"></i>
                                                                 <i class="fas fa-file-alt" data-fa-transform="shrink-2 up-4"></i>
                                                                 <i class="fas fa-file-pdf" data-fa-transform="shrink-3 down-2 right-6 rotate-45"></i>
                                                             </div>
-                                                            <div class="flex flex-auto mx-auto" id="input-file-preview-0">
+                                                            <div class="flex flex-auto mx-auto" id="input-file-preview-{{$file_count}}">
                                                             </div>
-                                                            <input type="file" id="file-upload" data-index-input-file="0" name="{{$input['var_name']}}" 
-                                                                class="input-file" {{@$input['is_required']?'required':''}}>
-                                                            <p><small>Drag dan drop file, atau <a href="#" id="file-browser">cari disini</a>.</small></p>
+                                                            <input  type="file" class="input-file" id="input-file-el-{{$file_count}}" data-index-input-file="{{$file_count}}" 
+                                                                    name="{{$input['var_name']}}" accept="{{@$input['file_attr']['accept']?implode(',',Config::get('app.accept_mimes')[$input['file_attr']['accept']]):''}}" {{@$input['is_required']?'required':''}}>
+                                                            <p>
+                                                                <small>
+                                                                    Drag dan drop file, atau <a href="#" class="file-browser" data-index-input-file="{{$file_count}}">cari disini</a>.
+                                                                </small>
+                                                            </p>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                            @php
+                                                $file_count++;
+                                            @endphp
                                             @break
                                     @endswitch
                                 </div>
                             @endforeach
                         </div>
+                        @endif
                     </div>
                 @endfor
             </form>

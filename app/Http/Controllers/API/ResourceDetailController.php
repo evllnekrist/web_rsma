@@ -17,7 +17,7 @@ class ResourceDetailController extends APIController
     protected $model = 'ResourceDetail';
     /**
      * @OA\Get(
-     *     path="/api/resource-detail",
+     *     path="/api/resourceDetail",
      *     tags={"Resource Detail"},
      *     summary="Display a listing of items",
      *     operationId="resourceDetailIndex",
@@ -77,10 +77,10 @@ class ResourceDetailController extends APIController
 
     /**
      * @OA\Post(
-     *     path="/api/resource-detail",
+     *     path="/api/resourceDetail",
      *     tags={"Resource Detail"},
      *     summary="Store a newly created item",
-     *     operationId="resource-detailStore",
+     *     operationId="resourceDetailStore",
      *     @OA\MediaType(mediaType="multipart/form-data"),
      *     @OA\Response(
      *         response=400,
@@ -134,15 +134,15 @@ class ResourceDetailController extends APIController
         $rules = [
             'name'  => 'required',
         ];
-        return $this->post_common($request, $this->model, $rules);
+        return $this->post_common($request, $this->model, $rules,['img_main']);
     }
 
     /**
      * @OA\Get(
-     *     path="/api/resource-detail/{id}",
+     *     path="/api/resourceDetail/{id}",
      *     tags={"Resource Detail"},
      *     summary="Display the specified item",
-     *     operationId="resource-detailShow",
+     *     operationId="resourceDetailShow",
      *     @OA\Response(
      *         response=404,
      *         description="Item not found",
@@ -176,10 +176,10 @@ class ResourceDetailController extends APIController
 
     /**
      * @OA\Post(
-     *     path="/api/resource-detail/{id}",
+     *     path="/api/resourceDetail/{id}",
      *     tags={"Resource Detail"},
      *     summary="Update the specified item",
-     *     operationId="resource-detailUpdate",
+     *     operationId="resourceDetailUpdate",
      *     @OA\MediaType(mediaType="multipart/form-data"),
      *     @OA\Response(
      *         response=404,
@@ -248,16 +248,16 @@ class ResourceDetailController extends APIController
         $rules = [
             'name'  => 'required',
         ];
-        return $this->put_common($request, $id, $this->model, $rules);
+        return $this->put_common($request, $id, $this->model, $rules, ['img_main']);
 
     }
     
     /**
      * @OA\Delete(
-     *     path="/api/resource-detail/{id}",
+     *     path="/api/resourceDetail/{id}",
      *     tags={"Resource Detail"},
      *     summary="Remove the specified item",
-     *     operationId="resource-detailDestroy",
+     *     operationId="resourceDetailDestroy",
      *     @OA\Response(
      *         response=404,
      *         description="Item not found",

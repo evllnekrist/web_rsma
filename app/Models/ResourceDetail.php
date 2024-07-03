@@ -31,6 +31,7 @@ class ResourceDetail extends Model
         'description',
         'link',
         'sequence',
+        'img_main',
         'created_at',
         'created_by',
         'updated_at',

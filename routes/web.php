@@ -34,27 +34,15 @@ Route::prefix('cms')->middleware('auth')->group(function () {
         Route::get('/add', [CMSController::class, 'postAdd']);
         Route::get('/{id}', [CMSController::class, 'postEdit']);
     });
-    Route::prefix('resource-summary')->group(function () {
-        Route::get('/', function () {
-            return view('cms.resource-summary.index');
-        })->name('cms.resource-summary');
-        Route::get('/add', function () {
-            return view('cms.resource-summary.add');
-        });
-        Route::get('/{id}', function () {
-            return view('cms.resource-summary.edit');
-        });
+    Route::prefix('resourceSummary')->group(function () {
+        Route::get('/', [CMSController::class, 'resourceSummaryIndex'])->name('cms.resourceSummary');
+        Route::get('/add', [CMSController::class, 'resourceSummaryAdd']);
+        Route::get('/{id}', [CMSController::class, 'resourceSummaryEdit']);
     });
-    Route::prefix('resource-detail')->group(function () {
-        Route::get('/', function () {
-            return view('cms.resource-detail.index');
-        })->name('cms.resource-detail');
-        Route::get('/add', function () {
-            return view('cms.resource-detail.add');
-        });
-        Route::get('/{id}', function () {
-            return view('cms.resource-detail.edit');
-        });
+    Route::prefix('resourceDetail')->group(function () {
+        Route::get('/', [CMSController::class, 'resourceDetailIndex'])->name('cms.resourceDetail');
+        Route::get('/add', [CMSController::class, 'resourceDetailAdd']);
+        Route::get('/{id}', [CMSController::class, 'resourceDetailEdit']);
     });
     Route::prefix('org')->group(function () {
         Route::get('/', [CMSController::class, 'orgIndex'])->name('cms.org');
@@ -62,36 +50,16 @@ Route::prefix('cms')->middleware('auth')->group(function () {
         Route::get('/{id}', [CMSController::class, 'orgEdit']);
     });
     Route::prefix('satisfaction')->group(function () {
-        Route::get('/', function () {
-            return view('cms.satisfaction.index');
-        })->name('cms.satisfaction');
-        Route::get('/add', function () {
-            return view('cms.satisfaction.add');
-        });
-        Route::get('/{id}', function () {
-            return view('cms.satisfaction.edit');
-        });
+        Route::get('/', [CMSController::class, 'satisfactionIndex'])->name('cms.satisfaction');
     });
     Route::prefix('web')->group(function () {
-        Route::get('/', function () {
-            return view('cms.web-info.index');
-        })->name('cms.web-info');
-        Route::get('/add', function () {
-            return view('cms.web-info.add');
-        });
-        Route::get('/{id}', function () {
-            return view('cms.web-info.edit');
-        });
+        Route::get('/', [CMSController::class, 'webInfoIndex'])->name('cms.web-info');
+        Route::get('/add', [CMSController::class, 'webInfoAdd']);
+        Route::get('/{id}', [CMSController::class, 'webInfoEdit']);
     });
     Route::prefix('user')->group(function () {
-        Route::get('/', function () {
-            return view('cms.user.index');
-        })->name('cms.user');
-        Route::get('/add', function () {
-            return view('cms.user.add');
-        });
-        Route::get('/{id}', function () {
-            return view('cms.user.edit');
-        });
+        Route::get('/', [CMSController::class, 'userIndex'])->name('cms.user');
+        Route::get('/add', [CMSController::class, 'userAdd']);
+        Route::get('/{id}', [CMSController::class, 'userEdit']);
     });
 });

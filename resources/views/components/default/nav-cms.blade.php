@@ -16,12 +16,12 @@
             <i class="fa fa-newspaper mr-3 text-white" aria-hidden="true"></i>
             Berita / Artikel
         </a>
-        <a  data-toggle="tooltip" data-placement="bottom" href="{{route('cms.resource-summary')}}" 
+        <a  data-toggle="tooltip" data-placement="bottom" href="{{route('cms.resourceSummary')}}" 
             title="Memastikan informasi sumber daya manusia atau infrastruktur terdata jenis dan jumlahnya">
             <i class="fa fa-chart-bar mr-3 text-white" aria-hidden="true"></i>
             Ikhtisar Sumber Daya
         </a>
-        <a  data-toggle="tooltip" data-placement="bottom" href="{{route('cms.resource-detail')}}" 
+        <a  data-toggle="tooltip" data-placement="bottom" href="{{route('cms.resourceDetail')}}" 
             title="Mendata detail sumber daya">
             <i class="fa fa-chart-pie mr-3 text-white" aria-hidden="true"></i>
             Detail Sumber Daya

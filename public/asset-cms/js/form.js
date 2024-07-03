@@ -12,10 +12,11 @@ $(document).ready(function() {
   })
 });
 
-$("#file-upload").css("opacity", "0");
-$("#file-browser").click(function(e) {
+$(".input-file").css("opacity", "0");
+$(".file-browser").click(function(e) {
   e.preventDefault();
-  $("#file-upload").trigger("click");
+  let iii = event.target.getAttribute('data-index-input-file');
+  $("#input-file-el-"+iii).trigger("click");
 });
 
 $("#btn-submit-add").on('click', function(e) {
@@ -47,9 +48,9 @@ $("#btn-submit-add").on('click', function(e) {
             position: 'center',
             progressBarColor: 'rgb(0, 255, 184)',
         });
-        // setTimeout(function() {
-        //   window.location = baseUrl+'/cms/'+object;
-        // }, 1500);
+        setTimeout(function() {
+          window.location = baseUrl+'/cms/'+object;
+        }, 1500);
       }else{
         iziToast.warning({
             title: "Gagal",
@@ -69,6 +70,7 @@ $("#btn-submit-add").on('click', function(e) {
     })
     .catch(function (error) {
       iziToast.error({
+          timeout: 20000,
           title: "Gagal",
           message: error.response?error.response.data.message:error.message,
           position: 'center',
@@ -138,6 +140,7 @@ $("#btn-submit-edit").on('click', function(e) {
     })
     .catch(function (error) {
       iziToast.error({
+          timeout: 20000,
           title: "Gagal",
           message: error.response?error.response.data.message:error.message,
           position: 'center',

@@ -6,8 +6,12 @@
                 <b class="text-white"><i class="fa fa-caret-right"></i>&nbsp;&nbsp;{{$breadcrumbs[1]['label']}}</b>
             </div>
             <form action="#" method="post" id="form-edit" data-object="{{@$object}}" data-id="{{$id}}" class="row">
+                @php
+                    $file_count = 0;
+                @endphp
                 @for($i=0;$i<sizeof($inputs);$i++)
                     <div class="col-md-{{12/sizeof($inputs)}} col-sm-12">
+                        @if(sizeof($inputs[$i])>0)
                         <div class="appointment-form default-form">
                             @foreach ($inputs[$i] as $input)
                                 <div class="form-group">
@@ -40,6 +44,11 @@
                                             <input type="email" name="{{$input['var_name']}}" class="{{@$input['class']}}" placeholder="{{@$input['format']}}" 
                                                 {{@$input['is_required']?'required':''}} {{@$input['is_readonly']?'readonly':''}} {{@$input['is_hidden']?'hidden':''}}
                                                 value="{{$selected[$input['var_name']]}}">
+                                            @break
+                                        @case('password')
+                                            <input type="password" name="{{$input['var_name']}}" class="{{@$input['class']}}" placeholder="Isi hanya jika ingin melakukan reset" autocomplete="off"
+                                                {{@$input['is_readonly']?'readonly':''}} {{@$input['is_hidden']?'hidden':''}}>
+                                            <input type="password" name="{{$input['var_name']}}_confirmation" class="{{@$input['class']}}" placeholder="Konfirmasi: tulis password yang sama" autocomplete="off">
                                             @break
                                         @case('textarea')
                                             <textarea name="{{$input['var_name']}}" class="{{@$input['class']}}" placeholder="{{@$input['format']}}" {{@$input['is_required']?'required':''}} 
@@ -117,6 +126,7 @@
                                 </div>
                             @endforeach
                         </div>
+                        @endif
                     </div>
                 @endfor
             </form>

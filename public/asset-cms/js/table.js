@@ -113,8 +113,8 @@ function getData(move_to_page=null){
                     }else{
                         template += `<a class="mr-3 flex items-center" href="`+baseUrl+'/cms/'+object+'/'+item.id+`">
                                         <i class="fa fa-pen"></i>
-                                    </a>
-                                    <a onclick="doDelete(`+item.id+`,'`+item.name+`')" class="flex items-center text-danger">
+                                    </a>`;
+                        template += `<a onclick="doDelete(`+item.id+`,'`+item.name+`')" class="flex items-center text-danger">
                                         <i class="fa fa-trash"></i>
                                     </a>`;
                     }

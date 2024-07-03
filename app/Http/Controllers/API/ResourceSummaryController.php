@@ -17,7 +17,7 @@ class ResourceSummaryController extends APIController
     protected $model = 'ResourceSummary';
     /**
      * @OA\Get(
-     *     path="/api/resource-summary",
+     *     path="/api/resourceSummary",
      *     tags={"Resource Summary"},
      *     summary="Display a listing of items",
      *     operationId="resourceSummaryIndex",
@@ -77,10 +77,10 @@ class ResourceSummaryController extends APIController
 
     /**
      * @OA\Post(
-     *     path="/api/resource-summary",
+     *     path="/api/resourceSummary",
      *     tags={"Resource Summary"},
      *     summary="Store a newly created item",
-     *     operationId="resource-summaryStore",
+     *     operationId="resourceSummaryStore",
      *     @OA\MediaType(mediaType="multipart/form-data"),
      *     @OA\Response(
      *         response=400,
@@ -132,7 +132,7 @@ class ResourceSummaryController extends APIController
      *                     type="integer",
      *                     example=""
      *                 ),
-     *                 required={"name"}
+     *                 required={"key_label"}
      *             )
      *         )
      *     ),
@@ -142,17 +142,17 @@ class ResourceSummaryController extends APIController
     public function store(Request $request)
     {
         $rules = [
-            'label'  => 'required',
+            'key_label'  => 'required',
         ];
-        return $this->post_common($request, $this->model, $rules);
+        return $this->post_common($request, $this->model, $rules, []);
     }
 
     /**
      * @OA\Get(
-     *     path="/api/resource-summary/{id}",
+     *     path="/api/resourceSummary/{id}",
      *     tags={"Resource Summary"},
      *     summary="Display the specified item",
-     *     operationId="resource-summaryShow",
+     *     operationId="resourceSummaryShow",
      *     @OA\Response(
      *         response=404,
      *         description="Item not found",
@@ -186,10 +186,10 @@ class ResourceSummaryController extends APIController
 
     /**
      * @OA\Post(
-     *     path="/api/resource-summary/{id}",
+     *     path="/api/resourceSummary/{id}",
      *     tags={"Resource Summary"},
      *     summary="Update the specified item",
-     *     operationId="resource-summaryUpdate",
+     *     operationId="resourceSummaryUpdate",
      *     @OA\MediaType(mediaType="multipart/form-data"),
      *     @OA\Response(
      *         response=404,
@@ -256,7 +256,7 @@ class ResourceSummaryController extends APIController
      *                     type="integer",
      *                     example=""
      *                 ),
-     *                 required={"name"}
+     *                 required={"key_label"}
      *             )
      *         )
      *     ),
@@ -266,18 +266,18 @@ class ResourceSummaryController extends APIController
     public function update(Request $request, $id)
     {
         $rules = [
-            'label'  => 'required',
+            'key_label'  => 'required',
         ];
-        return $this->put_common($request, $id, $this->model, $rules);
+        return $this->put_common($request, $id, $this->model, $rules, []);
 
     }
     
     /**
      * @OA\Delete(
-     *     path="/api/resource-summary/{id}",
+     *     path="/api/resourceSummary/{id}",
      *     tags={"Resource Summary"},
      *     summary="Remove the specified item",
-     *     operationId="resource-summaryDestroy",
+     *     operationId="resourceSummaryDestroy",
      *     @OA\Response(
      *         response=404,
      *         description="Item not found",

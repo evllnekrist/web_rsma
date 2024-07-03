@@ -11,10 +11,11 @@ use App\Http\Controllers\API\ResourceDetailController;
 use App\Http\Controllers\API\ResourceSummaryController;
 use App\Http\Controllers\API\SatisfactionController;
 
+Route::resource('user', AuthController::class, ['only' => ['index', 'show']]);
+Route::post('/user/{id}', [AuthController::class, 'update'])->middleware(['auth:api']);
+Route::resource('user', AuthController::class, ['except' => ['index', 'show']])->middleware(['auth:api']);
 Route::prefix('user')->group(function () {
-    Route::get('/users', function () {
-        return $request->user();
-    });
+    Route::get('/users', function () { return $request->user(); });
     Route::post('/register', [AuthController::class, 'register']);
     Route::get('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/login', [AuthController::class, 'login']);
@@ -37,13 +38,13 @@ Route::resource('page', PageController::class, ['only' => ['index', 'show']]);
 Route::post('/page/{id}', [PageController::class, 'update'])->middleware(['auth:api']);
 Route::resource('page', PageController::class, ['except' => ['index', 'show']])->middleware(['auth:api']);
 
-Route::resource('resource-detail', ResourceDetailController::class, ['only' => ['index', 'show']]);
-Route::post('/resource-detail/{id}', [ResourceDetailController::class, 'update'])->middleware(['auth:api']);
-Route::resource('resource-detail', ResourceDetailController::class, ['except' => ['index', 'show']])->middleware(['auth:api']);
+Route::resource('resourceDetail', ResourceDetailController::class, ['only' => ['index', 'show']]);
+Route::post('/resourceDetail/{id}', [ResourceDetailController::class, 'update'])->middleware(['auth:api']);
+Route::resource('resourceDetail', ResourceDetailController::class, ['except' => ['index', 'show']])->middleware(['auth:api']);
 
-Route::resource('resource-summary', ResourceSummaryController::class, ['only' => ['index', 'show']]);
-Route::post('/resource-summary/{id}', [ResourceSummaryController::class, 'update'])->middleware(['auth:api']);
-Route::resource('resource-summary', ResourceSummaryController::class, ['except' => ['index', 'show']])->middleware(['auth:api']);
+Route::resource('resourceSummary', ResourceSummaryController::class, ['only' => ['index', 'show']]);
+Route::post('/resourceSummary/{id}', [ResourceSummaryController::class, 'update'])->middleware(['auth:api']);
+Route::resource('resourceSummary', ResourceSummaryController::class, ['except' => ['index', 'show']])->middleware(['auth:api']);
 
 Route::resource('satisfaction', SatisfactionController::class, ['only' => ['index', 'show']]);
 Route::post('/satisfaction/{id}', [SatisfactionController::class, 'update'])->middleware(['auth:api']);
