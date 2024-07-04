@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CMSController;
 use Illuminate\Support\Facades\Route;
@@ -8,6 +9,30 @@ Route::get('/', function () {
     // return view('welcome');
     return view('index');
 });
+Route::get('p/{id}', [PageController::class, 'index']);
+Route::prefix('doctor')->middleware('auth')->group(function () {
+    Route::get('/', function () {
+        return view('pages.doctor');
+    });
+    Route::get('/{id}', function () {
+        return view('pages.doctor.detail');
+    });
+    Route::get('/schedule/{id}', function () {
+        return view('pages.doctor.schedule');
+    });
+});
+Route::prefix('news')->middleware('auth')->group(function () {
+    Route::get('/', function () {
+        return view('pages.news');
+    });
+    Route::get('/{id}', function () {
+        return view('pages.news.detail');
+    });
+    Route::get('/schedule/{id}', function () {
+        return view('pages.news.schedule');
+    });
+});
+
 
 require __DIR__.'/auth.php';
 

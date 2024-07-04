@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OpenApi\Annotations as OA;
+use App\Models\ResourceSumamry;
 
 /**
  * Class ResourceDetail.
@@ -37,4 +38,8 @@ class ResourceDetail extends Model
         'updated_at',
         'updated_by',
     ];
+    
+    public function summary(){
+        return $this->belongsTo(ResourceSummary::class, 'key', 'key');
+    }
 }

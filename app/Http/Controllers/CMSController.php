@@ -19,6 +19,7 @@ class CMSController extends Controller
                 'btn_add'=>[
                     'link'=>url('cms/'.$object.'/add'),
                 ],
+                'no_delete_items'=>['services','service-flow','poly-schedule','contact-us','bpjs-info','about-us'],
                 'columns'=>[
                     [
                         'type'=>'seq_number',
@@ -60,7 +61,7 @@ class CMSController extends Controller
                     [
                         [
                             'label'=>'Layout (tata letak)',
-                            'var_name'=>'type',
+                            'var_name'=>'layout',
                             'type'=>'select',
                             'select_attr'=>[
                                 'options'=>$coll['layout'],

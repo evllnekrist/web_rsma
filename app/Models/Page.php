@@ -26,6 +26,7 @@ class Page extends Model
     use SoftDeletes;
 
     public $primaryKey = 'slug';
+    public $incrementing = false;
     protected $table = 'pages';
     protected $fillable = [
       'slug',

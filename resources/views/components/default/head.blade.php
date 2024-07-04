@@ -5,6 +5,7 @@
 
 <link href="{{asset('asset/css/bootstrap.css')}}" rel="stylesheet">
 <link href="{{asset('asset/css/style.css')}}" rel="stylesheet">
+<link href="{{asset('asset/css/style-custom.css')}}" rel="stylesheet">
 <link href="{{asset('asset/css/responsive.css')}}" rel="stylesheet">
 <link href="{{asset('asset/css/iziToast.css')}}" rel="stylesheet">
 <link href="{{asset('asset/css/select2.min.css')}}" rel="stylesheet">

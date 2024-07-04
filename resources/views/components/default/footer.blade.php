@@ -5,10 +5,10 @@
         <div class="auto-container">
             <div class="row">
                 <!--Big Column-->
-                <div class="big-column col-xl-6 col-lg-12 col-md-12 col-sm-12">
+                <div class="big-column col-xl-4 col-lg-12 col-md-12 col-sm-12">
                     <div class="row">
                         <!--Footer Column-->
-                        <div class="footer-column col-xl-7 col-lg-6 col-md-6 col-sm-12">
+                        <div class="footer-column col-12">
                             <div class="footer-widget about-widget">
                                 <div class="logo">
                                     <a href="index.html"><img src="images/logo-2.png" alt="" /></a>
@@ -24,26 +24,11 @@
                                 </ul>
                             </div>
                         </div>
-
-                        <!--Footer Column-->
-                        <div class="footer-column col-xl-5 col-lg-6 col-md-6 col-sm-12">
-                            <div class="footer-widget">
-                                <h2 class="widget-title">Departments</h2>
-                                <ul class="user-links">
-                                    <li><a href="#">Surgery & Radiology</a></li>
-                                    <li><a href="#">Family Medicine</a></li>
-                                    <li><a href="#">Women’s Health</a></li>
-                                    <li><a href="#">Optician</a></li>
-                                    <li><a href="#">Pediatrics</a></li>
-                                    <li><a href="#">Dermatology</a></li>
-                                </ul>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
                 <!--Big Column-->
-                <div class="big-column col-xl-6 col-lg-12 col-md-12 col-sm-12">
+                <div class="big-column col-xl-8 col-lg-12 col-md-12 col-sm-12">
                     <div class="row">
                         <!--Footer Column-->
                         <div class="footer-column col-lg-6 col-md-6 col-sm-12">
@@ -77,31 +62,30 @@
                         <div class="footer-column col-lg-6 col-md-6 col-sm-12">
                             <!--Footer Column-->
                             <div class="footer-widget contact-widget">
-                                <h2 class="widget-title">Contact Us</h2>
+                                <h2 class="widget-title">Kontak</h2>
                                 <!--Footer Column-->
                                 <div class="widget-content">
                                     <ul class="contact-list">
                                         <li>
                                             <span class="icon flaticon-placeholder"></span>
-                                            <div class="text">2130 Fulton Street San Diego <Br>CA 94117-1080 USA</div>
-                                        </li>
-
-                                        <li>
-                                            <span class="icon flaticon-call-1"></span>
-                                            <div class="text">Mon to Fri : 08:30 - 18:00</div>
-                                            <a href="tel:+89868679575"><strong>+898 68679 575</strong></a>
-                                        </li>
-
-                                        <li>
-                                            <span class="icon flaticon-email"></span>
-                                            <div class="text">Do you have a Question?<br>
-                                            <a href="mailto:info@gmail.com"><strong>info@gmail.com</strong></a></div>
+                                            <div class="text">{!!env('OBJ_ADDRESS')!!}</div>
                                         </li>
 
                                         <li>
                                             <span class="icon flaticon-back-in-time"></span>
-                                            <div class="text">Mon - Sat 8.00 - 18.00<br>
-                                            <strong>Sunday CLOSED</strong></div>
+                                            <div class="text">{!!env('OBJ_WORKHOURS')!!}</div>
+                                        </li>
+
+                                        <li>
+                                            <span class="icon flaticon-call-1"></span>
+                                            <div class="text">Telepon</div>
+                                            <a href="tel:{!!env('OBJ_PHONE')!!}"><strong>{!!env('OBJ_PHONE')!!}</strong></a>
+                                        </li>
+
+                                        <li>
+                                            <span class="icon flaticon-email"></span>
+                                            <div class="text">Email<br>
+                                            <a href="mailto:{!!env('OBJ_EMAIL')!!}"><strong>{!!env('OBJ_EMAIL')!!}</strong></a></div>
                                         </li>
                                     </ul>
                                 </div>

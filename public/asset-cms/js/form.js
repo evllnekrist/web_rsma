@@ -1,15 +1,20 @@
 apiHeaders['headers']['Authorization'] = 'Bearer '+$("meta[name='tapi']").attr("content");
+// import { ClassicEditor, SourceEditing } from 'ckeditor5';
 
 $(document).ready(function() {
+  
   $('.form-select').select2();
   $('.form-select-tags').select2({
     tags: true
   });
-  $('.summernote-area').summernote({
-      placeholder: 'Tulis sesuatu disini....',
-      tabsize: 2,
-      height: 200
-  })
+  
+  $('.wysiwyg-editor').each(function(i, obj) {
+    CKEDITOR.replace('wysiwyg-editor-'+i, {
+        language: 'id',
+        // uiColor: '#018f55'
+    });
+  });
+
 });
 
 $(".input-file").css("opacity", "0");
@@ -105,6 +110,9 @@ $("#btn-submit-edit").on('click', function(e) {
     $('#loading').show();
     $('#form').hide();
     const formData = new FormData(form);
+    $('.wysiwyg-editor').each(function(i, obj) {
+      formData.append($(obj).attr('name'),CKEDITOR.instances['wysiwyg-editor-'+i].getData());
+    });
     // for (const [key, value] of formData) {
     //   console.log('»', key, value)
     // }; return;
@@ -118,9 +126,9 @@ $("#btn-submit-edit").on('click', function(e) {
             position: 'center',
             progressBarColor: 'rgb(0, 255, 184)',
         });
-        setTimeout(function() {
-          window.location = baseUrl+'/cms/'+object;
-        }, 1500);
+        // setTimeout(function() {
+        //   window.location = baseUrl+'/cms/'+object;
+        // }, 1500);
       }else{
         iziToast.warning({
             title: "Gagal",

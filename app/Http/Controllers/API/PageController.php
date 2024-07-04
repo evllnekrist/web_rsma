@@ -261,7 +261,7 @@ class PageController extends APIController
     public function update(Request $request, $id)
     {
         $rules = [
-            'title'  => 'required|unique:pages',
+            'title'  => 'required',
             'layout'  => 'required',
         ];
         return $this->put_common($request, $id, $this->model, $rules, ['img_main','file_main']);

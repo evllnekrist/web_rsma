@@ -54,7 +54,7 @@
                                                 {{@$input['is_required']?'required':''}} style="{{@$input['height']?'height:'.@$input['height']:''}}"></textarea>
                                             @break
                                         @case('editor')
-                                            <textarea name="{{$input['var_name']}}" class="summernote-area {{@$input['class']}}" placeholder="{{@$input['format']}}" 
+                                            <textarea name="{{$input['var_name']}}" class="wysiwyg-editor {{@$input['class']}}" placeholder="{{@$input['format']}}" 
                                                 {{@$input['is_required']?'required':''}}></textarea>
                                             @break
                                         @case('select')

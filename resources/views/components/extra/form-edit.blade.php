@@ -8,9 +8,10 @@
             <form action="#" method="post" id="form-edit" data-object="{{@$object}}" data-id="{{$id}}" class="row">
                 @php
                     $file_count = 0;
+                    $editor_count = 0;
                 @endphp
                 @for($i=0;$i<sizeof($inputs);$i++)
-                    <div class="col-md-{{12/sizeof($inputs)}} col-sm-12">
+                    <div class="col-md-{{sizeof($inputs)<=2?($i==0?'7':'5'):(12/sizeof($inputs))}} col-sm-12">
                         @if(sizeof($inputs[$i])>0)
                         <div class="appointment-form default-form">
                             @foreach ($inputs[$i] as $input)
@@ -31,23 +32,23 @@
                                         @case('text')
                                             <input type="text" name="{{$input['var_name']}}" class="{{@$input['class']}}" placeholder="{{@$input['format']}}" 
                                                 {{@$input['min']?'minlength='.$input['min']:''}} {{@$input['max']?'maxlength='.$input['max']:''}}
-                                                {{@$input['is_required']?'required':''}} {{@$input['is_readonly']?'readonly':''}} {{@$input['is_hidden']?'hidden':''}}
+                                                {{@$input['is_required']?'required':''}} {{@$input['is_readonly'] || @$input['on_edit']['is_readonly']?'readonly':''}} {{@$input['is_hidden']?'hidden':''}}
                                                 data-affects_to="{{@$input['el_data']['affects_to']}}" value="{{$selected[$input['var_name']]}}">
                                             @break
                                         @case('number')
                                             <input type="number" name="{{$input['var_name']}}" class="{{@$input['class']}}" placeholder="{{@$input['format']}}" 
                                                 {{@$input['min']?'min='.$input['min']:''}} {{@$input['max']?'max='.$input['max']:''}}
-                                                {{@$input['is_required']?'required':''}} {{@$input['is_readonly']?'readonly':''}} {{@$input['is_hidden']?'hidden':''}}
+                                                {{@$input['is_required']?'required':''}} {{@$input['is_readonly'] || @$input['on_edit']['is_readonly']?'readonly':''}} {{@$input['is_hidden']?'hidden':''}}
                                                 value="{{$selected[$input['var_name']]}}">
                                             @break
                                         @case('email')
                                             <input type="email" name="{{$input['var_name']}}" class="{{@$input['class']}}" placeholder="{{@$input['format']}}" 
-                                                {{@$input['is_required']?'required':''}} {{@$input['is_readonly']?'readonly':''}} {{@$input['is_hidden']?'hidden':''}}
+                                                {{@$input['is_required']?'required':''}} {{@$input['is_readonly'] || @$input['on_edit']['is_readonly']?'readonly':''}} {{@$input['is_hidden']?'hidden':''}}
                                                 value="{{$selected[$input['var_name']]}}">
                                             @break
                                         @case('password')
                                             <input type="password" name="{{$input['var_name']}}" class="{{@$input['class']}}" placeholder="Isi hanya jika ingin melakukan reset" autocomplete="off"
-                                                {{@$input['is_readonly']?'readonly':''}} {{@$input['is_hidden']?'hidden':''}}>
+                                                {{@$input['is_readonly'] || @$input['on_edit']['is_readonly']?'readonly':''}} {{@$input['is_hidden']?'hidden':''}}>
                                             <input type="password" name="{{$input['var_name']}}_confirmation" class="{{@$input['class']}}" placeholder="Konfirmasi: tulis password yang sama" autocomplete="off">
                                             @break
                                         @case('textarea')
@@ -55,7 +56,7 @@
                                                 style="{{@$input['height']?'height:'.@$input['height']:''}}">{{$selected[$input['var_name']]}}</textarea>
                                             @break
                                         @case('editor')
-                                            <textarea name="{{$input['var_name']}}" class="summernote-area {{@$input['class']}}" placeholder="{{@$input['format']}}" 
+                                            <textarea name="{{$input['var_name']}}" id="wysiwyg-editor-{{$editor_count++}}" class="wysiwyg-editor {{@$input['class']}}" placeholder="{{@$input['format']}}" 
                                                 {{@$input['is_required']?'required':''}}>{{$selected[$input['var_name']]}}</textarea>
                                             @break
                                         @case('select')
@@ -69,7 +70,7 @@
                                             @endphp --}}
                                             <select class="{{@$input['is_hidden']?'hidden':(@$input['select_attr']['is_tags']?'form-select-tags':'form-select')}} {{@$input['class']}}" name="{{$input['var_name']}}" 
                                                 {{@$input['select_attr']['is_tags']?'multiple="multiple"':''}}
-                                                {{@$input['is_required']?'required':''}} {{@$input['is_readonly']?'readonly':''}}>
+                                                {{@$input['is_required']?'required':''}} {{@$input['is_readonly'] || @$input['on_edit']['is_readonly']?'readonly':''}}>
                                                 <option></option>
                                                 @if(@$input['select_attr']['is_tags'] && sizeof($input['select_attr']['options']))
                                                     @foreach ($input['select_attr']['options'] as $item)

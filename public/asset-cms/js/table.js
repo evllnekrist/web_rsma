@@ -1,5 +1,4 @@
 const id_list = '#data-list';
-const no_delete_items = [];
 const loadingElementImg = `<tr>
                                 <td colspan="100%"><center><img src="../../asset/images/loading.gif"></center></td>
                             </tr>`; 
@@ -107,12 +106,12 @@ function getData(move_to_page=null){
                     template += `<td>`+(++num)+`</td>`;
                 }else if(val.type == 'action'){
                     template += `<td>`;
-                    if(no_delete_items.includes(item.id)){
-                        template += `<i>tidak dapat dihapus</i>`;
+                    template += `<a class="mr-3 flex items-center" href="`+baseUrl+'/cms/'+object+'/'+item[pk]+`">
+                                    <i class="fa fa-pen"></i>
+                                </a>`;
+                    if(no_delete_items.includes(item[pk])){
+                        template += `<i class="small text-muted2">tidak dapat dihapus</i>`;
                     }else{
-                        template += `<a class="mr-3 flex items-center" href="`+baseUrl+'/cms/'+object+'/'+item.id+`">
-                                        <i class="fa fa-pen"></i>
-                                    </a>`;
                         template += `<a onclick="doDelete(`+item.id+`,'`+item.name+`')" class="flex items-center text-danger">
                                         <i class="fa fa-trash"></i>
                                     </a>`;

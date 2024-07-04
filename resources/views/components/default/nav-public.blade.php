@@ -7,8 +7,8 @@
             <div class="inner-container">
                 <div class="top-left">
                     <ul class="contact-list clearfix">
-                        <li><i class="flaticon-hospital-1"></i>Jl. Rumah Sakit No 1 Kasongan,<br>Katingan, Kalimantan Tengah</li>
-                        <li><i class="flaticon-back-in-time"></i>Senin-Kamis 08.00-11.00<br>Jumat-Sabtu 08.00-10.00<br>IGD 24 Jam</li>
+                        <li><i class="flaticon-hospital-1"></i>{!!env('OBJ_ADDRESS')!!}</li>
+                        <li><i class="flaticon-back-in-time"></i>{!!env('OBJ_WORKHOURS')!!}</li>
                     </ul>
                 </div>
                 <div class="top-right">
@@ -18,7 +18,7 @@
                         <li><a target="_blank" href="https://www.instagram.com/rsudmakasongan/"><span class="fab fa-instagram"></span></a></li>
                     </ul>
                     <div class="btn-box">
-                        <a href="tel:05364041041" title="(0536) 4041041" id="appointment-btn" class="theme-btn btn-style-three">
+                        <a href="tel:{!!env('OBJ_PHONE')!!}" title="{!!env('OBJ_PHONE')!!}" id="appointment-btn" class="theme-btn btn-style-three">
                             <span class="btn-title">Call Center</span>
                         </a>
                     </div>
@@ -42,37 +42,37 @@
                 <div class="nav-outer">
                     <nav class="nav main-menu">
                         <ul class="navigation" id="navbar">
-                            <li class="current"><a href="#">Beranda<a href="#"></li>
+                            <li class="current"><a href="{{url('/')}}">Beranda</a></li>
                             <li class="dropdown">
                                 <span>Layanan</span>
                                 <ul>
-                                    <li><a href="#">Rawat Jalan</a></li>
-                                    <li><a href="#">Rawat Inap</a></li>
-                                    <li><a href="#">Penunjang Medis</a></li>
-                                    <li><a href="#">IGD</a></li>
-                                    <li><a href="#">Farmasi</a></li>
+                                    <li><a href="{{url('/p/services#rawat-jalan')}}">Rawat Jalan</a></li>
+                                    <li><a href="{{url('/p/services#rawat-inap')}}">Rawat Inap</a></li>
+                                    <li><a href="{{url('/p/services#penunjang-medis')}}">Penunjang Medis</a></li>
+                                    <li><a href="{{url('/p/services#igd')}}">IGD</a></li>
+                                    <li><a href="{{url('/p/services#farmasi')}}">Farmasi</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
                                 <span>Informasi</span>
                                 <ul>
-                                    <li><a href="#">Info BPJS</a></li>
-                                    <li><a href="#">Alur Pelayanan Umum dan BPJS</a></li>
-                                    <li><a href="#">Jadwal Poliklinik</a></li>
+                                    <li><a href="{{url('/p/bpjs-info')}}">Info BPJS</a></li>
+                                    <li><a href="{{url('/p/service-flow')}}">Alur Pelayanan Umum dan BPJS</a></li>
+                                    <li><a href="{{url('/p/poly-schedule')}}">Jadwal Poliklinik</a></li>
                                 </ul>
                             </li>
-                            <li><a href="#">Dokter</a></li>
-                            <li><a href="#">Berita</a></li>
-                            <li><a href="#">Artikel</a></li>
+                            <li><a href="{{url('/doctor')}}">Dokter</a></li>
+                            <li><a href="{{url('/news')}}">Berita</a></li>
+                            <li><a href="{{url('/article')}}">Artikel</a></li>
                             <li class="dropdown">
                                 <span>Profil</span>
                                 <ul>
-                                    <li><a href="#">Tentang RSUD MA</a></li>
-                                    <li><a href="#">Struktur Organisasi</a></li>
-                                    <li><a href="#">Sumber Daya Manusia</a></li>
+                                    <li><a href="{{url('/p/about-us')}}">Tentang RSUD MA</a></li>
+                                    <li><a href="{{url('/org')}}">Struktur Organisasi</a></li>
+                                    <li><a href="{{url('/sdm')}}">Sumber Daya Manusia</a></li>
                                 </ul>
                             </li>
-                            <li><a href="#">Kontak dan Pengaduan</a></li>
+                            <li><a href="{{url('/p/contact-us')}}">Kontak dan Pengaduan</a></li>
                         </ul>
                     </nav>
                     <!-- Main Menu End-->

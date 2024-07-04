@@ -72,7 +72,7 @@ class ResourceDetailController extends APIController
     {
         // $filter['equal']  = [];
         $filter['search'] = ['key','name','description'];
-        return $this->get_list_common($request, $this->model, $filter, []);
+        return $this->get_list_common($request, $this->model, $filter, ['summary']);
     }
 
     /**
