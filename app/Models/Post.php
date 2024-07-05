@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OpenApi\Annotations as OA;
+use App\Models\User;
 
 /**
  * Class Post.
@@ -44,4 +45,8 @@ class Post extends Model
         'updated_at',
         'created_by',
     ];
+    
+    public function created_by_attr(){
+        return $this->belongsTo(User::class, 'created_by', 'id');
+    }
 }

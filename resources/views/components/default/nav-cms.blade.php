@@ -44,7 +44,7 @@
         <a  data-toggle="tooltip" data-placement="bottom" href="{{route('cms.user')}}" 
             title="Kelola admin web">
             <i class="fa fa-user mr-3 text-white" aria-hidden="true"></i>
-            Pengguna Teregistrasi
+            {{-- Pengguna Teregistrasi --}}Admin
         </a>
     </div>
 

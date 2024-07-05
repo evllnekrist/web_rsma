@@ -16,6 +16,7 @@
 <script src="{{asset('asset/js/owl.js')}}"></script>
 <script src="{{asset('asset/js/wow.js')}}"></script>
 <script src="{{asset('asset/js/script.js')}}"></script>
+<script src="{{asset('asset/js/dayjs.min.js')}}"></script>
 <script src="{{asset('asset/js/iziToast.js')}}"></script>
 <script src="{{asset('asset/js/select2.min.js')}}"></script>
 <script src="{{asset('asset/js/axios.min.js')}}"></script>

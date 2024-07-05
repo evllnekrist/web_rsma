@@ -1,7 +1,7 @@
 @extends('layouts.app-default', ['breadcrumbs'=>[['label'=>'']]])
-@section('title', 'Dashboard')
+@section('title', $selected['title'])
 @section('content')
-  <div id="main-wrapper" class="container py-4">	
+  <div class="container my-5">	
     @php
       $layout_slices = explode("_",@$selected->layout);
     @endphp
@@ -27,7 +27,6 @@
         @break
       @endswitch
     @endforeach
-    <a id="back2Top" class="top-scroll" title="Back to top" href="#"><i class="ti-arrow-up"></i></a>
   </div>
 @endsection
 @section('addition_css')

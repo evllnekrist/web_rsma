@@ -72,7 +72,7 @@ class PostController extends APIController
     {
         // $filter['equal']  = [''];
         $filter['search'] = ['article','title','caption','keywords'];
-        return $this->get_list_common($request, $this->model, $filter, []);
+        return $this->get_list_common($request, $this->model, $filter, ['created_by_attr']);
     }
 
     /**

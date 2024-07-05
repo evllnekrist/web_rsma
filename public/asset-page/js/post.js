@@ -22,15 +22,15 @@ function getData(move_to_page=null){
   });
   // console.log('payload',payload); 
   // return;
-  axios.get(baseUrl+'/api/resourceDetail', {params: payload}, apiHeaders)
+  axios.get(baseUrl+'/api/post', {params: payload}, apiHeaders)
   .then(function (response) {
     console.log('[DATA] response..',response.data);
     if(response.data.status) {
         if(response.data.data.products && response.data.data.products.length > 0) {
           // i::data display-------------------------------------------------------------------------------START
-            let template = ``; let imgToDisplay = ``;
+            let template = ``; let imgToDisplay = ``; let templateUrl = '';
             (response.data.data.products).forEach((item) => {
-                imgToDisplay = baseUrl+'/asset/images/no-image-clean.png'
+                imgToDisplay = baseUrl+'/asset/images/resource/news-1.jpg'
                 img = new Image();
                 img.src = item.img_main+"?_="+(new Date().getTime());
                 img.onload = function () {
@@ -39,17 +39,29 @@ function getData(move_to_page=null){
                     $('#product_'+item.id+'_img').attr("title",item.img_main)
                 }
 
-                template += ` <tr>
-                                    <td><img src="`+imgToDisplay+`" id="product_`+item.id+`_img" title="invalid image" style="width:100px"></td>
-                                    <td>
-                                        <strong>`+item.name+`</strong><br>
-                                        <i>`+item.summary.key_label+`</i>
-                                        <div>
-                                            <a href="#" class="theme-btn btn-style-two small"><span class="btn-title">Lihat Detail</span></a>
-                                            <a href="#" class="theme-btn btn-style-one small"><span class="btn-title">Lihat Jadwal</span></a>
-                                        </div>
-                                    </td>
-                                </tr>`;
+                templateUrl = baseUrl+`/`+$('#post-type').val()+`/`+item.slug;
+                template += `
+                <div class="news-block col-lg-4 col-md-6 col-sm-12 wow fadeInUp">
+                    <div class="inner-box">
+                        <div class="image-box">
+                            <figure class="image">
+                            <a href="`+templateUrl+`">
+                                <img src="`+imgToDisplay+`" id="product_`+item.id+`_img" alt=""></a>
+                            </figure>
+                            <a href="#" class="date">`+dayjs(item.created_at).format('D MMM YYYY')+`</a>
+                        </div>
+                        <div class="lower-content">
+                            <h4><a href="blog-post-image.html">`+item.title+`</a></h4>
+                            <div class="text">`+shorten(jQuery(item.content).text(), 30, "...", false)+`</div>
+                            <div class="post-info">
+                                <div class="post-author"><small>Oleh `+(item.created_by_attr?item.created_by_attr.name:'-')+`</small></div>
+                                <ul class="post-option">
+                                    <li><a onclick="copyToClipboard('`+templateUrl+`')"><i class="fa fa-share-alt"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
             });
             $(id_list).html(template);
           // i::data display---------------------------------------------------------------------------------END

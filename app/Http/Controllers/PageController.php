@@ -12,11 +12,7 @@ class PageController extends Controller
         $data['title'] = $data['selected']->title;
         return view('pages.page', $data);
       }else{
-        $error_details = array(
-          'title' => 'Oops!', 
-          'desc' => 'Page dengan ID yang Anda cari tidak ditemukan.'
-        );
-        return view('errors.404', $error_details);
+        return view('errors.404');
       }
     }
 }

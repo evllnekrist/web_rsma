@@ -12,7 +12,7 @@ class CMSController extends Controller
 
             return [
                 'object'=>$object,
-                'pk'=>app('App\Models\\'.$object)->getKeyName(),
+                'pk'=>app('App\Models\\'.strtoupper($object))->getKeyName(),
                 'breadcrumbs'=>[
                     ['label'=>'Halaman','route'=>route('cms.'.$object)],
                 ],
@@ -147,7 +147,7 @@ class CMSController extends Controller
 
             return [
                 'object'=>$object,
-                'pk'=>app('App\Models\\'.$object)->getKeyName(),
+                'pk'=>app('App\Models\\'.strtoupper($object))->getKeyName(),
                 'breadcrumbs'=>[
                     ['label'=>'Post','route'=>route('cms.'.$object)],
                 ],
@@ -305,7 +305,7 @@ class CMSController extends Controller
 
             return [
                 'object'=>$object,
-                'pk'=>app('App\Models\\'.$object)->getKeyName(),
+                'pk'=>app('App\Models\\'.strtoupper($object))->getKeyName(),
                 'breadcrumbs'=>[
                     ['label'=>'Ikhtisar Sumber Daya','route'=>route('cms.'.$object)],
                 ],
@@ -433,7 +433,7 @@ class CMSController extends Controller
             // dd($coll['key']);
             return [
                 'object'=>$object,
-                'pk'=>app('App\Models\\'.$object)->getKeyName(),
+                'pk'=>app('App\Models\\'.strtoupper($object))->getKeyName(),
                 'breadcrumbs'=>[
                     ['label'=>'Detail Sumber Daya','route'=>route('cms.'.$object)],
                 ],
@@ -551,7 +551,7 @@ class CMSController extends Controller
             $object = 'org';
             return [
                 'object'=>$object,
-                'pk'=>app('App\Models\\'.$object)->getKeyName(),
+                'pk'=>app('App\Models\\'.strtoupper($object))->getKeyName(),
                 'breadcrumbs'=>[
                     ['label'=>'Struktur Organisasi','route'=>route('cms.'.$object)],
                 ],
@@ -679,7 +679,7 @@ class CMSController extends Controller
             $object = 'satisfaction';
             return [
                 'object'=>$object,
-                'pk'=>app('App\Models\\'.$object)->getKeyName(),
+                'pk'=>app('App\Models\\'.strtoupper($object))->getKeyName(),
                 'breadcrumbs'=>[
                     ['label'=>'Survey Kepuasan','route'=>route('cms.'.$object)],
                 ],
@@ -745,7 +745,7 @@ class CMSController extends Controller
             $object = 'user';
             return [
                 'object'=>$object,
-                'pk'=>app('App\Models\\'.$object)->getKeyName(),
+                'pk'=>app('App\Models\\'.strtoupper($object))->getKeyName(),
                 'breadcrumbs'=>[
                     ['label'=>'Struktur Useranisasi','route'=>route('cms.'.$object)],
                 ],

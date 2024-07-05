@@ -2,6 +2,17 @@
 @section('title', $page_conf['breadcrumbs'][0]['label'])
 @section('content')
 
+<section class="page-title" style="background-image: url({{asset('asset/images/background/borneo/'.rand(1,5).'.jpg')}});">
+    <div class="auto-container">
+        <div class="title-outer">
+            <h1 class="text-shadow14">{{ $page_conf['breadcrumbs'][0]['label'] }}</h1>
+            <ul class="page-breadcrumb mark-light">
+                <li><a href="{{url('/')}}">Beranda</a></li>
+                <li>{{ $page_conf['breadcrumbs'][0]['label'] }}</li>
+            </ul> 
+        </div>
+    </div>
+</section>
 <div class="row justify-content-center">
     <div class="col-auto">
         @include('components.extra.table', $page_conf)

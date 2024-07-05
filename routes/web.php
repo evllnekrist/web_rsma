@@ -23,13 +23,10 @@ Route::prefix('doctor')->middleware('auth')->group(function () {
 });
 Route::prefix('news')->middleware('auth')->group(function () {
     Route::get('/', function () {
-        return view('pages.news');
+        return view('pages.post');
     });
     Route::get('/{id}', function () {
-        return view('pages.news.detail');
-    });
-    Route::get('/schedule/{id}', function () {
-        return view('pages.news.schedule');
+        return view('pages.post.detail');
     });
 });
 
