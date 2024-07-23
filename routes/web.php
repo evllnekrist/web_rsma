@@ -4,11 +4,18 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CMSController;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     // return view('welcome');
     return view('index');
+});
+Route::fallback(function () {
+    return view('errors.404', array(
+        'title' => 'Yaah...',
+        'desc' => 'Laman/fitur yang Anda cari tidak ditemukan.'
+    ));
 });
 Route::get('p/{id}', [PageController::class, 'index']);
 Route::prefix('doctor')->group(function () {

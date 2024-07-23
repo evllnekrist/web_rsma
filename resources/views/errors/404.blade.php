@@ -14,7 +14,7 @@
 									$wpp = array('404_burung.png','404_enggang.png','404_orangutan.png');
 								@endphp
 								<img src="{{asset('asset/images/'.$wpp[array_rand($wpp,1)])}}" class="img-fluid" style="height:40vh" alt="">
-								<h3 class="text-secondary mt-5 mb-3">Halaman yang Anda cari tidak tersedia</h3>
+								<h3 class="text-secondary mt-5 mb-3">{{@$desc?:'Halaman yang Anda cari tidak tersedia'}}</h3>
 								Kembali ke <a class="text-success underline--magical" href="{{url('/')}}"><b>&nbsp;&nbsp;halaman utama&nbsp;&nbsp;</b></a>
 								
 							</div>
