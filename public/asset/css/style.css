@@ -9948,7 +9948,7 @@ img {
   padding-left: 230px;
   padding-top: 20px;
   padding-right: 30px;
-  min-height: 200px;
+  /* min-height: 200px; */
 }
 
 .author-box .title{
@@ -9962,8 +9962,8 @@ img {
   position:absolute;
   left:0px;
   top:0px;
-  height: 200px;
-  width: 200px;
+  /* height: 200px;
+  width: 200px; */
   background-color: #ffffff;
   overflow: hidden;
   margin-bottom: 20px;

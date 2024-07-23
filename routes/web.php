@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CMSController;
 use Illuminate\Support\Facades\Route;
@@ -10,7 +11,7 @@ Route::get('/', function () {
     return view('index');
 });
 Route::get('p/{id}', [PageController::class, 'index']);
-Route::prefix('doctor')->middleware('auth')->group(function () {
+Route::prefix('doctor')->group(function () {
     Route::get('/', function () {
         return view('pages.doctor');
     });
@@ -21,13 +22,17 @@ Route::prefix('doctor')->middleware('auth')->group(function () {
         return view('pages.doctor.schedule');
     });
 });
-Route::prefix('news')->middleware('auth')->group(function () {
+Route::prefix('news')->group(function () {
     Route::get('/', function () {
         return view('pages.post');
     });
-    Route::get('/{id}', function () {
-        return view('pages.post.detail');
+    Route::get('/{id}', [PostController::class, 'show']);
+});
+Route::prefix('article')->group(function () {
+    Route::get('/', function () {
+        return view('pages.post');
     });
+    Route::get('/{id}', [PostController::class, 'show']);
 });
 
 

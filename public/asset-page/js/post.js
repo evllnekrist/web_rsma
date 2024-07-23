@@ -11,7 +11,9 @@ function getData(move_to_page=null){
   if(move_to_page){
     $('[name="_page"]').val(move_to_page);
   }
-  let payload = {}; payload['_dir'] = {}
+  let payload = {
+    _type: $('#post-type').val()
+  }; payload['_dir'] = {}
   $("._dir").each(function() {
     if($(this).data('dir')){
       payload['_dir'][$(this).attr('id').replace('th_','')] = $(this).data('dir');
