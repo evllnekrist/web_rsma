@@ -70,7 +70,7 @@ class OrgController extends APIController
      */
     public function index(Request $request)
     {
-        $filter['equal']  = ['parent_id'];
+        $filter['equal']  = ['pid'];
         $filter['search'] = ['name','job_title'];
         return $this->get_list_common($request, $this->model, $filter, []);
     }
@@ -98,7 +98,7 @@ class OrgController extends APIController
      *             mediaType="multipart/form-data",
      *             @OA\Schema(
      *                 @OA\Property(
-     *                     property="parent_id",
+     *                     property="pid",
      *                     type="integer",
      *                 ),
      *                 @OA\Property(
@@ -221,7 +221,7 @@ class OrgController extends APIController
      *             mediaType="multipart/form-data",
      *             @OA\Schema(
      *                 @OA\Property(
-     *                     property="parent_id",
+     *                     property="pid",
      *                     type="integer",
      *                 ),
      *                 @OA\Property(

@@ -35,6 +35,7 @@ class Post extends Model
         'content',
         'keywords',
         'img_main',
+        'img_link',
         'caption',
         'sequence',
         'portal_user_id',

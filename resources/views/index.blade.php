@@ -9,10 +9,10 @@
                         <div class="auto-container">
                             <div class="content-outer">
                                 <div class="content-box">
-                                    <span class="title">Welcome Our Hospital</span>
-                                    <h2>We Are Provide Total <span>Healthcare</span> Solutions</h2>
-                                    <div class="text">behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind.</div>
-                                    <div class="btn-box"><a href="#" class="theme-btn btn-style-one bg-tealblue"><span class="btn-title">About Us</span></a></div>
+                                    <span class="title">Selamat Datang di RSUD Mas Amsyar Kasongan</span>
+                                    <h2>Bekerja yang <span>seharusnya</span> bukan seperti yang biasanya</h2>
+                                    <div class="text">4 S "Senyum, Sapa, Sentuh, Sembuh"</div>
+                                    <div class="btn-box"><a href="/p/about-us" class="theme-btn btn-style-one bg-tealblue"><span class="btn-title">Tentang Kami</span></a></div>
                                 </div>
                             </div>
                         </div>

@@ -5,7 +5,7 @@
         <div class="auto-container">
             <div class="row">
                 <!--Big Column-->
-                <div class="big-column col-xl-4 col-lg-12 col-md-12 col-sm-12">
+                <div class="big-column col-xl-6 col-lg-4 col-md-12 col-sm-12">
                     <div class="row">
                         <!--Footer Column-->
                         <div class="footer-column col-12">
@@ -14,8 +14,11 @@
                                     <a href="index.html"><img src="images/logo-2.png" alt="" /></a>
                                 </div>
                                 <div class="text">
-                                    <p>Our Clinic has grown to provide a world class facility for the clinic advanced restorative. </p>
-                                    <p>We are among the most qualified implant providers in the AUS with over 30 years of quality training and experience.</p>
+                                    <p>RSUD Mas Amsyar Kasongan.</p> 
+                                    <p>
+                                        Melaksanakan upaya kesehatan secara berdaya guna dan berhasil guna dengan mengutamakan penyembuhan (kuratif), pemulihan (rehabilitatif), 
+                                        upaya peningkatan (promotif), pencegahan terjadinya penyakit (preventif) dan melaksanakan upaya rujukan serta pelayanan yang bermutu sesuai standar pelayanan Rumah Sakit.
+                                    </p>
                                 </div>
                                 <ul class="social-icon-three">
                                     <li><a target="_blank" href="https://www.facebook.com/rsudmakasongan/"><span class="fab fa-facebook-f"></span></a></li>
@@ -28,7 +31,7 @@
                 </div>
 
                 <!--Big Column-->
-                <div class="big-column col-xl-8 col-lg-12 col-md-12 col-sm-12">
+                <div class="big-column col-xl-6 col-lg-8 col-md-12 col-sm-12">
                     <div class="row">
                         <!--Footer Column-->
                         <div class="footer-column col-lg-6 col-md-6 col-sm-12">

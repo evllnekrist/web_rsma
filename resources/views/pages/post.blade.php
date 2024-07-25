@@ -23,8 +23,19 @@
             </div>
         </div>
     </section>
-    <div class="row justify-content-center">
-        <div class="d-flex" id="data-list-pagination"></div>
+    <div class="container mb-5">
+        <div class="row justify-content-between">
+            <div class="d-flex" id="data-list-pagination"></div>
+            <div>
+                <select name="_limit" onchange="getData()" data-tw-merge="" class="_filter form-control">
+                    <option value="5" selected>5</option>
+                    <option value="10">10</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                    <option value="all">Semua</option>
+                </select>
+            </div>
+        </div>
     </div>
 @endsection
 @section('addition_css')

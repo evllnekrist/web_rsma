@@ -85,7 +85,7 @@
                 <div class="top-right">
                     <div class="btn-group dropleft">
                         <button type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{ Auth::user()->name }}
+                            {{ @Auth::user()->name }}
                         </button>
                         <div class="dropdown-menu">
                             <ul>

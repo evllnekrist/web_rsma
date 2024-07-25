@@ -32,7 +32,7 @@ class Org extends Model
         'desc_title',
         'desc_body',
         'job_title',
-        'parent_id',
+        'pid',
         'created_at',
         'created_by',
         'updated_at',
@@ -41,6 +41,6 @@ class Org extends Model
 
     public function superior_attr()
     {
-        return $this->hasOne(Org::class, 'id', 'parent_id');
+        return $this->hasOne(Org::class, 'id', 'pid');
     }
 }

@@ -32,6 +32,7 @@ function getData(move_to_page=null){
           // i::data display-------------------------------------------------------------------------------START
             let template = ``; let imgToDisplay = ``; let templateUrl = '';
             (response.data.data.products).forEach((item) => {
+              if(item.img_main){
                 imgToDisplay = baseUrl+'/asset/images/resource/news-1.jpg'
                 img = new Image();
                 img.src = item.img_main+"?_="+(new Date().getTime());
@@ -40,6 +41,9 @@ function getData(move_to_page=null){
                     $('#product_'+item.id+'_img').attr("src",imgToDisplay)
                     $('#product_'+item.id+'_img').attr("title",item.img_main)
                 }
+              }else{
+                imgToDisplay = item.img_link;
+              }
 
                 templateUrl = baseUrl+`/`+$('#post-type').val()+`/`+item.slug;
                 template += `

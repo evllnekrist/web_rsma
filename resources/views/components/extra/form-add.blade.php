@@ -65,12 +65,29 @@
                                                 {{@$input['select_attr']['is_tags']?'multiple="multiple"':''}}
                                                 {{@$input['is_required']?'required':''}} {{@$input['is_readonly']?'readonly':''}}>
                                                 <option></option>
-                                                @foreach ($input['select_attr']['options'] as $item)
-                                                    <option value="{{$item[$input['select_attr']['id']]}}"
-                                                        {{$item[$input['select_attr']['id']]==@$input['value']?'selected':''}}>
-                                                        {{$item[$input['select_attr']['label']]}}
-                                                    </option>
-                                                @endforeach
+                                                @if(is_array($input['select_attr']['label']))
+                                                    @php
+                                                        $label_sum      = sizeof($input['select_attr']['label']);
+                                                    @endphp
+                                                    @foreach ($input['select_attr']['options'] as $item)
+                                                        <option value="{{$item[$input['select_attr']['id']]}}"
+                                                            {{$item[$input['select_attr']['id']]==@$input['value']?'selected':''}}>
+                                                            @for($label_idx=0;$label_idx<$label_sum;$label_idx++)
+                                                                {{$item[$input['select_attr']['label'][$label_idx]]}}
+                                                                @if($label_idx < $label_sum-1 && $item[$input['select_attr']['label'][$label_idx]] != '')
+                                                                    &nbsp;-&nbsp; 
+                                                                @endif
+                                                            @endfor
+                                                        </option>
+                                                    @endforeach
+                                                @else
+                                                    @foreach ($input['select_attr']['options'] as $item)
+                                                        <option value="{{$item[$input['select_attr']['id']]}}"
+                                                            {{$item[$input['select_attr']['id']]==@$input['value']?'selected':''}}>
+                                                            {{$item[$input['select_attr']['label']]}}
+                                                        </option>
+                                                    @endforeach
+                                                @endif
                                             </select>
                                             @break
                                         @case('file')

@@ -41,6 +41,9 @@ Route::prefix('article')->group(function () {
     });
     Route::get('/{id}', [PostController::class, 'show']);
 });
+Route::get('/org', function () {
+    return view('pages.org');
+});
 
 
 require __DIR__.'/auth.php';

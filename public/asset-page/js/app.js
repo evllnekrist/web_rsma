@@ -205,6 +205,20 @@ function shorten(text, maxLength, delimiter, overflow) {
     }
 }
 
+function reduceArrayObject(arr, aobj) {
+    
+    for(let key2=0;key2<aobj.length;key2++){
+        arr.forEach(function(key) {
+            delete aobj[key2][key];
+            // console.log('reduce child ____', key2, key);
+        });
+        aobj[key2]['img_main'] = aobj[key2]['img_main']?baseUrl+aobj[key2]['img_main']:baseUrl+'/asset/images/resource/author-thumb-sample.jpg';
+    }
+    // console.log('reduce', aobj);
+    return aobj;
+}
+
+
 function cleanUrl(str){
     return str.replace(/([^:])(\/\/+)/g, '$1/');
 }

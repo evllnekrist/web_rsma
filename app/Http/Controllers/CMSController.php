@@ -549,6 +549,7 @@ class CMSController extends Controller
     // -------------------- START::org --------------------
         public function orgPrepare(){
             $object = 'org';
+            $coll['superior'] = ('App\Models\Org')::select('id','name','job_title')->get();
             return [
                 'object'=>$object,
                 'pk'=>app('App\Models\Org')->getKeyName(),
@@ -588,7 +589,7 @@ class CMSController extends Controller
                     ],
                     [
                         'label'=>'Superior',
-                        'var_name'=>'parent_id',
+                        'var_name'=>'pid',
                         'is_order'=>true,
                         'search'=>[
                             'type'=>'number'
@@ -604,12 +605,12 @@ class CMSController extends Controller
                     [
                         [
                             'label'=>'Superior',
-                            'var_name'=>'parent_id',
+                            'var_name'=>'pid',
                             'type'=>'select',
                             'select_attr'=>[
-                                'options'=>[],
+                                'options'=>$coll['superior'],
                                 'id'=>'id',
-                                'label'=>'name',
+                                'label'=>['name','job_title'],
                             ]
                         ],
                         [

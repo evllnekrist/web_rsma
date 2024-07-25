@@ -27,14 +27,14 @@
                                 @if(@$selected['caption'])     
                                     <div class="two-column row">
                                         <div class="image-column col-lg-6 col-md-8 col-sm-12">
-                                            <figure class="image wow fadeIn"><img src="{{asset($selected['img_main'])}}" alt=""></figure>
+                                            <figure class="image wow fadeIn"><img src="{{$selected['img_link']?:asset($selected['img_main'])}}" alt=""></figure>
                                         </div>
                                         <div class="content-column col-lg-6 col-md-4 col-sm-12">
                                             <blockquote><small>{!!$selected['caption']!!}</small></blockquote>
                                         </div>
                                     </div>                       
                                 @else
-                                    <figure class="image wow fadeIn"><img src="{{asset($selected['img_main'])}}" alt=""></figure>
+                                    <figure class="image wow fadeIn"><img src="{{$selected['img_link']?:asset($selected['img_main'])}}" alt=""></figure>
                                 @endif
                                 {!!$selected['content']!!}
                             </div>

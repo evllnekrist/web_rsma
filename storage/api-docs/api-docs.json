@@ -830,7 +830,7 @@
                                     "job_title"
                                 ],
                                 "properties": {
-                                    "parent_id": {
+                                    "pid": {
                                         "type": "integer"
                                     },
                                     "name": {
@@ -961,7 +961,7 @@
                                     "job_title"
                                 ],
                                 "properties": {
-                                    "parent_id": {
+                                    "pid": {
                                         "type": "integer"
                                     },
                                     "name": {
