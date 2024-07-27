@@ -39,6 +39,7 @@ Route::post('/page/{id}', [PageController::class, 'update'])->middleware(['auth:
 Route::resource('page', PageController::class, ['except' => ['index', 'show']])->middleware(['auth:api']);
 
 Route::resource('resourceDetail', ResourceDetailController::class, ['only' => ['index', 'show']]);
+Route::post('/resourceDetail/schedule', [ResourceDetailController::class, 'updateSchedule'])->middleware(['auth:api']);
 Route::post('/resourceDetail/{id}', [ResourceDetailController::class, 'update'])->middleware(['auth:api']);
 Route::resource('resourceDetail', ResourceDetailController::class, ['except' => ['index', 'show']])->middleware(['auth:api']);
 

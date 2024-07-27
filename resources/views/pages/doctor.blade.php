@@ -5,7 +5,7 @@
     <div class="py-5">
         <div class="row justify-content-center">
             <div class="col-auto">
-                <table class="table table-bordered table-hover table-responsive table-sm mt-3">
+                <table class="table table-hover table-responsive table-sm mt-3">
                     <thead hidden>
                         <tr>
                             <td width="30%"></td>

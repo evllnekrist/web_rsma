@@ -2081,6 +2081,70 @@
                 ]
             }
         },
+        "/api/resourceDetail/schedule": {
+            "post": {
+                "tags": [
+                    "Resource Detail"
+                ],
+                "summary": "Update the specified item",
+                "operationId": "resourceDetailUpdateSchedule",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "resource_id"
+                                ],
+                                "properties": {
+                                    "ref_id": {
+                                        "type": "number",
+                                        "example": 1
+                                    },
+                                    "schedule": {
+                                        "type": "object",
+                                        "example": []
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "404": {
+                        "description": "Item not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport_token_ready": [],
+                        "passport": []
+                    }
+                ]
+            }
+        },
         "/api/resourceSummary": {
             "get": {
                 "tags": [
@@ -2153,7 +2217,7 @@
                         "multipart/form-data": {
                             "schema": {
                                 "required": [
-                                    "name"
+                                    "key_label"
                                 ],
                                 "properties": {
                                     "type": {
@@ -2285,7 +2349,7 @@
                         "multipart/form-data": {
                             "schema": {
                                 "required": [
-                                    "name"
+                                    "key_label"
                                 ],
                                 "properties": {
                                     "type": {
@@ -2759,6 +2823,13 @@
                 "description": "ResourceDetail model",
                 "xml": {
                     "name": "ResourceDetail"
+                }
+            },
+            "ResourceDetailSchedule": {
+                "title": "ResourceDetailSchedule model",
+                "description": "ResourceDetailSchedule model",
+                "xml": {
+                    "name": "ResourceDetailSchedule"
                 }
             },
             "ResourceSummary": {

@@ -44,6 +44,9 @@ Route::prefix('article')->group(function () {
 Route::get('/org', function () {
     return view('pages.org');
 });
+Route::get('/sdm', function () {
+    return view('pages.sdm');
+});
 
 
 require __DIR__.'/auth.php';

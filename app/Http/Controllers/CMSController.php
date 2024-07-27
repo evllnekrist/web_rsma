@@ -523,6 +523,15 @@ class CMSController extends Controller
                         ],
                     ],
                 ],
+                'custom_inputs' => [
+                    [
+                        'label'=>'Jadwal',
+                        'api_method'=>'POST',
+                        'api_url'=>url('api/'.$object.'/schedule'),
+                        'type'=>'schedule',
+                        'is_required'=>false,
+                    ],
+                ]
             ];
         } 
 

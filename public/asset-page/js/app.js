@@ -9,6 +9,7 @@ const apiHeaders = {
     }
 };
 let loadingElement = `<div class="mx-auto">memuat...</div>`;
+let days = ['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'];
 
 function nospace(event,changeWith=""){
     if((event.target.value).includes(' ')){

@@ -21,6 +21,5 @@
 @endsection
 @section('addition_script')
     <script src="{{asset('asset/js/orgchart.js')}}"></script>
-    {{-- <script src="https://balkan.app/js/OrgChart.js"></script> --}}
     <script src="{{asset('asset-page/js/org.js')}}"></script>
 @endsection

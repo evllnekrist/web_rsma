@@ -4,7 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\ResourceDetail;
+use Illuminate\Support\Facades\Validator;
 use OpenApi\Annotations as OA;
 
 /**
@@ -288,5 +288,81 @@ class ResourceDetailController extends APIController
     public function destroy($id)
     {
         return $this->delete_common($id, $this->model);
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/api/resourceDetail/schedule",
+     *     tags={"Resource Detail"},
+     *     summary="Update the specified item",
+     *     operationId="resourceDetailUpdateSchedule",
+     *     @OA\MediaType(mediaType="multipart/form-data"),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Item not found",
+     *         @OA\JsonContent()
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="invalid input",
+     *         @OA\JsonContent()
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="successful",
+     *         @OA\JsonContent()
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(
+     *                 @OA\Property(
+     *                     property="ref_id",
+     *                     type="number",
+     *                     example=1,
+     *                 ),
+     *                 @OA\Property(
+     *                     property="schedule",
+     *                     type="object",
+     *                     example={}
+     *                 ),
+     *                 required={"resource_id"}
+     *             )
+     *         )
+     *     ),
+     *     security={{"passport_token_ready":{},"passport":{}}}
+     * )
+     */
+    public function updateSchedule(Request $request)
+    {
+        // return $request->all();
+        $rules = [
+            'ref_id'  => 'required',
+        ];
+        $validator = Validator::make($request->all(), $rules); 
+        if ($validator->fails()) {
+            // throw new HttpException(400, $validator->messages()->first());
+            return response()->json(array('message'=>$validator->messages()->first()),400);
+        }
+        
+        try {
+            $model              = 'App\Models\ResourceDetailSchedule';
+            $body               = $request->all();
+            foreach ($body['schedule'] as $key => $value) {
+                for ($i=0; $i < sizeof($value['from']); $i++) { 
+                    $item[$key][$i] = $model::create(array(
+                        'resource_id'   => $body['ref_id'],
+                        'day'           => $key,
+                        'time_start'    => $value['from'][$i],
+                        'time_end'      => $value['to'][$i],
+                    ));
+                }
+            }
+
+            return response()->json(array('data'=>$item,'message'=>'Berhasil ditambahkan!'), 200);
+        } catch(\Exception $exception) {
+            return response()->json(array('message'=>"Invalid data : {$exception->getMessage()}"),400);
+        }
     }
 }
