@@ -148,6 +148,7 @@
                         </div>
                     @endfor
             </form>
+
     </div>
 </section>
 <section class="services-section-two">
@@ -163,6 +164,9 @@
                                     @case('schedule')
                                     @php 
                                         $days = ['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'];
+                                        for($sch_idx = 0; $sch_idx < sizeof($selected['schedule']); $sch_idx++){
+                                            $schedule_rearranged[$selected['schedule'][$sch_idx]['day']][] = $selected['schedule'][$sch_idx]; 
+                                        }
                                     @endphp
                                     {{-- basic schedule, by day --}}
                                         <table width="100%" class="text-center table table-striped table-responsive">
@@ -176,8 +180,22 @@
                                             <tbody>
                                                 <tr>
                                                     @for($day_idx=0;$day_idx<sizeof($days);$day_idx++)
-                                                        <td id="schedule-day-{{$day_idx}}-wrap" data-count="0">
-                                                            <div id="schedule-day-{{$day_idx}}"></div>
+                                                        <td id="schedule-day-{{$day_idx}}-wrap" data-count="{{@$schedule_rearranged[$day_idx]?sizeof($schedule_rearranged[$day_idx]):0}}">
+                                                            <div id="schedule-day-{{$day_idx}}">
+                                                                @if(@$schedule_rearranged[$day_idx])
+                                                                @for($day_item_idx=0;$day_item_idx<sizeof($schedule_rearranged[$day_idx]);$day_item_idx++)
+                                                                <div class="row small" style="wax-width:200px" id="schedule-item-{{$day_idx}}-{{$day_item_idx}}">
+                                                                    <div class="form-group col-md-4">
+                                                                    <input type="time" name="schedule[{{$day_idx}}][from][]" value="{{$schedule_rearranged[$day_idx][$day_item_idx]['time_start']}}">
+                                                                    </div>
+                                                                    <div class="form-group col-md-4">
+                                                                    <input type="time" name="schedule[{{$day_idx}}][to][]" value="{{$schedule_rearranged[$day_idx][$day_item_idx]['time_end']}}">
+                                                                    </div>
+                                                                    <span class="col-md-4"><a onclick="removeSchedule({{$day_idx}},{{$day_item_idx}})"><req><i class="fas fa-trash"></i></req></a></span>
+                                                                </div>
+                                                                @endfor
+                                                                @endif
+                                                            </div>
                                                             <center>
                                                                 <button class="theme-btn btn-style-four small schedule-open-form-btn" data-day-idx="{{$day_idx}}" type="button" title="Tambah Jadwal" data-toggle="collapse" data-target="#form-add-schedule">
                                                                     <span class="btn-title"><i class="fas fa-plus"></i></span>
@@ -221,8 +239,15 @@
                 </div>
             @endif
         </form>
-        <button class="theme-btn btn-style-one bg-tealblue mt-5" type="button" id="btn-submit-edit">
-            <span class="btn-title">Simpan Perubahan</span>
-        </button>
+            
+    </div>
+    <div class="auto-container">
+
+        <center>
+            <button class="theme-btn btn-style-one bg-tealblue mt-5" type="button" id="btn-submit-edit">
+                <span class="btn-title">Simpan Perubahan</span>
+            </button>
+        </center>
+
     </div>
 </section>

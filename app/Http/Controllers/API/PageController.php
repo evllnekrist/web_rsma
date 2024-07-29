@@ -182,7 +182,7 @@ class PageController extends APIController
      */
     public function show($id)
     {
-        return $this->get_single_common($id, $this->model);
+        return $this->get_single_common($id, $this->model, []);
     }
 
     /**
@@ -303,6 +303,6 @@ class PageController extends APIController
      */
     public function destroy($id)
     {
-        return $this->delete_common($id, $this->model);
+        return $this->delete_common($id, $this->model, []);
     }
 }

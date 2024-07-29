@@ -164,9 +164,9 @@ class APIController extends Controller
         }
     }
 
-    public function get_single_common($id, $model){
+    public function get_single_common($id, $model, $with){
         $model  = 'App\Models\\'.$model;
-        $item   = $model::where(app($model)->getKeyName(),$id)->first();
+        $item   = $model::with($with)->where(app($model)->getKeyName(),$id)->first();
         if(!$item){
             // throw new HttpException(404, 'Item tidak ditemukan');
             return response()->json(array('message'=>'Item tidak ditemukan'),404);

@@ -25,7 +25,7 @@ $(".file-browser").click(function(e) {
 });
 
 $("#btn-submit-add").on('click', function(e) {
-  const form    = document.getElementById('form-add');
+  let form    = document.getElementById('form-add');
   const object  = $(form).data('object');
   
   form.reportValidity()
@@ -39,7 +39,7 @@ $("#btn-submit-add").on('click', function(e) {
   } else {
     $('#loading').show();
     $('#form').hide();
-    const formData = new FormData(form);
+    let formData = new FormData(form);
     // for (const [key, value] of formData) {
     //   console.log('»', key, value)
     // }; return;
@@ -47,15 +47,72 @@ $("#btn-submit-add").on('click', function(e) {
     .then(function (response) {
       console.log('response..',response);
       if(response.status == 200) {
-        iziToast.success({
-            title: response.data.message,
-            message: 'Anda akan diarahkan ke list data',
-            position: 'center',
-            progressBarColor: 'rgb(0, 255, 184)',
-        });
-        setTimeout(function() {
-          window.location = baseUrl+'/cms/'+object;
-        }, 1500);
+        if($('#custom-inputs').length){ 
+          let customInputs = $.parseJSON($('#custom-inputs').html());
+          form      = document.getElementById('form-add-custom');
+          formData  = new FormData(form);
+          formData.append('ref_id',response.data.data.id);
+          // for (const [key, value] of formData) {
+          //     console.log('»', key, value)
+          // }
+          try{
+            let axiosSub = [];
+            customInputs.forEach(async function(item) {
+              axiosSub[item.type] = await axios.post(item.api_url, formData, apiHeaders) 
+              .then(async function (response2) {
+                console.log('response2..',response2);
+              })
+              .catch(function (error) {
+                console.log('error',error)
+                iziToast.error({
+                    timeout: 20000,
+                    title: "Gagal [Tingkat 2]",
+                    message: error.message,
+                    position: 'center',
+                    buttons: [
+                        ['<button>OK</button>', function (instance, toast) {
+                            instance.hide({
+                                transitionOut: 'fadeOutUp',
+                            }, toast, 'Tombol OK');
+                        }]
+                    ],
+                });
+                $('#loading').hide();
+                $('#form').show();
+                return;
+              });
+            });
+            iziToast.success({
+              title: response.data.message,
+                message: 'Anda akan diarahkan ke list data [Tingkat 2]',
+                position: 'center',
+                progressBarColor: 'rgb(0, 255, 184)',
+            });
+            setTimeout(function() {
+              window.location = baseUrl+'/cms/'+object;
+            }, 1500);
+          }catch(err){
+            console.log(err);
+            iziToast.error({
+                timeout: 20000,
+                title: "Gagal [Tingkat 2 pada catch]",
+                message: "lihat console",
+                position: 'center',
+            });
+            $('#loading').hide();
+            $('#form').show();
+          }
+        }else{
+          iziToast.success({
+              title: response.data.message,
+              message: 'Anda akan diarahkan ke list data',
+              position: 'center',
+              progressBarColor: 'rgb(0, 255, 184)',
+          });
+          setTimeout(function() {
+            window.location = baseUrl+'/cms/'+object;
+          }, 1500);
+        }
       }else{
         iziToast.warning({
             title: "Gagal",
@@ -69,6 +126,7 @@ $("#btn-submit-add").on('click', function(e) {
                 }]
             ],
         });
+        console.log('feeew')
       }
       $('#loading').hide();
       $('#form').show();
@@ -124,6 +182,8 @@ $("#btn-submit-edit").on('click', function(e) {
           let customInputs = $.parseJSON($('#custom-inputs').html());
           form      = document.getElementById('form-edit-custom');
           formData  = new FormData(form);
+          formData.append('ref_id',id);
+
           try{
             let axiosSub = [];
             customInputs.forEach(async function(item) {
@@ -149,11 +209,12 @@ $("#btn-submit-edit").on('click', function(e) {
                 });
                 $('#loading').hide();
                 $('#form').show();
+                return;
               });
             });
             iziToast.success({
               title: response.data.message,
-                message: 'Anda akan diarahkan ke list data',
+                message: 'Anda akan diarahkan ke list data [Tingkat 2]',
                 position: 'center',
                 progressBarColor: 'rgb(0, 255, 184)',
             });
@@ -219,10 +280,6 @@ $("#btn-submit-edit").on('click', function(e) {
   }
 });
 
-function scheduleExec(){
-
-}
-
 $(".schedule-open-form-btn").on('click', function(e) {
   let idx = $(this).data('day-idx');
   $('#schedule-add-btn').data('day-idx', idx);
@@ -253,7 +310,6 @@ $("#schedule-add-btn").on('click', function(e) {
     $('#form-add-schedule').collapse('hide');
   }
 });
-
 
 function removeSchedule(idx,counter){
   $('#schedule-item-'+idx+'-'+counter).remove();

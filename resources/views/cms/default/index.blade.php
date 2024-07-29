@@ -2,7 +2,10 @@
 @section('title', $page_conf['breadcrumbs'][0]['label'])
 @section('content')
 
-<section class="page-title" style="background-image: url({{asset('asset/images/background/borneo/'.rand(1,5).'.jpg')}});">
+@php
+    $wpp = rand(1,20);
+@endphp
+<section class="page-title" style="background-image: url({{asset('asset/images/background/borneo/'.$wpp.'.jpg')}});">
     <div class="auto-container">
         <div class="title-outer">
             <h1 class="text-shadow14">{{ $page_conf['breadcrumbs'][0]['label'] }}</h1>

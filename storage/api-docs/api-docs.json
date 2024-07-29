@@ -1849,7 +1849,7 @@
                                 "properties": {
                                     "key": {
                                         "type": "string",
-                                        "example": "dokter-tht"
+                                        "example": "dokter-umum"
                                     },
                                     "name": {
                                         "type": "string",
@@ -1973,7 +1973,7 @@
                                 "properties": {
                                     "key": {
                                         "type": "string",
-                                        "example": "dokter-tht-edited"
+                                        "example": "dokter-umum-edited"
                                     },
                                     "name": {
                                         "type": "string",
@@ -2226,7 +2226,7 @@
                                     },
                                     "key": {
                                         "type": "string",
-                                        "example": "dokter-tht"
+                                        "example": "dokter-umum"
                                     },
                                     "key_label": {
                                         "type": "string",
@@ -2358,7 +2358,7 @@
                                     },
                                     "key": {
                                         "type": "string",
-                                        "example": "dokter-tht-edited"
+                                        "example": "dokter-umum-edited"
                                     },
                                     "key_label": {
                                         "type": "string",

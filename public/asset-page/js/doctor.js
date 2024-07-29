@@ -28,7 +28,10 @@ function getData(move_to_page=null){
     if(response.data.status) {
         if(response.data.data.products && response.data.data.products.length > 0) {
           // i::data display-------------------------------------------------------------------------------START
-            let template = ``; let imgToDisplay = ``;
+            let template = ``, template_schedule = ``; 
+            let imgToDisplay = ``;
+            let days = ['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'];
+            let scheduleRearranged = [];
             (response.data.data.products).forEach((item) => {
                 imgToDisplay = baseUrl+'/asset/images/no-image-clean.png'
                 img = new Image();
@@ -38,15 +41,60 @@ function getData(move_to_page=null){
                     $('#product_'+item.id+'_img').attr("src",imgToDisplay)
                     $('#product_'+item.id+'_img').attr("title",item.img_main)
                 }
-
+                
+                if(item.schedule.length){
+                  template_schedule = `<table width="100%" class="text-center table table-responsive">
+                                          <thead>
+                                              <tr>`;
+                            for(let dIdx = 0; dIdx < days.length; dIdx++){
+                              template_schedule += `<td>`+days[dIdx]+`</td>`; 
+                              scheduleRearranged[dIdx] = [];
+                            }
+                            for(let sIdx = 0; sIdx < item.schedule.length; sIdx++){
+                                scheduleRearranged[item.schedule[sIdx]['day']].push(item.schedule[sIdx]); 
+                            }   
+                  // console.log('scheduleRearranged',scheduleRearranged)                 
+                  template_schedule += `
+                                              </tr>
+                                          </thead>
+                                          <tbody>
+                                              <tr>`;
+                            for(let dIdx = 0; dIdx < days.length; dIdx++){
+                              template_schedule += `<td>`;
+                              for(let sIdx = 0; sIdx < scheduleRearranged[dIdx].length; sIdx++){
+                                template_schedule += `  <div class="small" style="wax-width:200px">
+                                                          <b>`+scheduleRearranged[dIdx][sIdx]['time_start']+`</b> sd <b>`+scheduleRearranged[dIdx][sIdx]['time_start']+`</b>
+                                                        </div>`;
+                              }
+                              template_schedule += `</td>`;
+                            }               
+                  template_schedule += `
+                                              </tr>
+                                          </tbody>
+                                      </table>`;
+                }else{
+                  template_schedule = `<center>-</center>`;
+                }
                 template += ` <tr>
                                     <td><img src="`+imgToDisplay+`" id="product_`+item.id+`_img" title="invalid image" style="width:100px"></td>
                                     <td>
                                         <strong>`+item.name+`</strong><br>
                                         <i>`+item.summary.key_label+`</i>
                                         <div>
-                                            <a href="#" class="theme-btn btn-style-two small"><span class="btn-title">Lihat Detail</span></a>
-                                            <a href="#" class="theme-btn btn-style-one small"><span class="btn-title">Lihat Jadwal</span></a>
+                                            <a class="theme-btn btn-style-two small" data-toggle="collapse" href="#product_`+item.id+`_detail"><span class="btn-title">Lihat Detail</span></a>
+                                            <a class="theme-btn btn-style-one small" data-toggle="collapse" href="#product_`+item.id+`_schedule"><span class="btn-title">Lihat Jadwal</span></a>
+                                        </div>
+                                        <div>
+                                          <div class="collapse" id="product_`+item.id+`_detail">
+                                            <div class="card card-body">
+                                            `+(item.description?item.description:`<center>-</center>`)+`                                    
+                                            </div>
+                                          </div>
+                                          <div class="collapse" id="product_`+item.id+`_schedule">
+                                            <div class="card card-body">
+                                            `+template_schedule+`                                    
+                                            </div>
+                                          </div>
                                         </div>
                                     </td>
                                 </tr>`;

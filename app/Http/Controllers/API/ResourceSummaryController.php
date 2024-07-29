@@ -105,7 +105,7 @@ class ResourceSummaryController extends APIController
      *                 @OA\Property(
      *                     property="key",
      *                     type="string",
-     *                     example="dokter-tht",
+     *                     example="dokter-umum",
      *                 ),
      *                 @OA\Property(
      *                     property="key_label",
@@ -181,7 +181,7 @@ class ResourceSummaryController extends APIController
      */
     public function show($id)
     {
-        return $this->get_single_common($id, $this->model);
+        return $this->get_single_common($id, $this->model, []);
     }
 
     /**
@@ -229,7 +229,7 @@ class ResourceSummaryController extends APIController
      *                 @OA\Property(
      *                     property="key",
      *                     type="string",
-     *                     example="dokter-tht-edited",
+     *                     example="dokter-umum-edited",
      *                 ),
      *                 @OA\Property(
      *                     property="key_label",
@@ -307,6 +307,6 @@ class ResourceSummaryController extends APIController
      */
     public function destroy($id)
     {
-        return $this->delete_common($id, $this->model);
+        return $this->delete_common($id, $this->model, []);
     }
 }

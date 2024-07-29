@@ -130,8 +130,85 @@
 </section>
 <section class="services-section-two">
     <div class="auto-container">
-        <button class="theme-btn btn-style-one bg-tealblue" type="button" id="btn-submit-add">
-            <span class="btn-title">Simpan</span>
-        </button>
+
+        <form action="#" method="post" id="form-add-custom" data-object="{{@$object}}">
+            @if(@$custom_inputs) 
+                <textarea id="custom-inputs" hidden>{{json_encode($custom_inputs)}}</textarea>           
+                <div class="row justify-content-center">
+                    <div class="col-auto">
+                        <div class="appointment-form default-form">                    
+                            @for($i=0;$i<sizeof($custom_inputs);$i++)
+                                @switch($custom_inputs[$i]['type'])
+                                    @case('schedule')
+                                    @php 
+                                        $days = ['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'];
+                                    @endphp
+                                    {{-- basic schedule, by day --}}
+                                        <table width="100%" class="text-center table table-striped table-responsive">
+                                            <thead>
+                                                <tr>
+                                                    @foreach ($days as $day)
+                                                        <td>{{$day}}</td>
+                                                    @endforeach
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    @for($day_idx=0;$day_idx<sizeof($days);$day_idx++)
+                                                        <td id="schedule-day-{{$day_idx}}-wrap" data-count="0">
+                                                            <div id="schedule-day-{{$day_idx}}"></div>
+                                                            <center>
+                                                                <button class="theme-btn btn-style-four small schedule-open-form-btn" data-day-idx="{{$day_idx}}" type="button" title="Tambah Jadwal" data-toggle="collapse" data-target="#form-add-schedule">
+                                                                    <span class="btn-title"><i class="fas fa-plus"></i></span>
+                                                                </button>
+                                                            </center>
+                                                        </td>
+                                                    @endfor
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="collapse mt-5" id="form-add-schedule">
+                                          <div class="card card-body">  
+                                            <h6>Jadwal Hari <span id="schedule-draft-day" class="theme-color">Senin</span></h6>
+                                            <div class="row mt-5">       
+                                                <div class="form-group col-md-4">
+                                                    <div class="d-flex justify-content-between small">
+                                                        <span class="text-muted">Dari <req>*</req></span>
+                                                    </div>
+                                                    <input type="time" id="schedule-draft-from">  
+                                                </div>       
+                                                <div class="form-group col-md-4">
+                                                    <div class="d-flex justify-content-between small">
+                                                        <span class="text-muted">Hingga <req>*</req></span>
+                                                    </div>
+                                                    <input type="time" id="schedule-draft-to">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <center>
+                                                        <button class="theme-btn btn-style-two small" id="schedule-add-btn" date-day-idx="0" type="button">
+                                                            <span class="btn-title">Tambahkan</span>
+                                                        </button>
+                                                    </center>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @break
+                                @endswitch
+                            @endfor
+                        </div>
+                    </div>
+                </div>
+            @endif
+        </form>
+            
+    </div>
+    <div class="auto-container">
+
+        <center>
+            <button class="theme-btn btn-style-one bg-tealblue mt-5" type="button" id="btn-submit-add">
+                <span class="btn-title">Simpan</span>
+            </button>
+        </center>
+
     </div>
 </section>

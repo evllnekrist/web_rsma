@@ -1,3 +1,4 @@
+apiHeaders['headers']['Authorization'] = 'Bearer '+$("meta[name='tapi']").attr("content");
 const id_list = '#data-list';
 const loadingElementImg = `<tr>
                                 <td colspan="100%"><center><img src="../../asset/images/loading.gif"></center></td>
@@ -6,7 +7,7 @@ const loadingElementImg = `<tr>
 function doDelete(id,name){
   const object  = $(id_list).data('object');
   if(confirm("Apakah Anda yakin menghapus '"+name+"'? Aksi ini tidak dapat dibatalkan.")){
-    axios.delete(baseUrl+'/api/'+object+'/'+id, {}, apiHeaders)
+    axios.delete(baseUrl+'/api/'+object+'/'+id, {data:{}, headers:apiHeaders['headers']})
     .then(function (response) {
       console.log('response..',response);
       if(response.status == 200) {
@@ -18,7 +19,7 @@ function doDelete(id,name){
         });
         setTimeout(function() {
           window.location = baseUrl+'/cms/'+object;
-        }, 1500);
+        }, 500);
       }else{
         iziToast.warning({
             title: "Gagal",
@@ -95,7 +96,7 @@ function getData(move_to_page=null){
                     $('#product_'+item.id+'_img').attr("src",imgToDisplay)
                     $('#product_'+item.id+'_img').attr("title",item.img_main)
                 }
-                imgToDisplayHtml = `<img src="`+imgToDisplay+`" id="product_`+item.id+`_img" title="invalid image" style="width:100px">`;
+                imgToDisplayHtml = `<img src="`+imgToDisplay+`" id="product_`+item.id+`_img" title="invalid image" style="width:80px">`;
               }else{
                 imgToDisplayHtml = `<center>-</center>`;
               }
@@ -103,7 +104,7 @@ function getData(move_to_page=null){
               template += `<tr>`;
               $.each(columns, function (key, val) {
                 if(val.type == 'seq_number'){
-                    template += `<td>`+(++num)+`</td>`;
+                    template += `<td><center>`+(++num)+`</center></td>`;
                 }else if(val.type == 'action'){
                     template += `<td>`;
                     template += `<a class="mr-3 flex items-center" href="`+baseUrl+'/cms/'+object+'/'+item[pk]+`">
@@ -120,7 +121,7 @@ function getData(move_to_page=null){
                 }else if(val.var_name == 'img_main'){
                     template += `<td>`+imgToDisplayHtml+`</td>`;
                 }else{
-                    template += `<td>`+item[val.var_name]+`</td>`;
+                    template += `<td>`+(item[val.var_name]?item[val.var_name]:'<center>-</center>')+`</td>`;
                 }
               });
               template += `</tr>`;

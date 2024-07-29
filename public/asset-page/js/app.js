@@ -81,10 +81,10 @@ function inputFile(event){
     let iii = event.target.getAttribute('data-index-input-file');
     const files = event.target.files
     let url='', template='';
-    console.log('change input image');
+    // console.log('change input image');
     // console.log(iii,event);
     for(i = 0; i < files.length; i++){
-        console.log(i,event.target.files[i]);
+        // console.log(i,event.target.files[i]);
         url = URL.createObjectURL(event.target.files[i]);
         if($.inArray(event.target.files[i]['type'], accept_mimes['img']) >= 0){
             template += `<img src="`+url+`">`;

@@ -42,4 +42,8 @@ class ResourceDetail extends Model
     public function summary(){
         return $this->belongsTo(ResourceSummary::class, 'key', 'key');
     }
+
+    public function schedule(){
+        return $this->hasMany(ResourceDetailSchedule::class, 'resource_id', 'id');
+    }
 }

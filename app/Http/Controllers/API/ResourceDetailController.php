@@ -72,7 +72,7 @@ class ResourceDetailController extends APIController
     {
         // $filter['equal']  = [];
         $filter['search'] = ['key','name','description'];
-        return $this->get_list_common($request, $this->model, $filter, ['summary']);
+        return $this->get_list_common($request, $this->model, $filter, ['summary','schedule']);
     }
 
     /**
@@ -100,7 +100,7 @@ class ResourceDetailController extends APIController
      *                 @OA\Property(
      *                     property="key",
      *                     type="string",
-     *                     example="dokter-tht",
+     *                     example="dokter-umum",
      *                 ),
      *                 @OA\Property(
      *                     property="name",
@@ -171,7 +171,7 @@ class ResourceDetailController extends APIController
      */
     public function show($id)
     {
-        return $this->get_single_common($id, $this->model);
+        return $this->get_single_common($id, $this->model, ['schedule']);
     }
 
     /**
@@ -214,7 +214,7 @@ class ResourceDetailController extends APIController
      *                 @OA\Property(
      *                     property="key",
      *                     type="string",
-     *                     example="dokter-tht-edited",
+     *                     example="dokter-umum-edited",
      *                 ),
      *                 @OA\Property(
      *                     property="name",
@@ -287,7 +287,7 @@ class ResourceDetailController extends APIController
      */
     public function destroy($id)
     {
-        return $this->delete_common($id, $this->model);
+        return $this->delete_common($id, $this->model, []);
     }
 
     /**
@@ -349,18 +349,23 @@ class ResourceDetailController extends APIController
         try {
             $model              = 'App\Models\ResourceDetailSchedule';
             $body               = $request->all();
-            foreach ($body['schedule'] as $key => $value) {
-                for ($i=0; $i < sizeof($value['from']); $i++) { 
-                    $item[$key][$i] = $model::create(array(
-                        'resource_id'   => $body['ref_id'],
-                        'day'           => $key,
-                        'time_start'    => $value['from'][$i],
-                        'time_end'      => $value['to'][$i],
-                    ));
+            if(@$body['schedule']){
+                $item_destroy       = $model::where('resource_id',$body['ref_id'])->delete();
+                foreach ($body['schedule'] as $key => $value) {
+                    for ($i=0; $i < sizeof($value['from']); $i++) { 
+                        $item[$key][$i] = $model::create(array(
+                            'resource_id'   => $body['ref_id'],
+                            'day'           => $key,
+                            'time_start'    => $value['from'][$i],
+                            'time_end'      => $value['to'][$i],
+                        ));
+                    }
                 }
-            }
 
-            return response()->json(array('data'=>$item,'message'=>'Berhasil ditambahkan!'), 200);
+                return response()->json(array('data'=>$item,'message'=>'Berhasil ditambahkan!'), 200);
+            }else{
+                return response()->json(array('data'=>[],'message'=>'Tidak ada jadwal'), 200);
+            }
         } catch(\Exception $exception) {
             return response()->json(array('message'=>"Invalid data : {$exception->getMessage()}"),400);
         }

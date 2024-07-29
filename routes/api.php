@@ -11,9 +11,6 @@ use App\Http\Controllers\API\ResourceDetailController;
 use App\Http\Controllers\API\ResourceSummaryController;
 use App\Http\Controllers\API\SatisfactionController;
 
-Route::resource('user', AuthController::class, ['only' => ['index', 'show']]);
-Route::post('/user/{id}', [AuthController::class, 'update'])->middleware(['auth:api']);
-Route::resource('user', AuthController::class, ['except' => ['index', 'show']])->middleware(['auth:api']);
 Route::prefix('user')->group(function () {
     Route::get('/users', function () { return $request->user(); });
     Route::post('/register', [AuthController::class, 'register']);
@@ -21,6 +18,9 @@ Route::prefix('user')->group(function () {
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api');
 });
+Route::resource('user', AuthController::class, ['only' => ['index', 'show']]);
+Route::post('/user/{id}', [AuthController::class, 'update'])->middleware(['auth:api']);
+Route::resource('user', AuthController::class, ['except' => ['index', 'show']])->middleware(['auth:api']);
 
 Route::resource('post', PostController::class, ['only' => ['index', 'show']]);
 Route::post('/post/{id}', [PostController::class, 'update'])->middleware(['auth:api']);

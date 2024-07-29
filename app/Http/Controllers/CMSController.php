@@ -390,7 +390,7 @@ class CMSController extends Controller
                         [
                             'label'=>'Jumlah',
                             'var_name'=>'amount',
-                            'type'=>'text',
+                            'type'=>'number',
                             'is_required'=>true,
                         ],
                     ],
@@ -550,7 +550,7 @@ class CMSController extends Controller
         public function resourceDetailEdit($id){
             $data = $this->resourceDetailPrepare();
             $data['breadcrumbs'][1] = ['label'=>'Edit'];
-            $data['selected'] = ('App\Models\ResourceDetail')::find($id);
+            $data['selected'] = ('App\Models\ResourceDetail')::with(['schedule'])->find($id);
             $data['id'] = $id;
             return view('cms.default.edit',['page_conf'=>$data]);
         }      
