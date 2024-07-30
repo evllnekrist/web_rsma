@@ -1,8 +1,8 @@
 apiHeaders['headers']['Authorization'] = 'Bearer '+$("meta[name='tapi']").attr("content");
 const id_list = '#data-list';
-const loadingElementImg = `<tr>
-                                <td colspan="100%"><center><img src="../../asset/images/loading.gif"></center></td>
-                            </tr>`; 
+loadingElementImg = `<tr>
+                        <td colspan="100%"><center><img src="../../asset/images/loading.gif"></center></td>
+                    </tr>`; 
 
 function doDelete(id,name){
   const object  = $(id_list).data('object');
@@ -35,7 +35,6 @@ function doDelete(id,name){
         });
       }
       $('#loading').hide();
-      $('#form').show();
     })
     .catch(function (error) {
       iziToast.error({
@@ -51,7 +50,6 @@ function doDelete(id,name){
             ],
       });
       $('#loading').hide();
-      $('#form').show();
     });
   }else{
     iziToast.info({
@@ -60,12 +58,13 @@ function doDelete(id,name){
     });
   }
 }
-function getData(move_to_page=null){
+
+function getData(moveToPage=null){
   const object  = $(id_list).data('object');
   $(id_list).html(loadingElementImg);
 
-  if(move_to_page){
-    $('[name="_page"]').val(move_to_page);
+  if(moveToPage){
+    $('[name="_page"]').val(moveToPage);
   }
   let payload = {}; payload['_dir'] = {}
   $("._dir").each(function() {

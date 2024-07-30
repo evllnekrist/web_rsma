@@ -25,7 +25,8 @@ $(".file-browser").click(function(e) {
 });
 
 $("#btn-submit-add").on('click', function(e) {
-  let form    = document.getElementById('form-add');
+  let form_id   = 'form-add';
+  let form      = document.getElementById(form_id);
   const object  = $(form).data('object');
   
   form.reportValidity()
@@ -37,8 +38,8 @@ $("#btn-submit-add").on('click', function(e) {
         position: 'center',
     });
   } else {
-    $('#loading').show();
-    $('#form').hide();
+    $('#'+form_id+'-loading').show();
+    $('#'+form_id).hide();
     let formData = new FormData(form);
     // for (const [key, value] of formData) {
     //   console.log('»', key, value)
@@ -77,8 +78,8 @@ $("#btn-submit-add").on('click', function(e) {
                         }]
                     ],
                 });
-                $('#loading').hide();
-                $('#form').show();
+                $('#'+form_id+'-loading').hide();
+                $('#'+form_id).show();
                 return;
               });
             });
@@ -99,8 +100,8 @@ $("#btn-submit-add").on('click', function(e) {
                 message: "lihat console",
                 position: 'center',
             });
-            $('#loading').hide();
-            $('#form').show();
+            $('#'+form_id+'-loading').hide();
+            $('#'+form_id).show();
           }
         }else{
           iziToast.success({
@@ -126,10 +127,9 @@ $("#btn-submit-add").on('click', function(e) {
                 }]
             ],
         });
-        console.log('feeew')
       }
-      $('#loading').hide();
-      $('#form').show();
+      $('#'+form_id+'-loading').hide();
+      $('#'+form_id).show();
     })
     .catch(function (error) {
       iziToast.error({
@@ -145,14 +145,15 @@ $("#btn-submit-add").on('click', function(e) {
               }]
           ],
       });
-      $('#loading').hide();
-      $('#form').show();
+      $('#'+form_id+'-loading').hide();
+      $('#'+form_id).show();
     });
   }
 });
 
 $("#btn-submit-edit").on('click', function(e) {
-  let form    = document.getElementById('form-edit');
+  let form_id   = 'form-edit';
+  let form      = document.getElementById(form_id);
   const object  = $(form).data('object');
   const id      = $(form).data('id');
 
@@ -165,8 +166,8 @@ $("#btn-submit-edit").on('click', function(e) {
         position: 'center',
     });
   } else {
-    $('#loading').show();
-    $('#form').hide();
+    $('#'+form_id+'-loading').show();
+    $('#'+form_id).hide();
     let formData = new FormData(form);
     $('.wysiwyg-editor').each(function(i, obj) {
       formData.append($(obj).attr('name'),CKEDITOR.instances['wysiwyg-editor-'+i].getData());
@@ -207,8 +208,8 @@ $("#btn-submit-edit").on('click', function(e) {
                         }]
                     ],
                 });
-                $('#loading').hide();
-                $('#form').show();
+                $('#'+form_id+'-loading').hide();
+                $('#'+form_id).show();
                 return;
               });
             });
@@ -229,8 +230,8 @@ $("#btn-submit-edit").on('click', function(e) {
                 message: "lihat console",
                 position: 'center',
             });
-            $('#loading').hide();
-            $('#form').show();
+            $('#'+form_id+'-loading').hide();
+            $('#'+form_id).show();
           }
         }else{
           iziToast.success({
@@ -257,8 +258,8 @@ $("#btn-submit-edit").on('click', function(e) {
             ],
         });
       }
-      $('#loading').hide();
-      $('#form').show();
+      $('#'+form_id+'-loading').hide();
+      $('#'+form_id).show();
     })
     .catch(function (error) {
       iziToast.error({
@@ -274,8 +275,8 @@ $("#btn-submit-edit").on('click', function(e) {
               }]
           ],
       });
-      $('#loading').hide();
-      $('#form').show();
+      $('#'+form_id+'-loading').hide();
+      $('#'+form_id).show();
     });
   }
 });

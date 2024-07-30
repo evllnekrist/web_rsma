@@ -1,5 +1,4 @@
 const id_list = '#tree';
-const loadingElementImg = `<center><img src="../../asset/images/loading.gif"></center>`; 
 let chart = null;
 
 function getData(){

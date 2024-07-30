@@ -18,20 +18,18 @@
                 <span class="divider"></span>
             </div>
 
-            <div class="row" id="data-list">
-
-            </div>
+            <br><input name="_page" value="1" class="_filter_{{$segments[0]}}" hidden>
+            <div class="row justify-content-end" id="data-list-{{$segments[0]}}"></div>
         </div>
     </section>
     <div class="container mb-5">
         <div class="row justify-content-between">
-            <div class="d-flex" id="data-list-pagination"></div>
+            <div class="d-flex" id="data-list-{{$segments[0]}}-pagination"></div>
             <div>
-                <select name="_limit" onchange="getData()" data-tw-merge="" class="_filter form-control">
-                    <option value="5" selected>5</option>
-                    <option value="10">10</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
+                <select name="_limit" onchange="getDataPost()" data-tw-merge="" class="_filter_{{$segments[0]}} form-control">
+                    <option value="6" selected>6</option>
+                    <option value="12">12</option>
+                    <option value="60">60</option>
                     <option value="all">Semua</option>
                 </select>
             </div>

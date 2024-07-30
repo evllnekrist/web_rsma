@@ -9,6 +9,7 @@ const apiHeaders = {
     }
 };
 let loadingElement = `<div class="mx-auto">memuat...</div>`;
+let loadingElementImg = `<p class="mx-auto"><img src="../../asset/images/loading.gif"></p>`; 
 let days = ['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'];
 
 function nospace(event,changeWith=""){
@@ -222,6 +223,174 @@ function reduceArrayObject(arr, aobj) {
 
 function cleanUrl(str){
     return str.replace(/([^:])(\/\/+)/g, '$1/');
+}
+
+function getDataPost(moveToPage=null, type='news', displayTemp=1){
+    let id_list = '#data-list-'+type;
+    $(id_list).html(loadingElementImg);
+  
+    if(moveToPage){
+      $("._filter_"+type+'[name="_page"]').val(moveToPage);
+    }
+    let payload = {
+      _type: type
+    }; payload['_dir'] = {}
+    $("._dir_"+type).each(function() {
+      if($(this).data('dir')){
+        payload['_dir'][$(this).attr('id').replace('th_','')] = $(this).data('dir');
+      }
+    });
+    $("._filter_"+type).each(function() {
+      payload[$(this).attr('name')] = $(this).val();
+    });
+    // console.log('payload',payload); 
+    // return;
+    axios.get(baseUrl+'/api/post', {params: payload}, apiHeaders)
+    .then(function (response) {
+      console.log('[DATA] response..',response.data);
+      if(response.data.status) {
+          if(response.data.data.products && response.data.data.products.length > 0) {
+            // i::data display-------------------------------------------------------------------------------START
+              let template  = ``; let imgToDisplay = ``; let templateUrl = '';
+              let temp2Icon = ['heart-2','brain','kidney']; let randomInt = 0;
+              (response.data.data.products).forEach((item) => {
+                if(item.img_main){
+                  imgToDisplay = baseUrl+'/asset/images/resource/news-1.jpg'
+                  img = new Image();
+                  img.src = item.img_main+"?_="+(new Date().getTime());
+                  img.onload = function () {
+                      imgToDisplay = item.img_main
+                      $('#product_'+item.id+'_img_'+type).attr("src",imgToDisplay)
+                      $('#product_'+item.id+'_img_'+type).attr("title",item.img_main)
+                  }
+                }else{
+                  imgToDisplay = item.img_link;
+                }
+  
+                templateUrl = baseUrl+`/`+type+`/`+item.slug;
+                if(displayTemp == 1){
+                template += ` <div class="news-block col-lg-4 col-md-6 col-sm-12 wow fadeInUp">
+                                    <div class="inner-box">
+                                        <div class="image-box">
+                                            <figure class="image">
+                                            <a href="`+templateUrl+`">
+                                                <img src="`+imgToDisplay+`" id="product_`+item.id+`_img_`+type+`" alt=""></a>
+                                            </figure>
+                                            <a href="#" class="date">`+dayjs(item.created_at).format('D MMM YYYY')+`</a>
+                                        </div>
+                                        <div class="lower-content">
+                                            <h4><a href="blog-post-image.html">`+item.title+`</a></h4>
+                                            <div class="text">`+shorten(jQuery(item.content).text(), 200, "...", false)+`</div>
+                                            <div class="post-info">
+                                                <div class="post-author"><small>Oleh `+(item.created_by_attr?item.created_by_attr.name:'-')+`</small></div>
+                                                <ul class="post-option">
+                                                    <li><a onclick="copyToClipboard('`+templateUrl+`')"><i class="fa fa-share-alt"></i></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`;
+                }else if(displayTemp == 2){
+                randomInt = Math.floor(Math.random() * temp2Icon.length);
+                template += `   <div class="service-block-two col-md-4">
+                                    <div class="inner-box">
+                                        <div class="image-box">
+                                            <figure class="image"><a href="`+templateUrl+`"><img src="`+imgToDisplay+`" id="product_`+item.id+`_img_`+type+`" alt=""></a></figure>
+                                        </div>
+                                        <div class="lower-content">
+                                            <div class="title-box">
+                                                <span class="icon flaticon-`+temp2Icon[randomInt]+`"></span>
+                                                <h4><a href="`+templateUrl+`">`+item.title+`</a></h4> 
+                                            </div>
+                                            <div class="text small">`+shorten(jQuery(item.content).text(), 200, "...", false)+`</div>
+                                            <span class="icon-right flaticon-`+temp2Icon[randomInt]+`"></span>
+                                        </div>
+                                    </div>
+                                </div>`;
+                }
+              });
+              $(id_list).html(template);
+            // i::data display---------------------------------------------------------------------------------END
+            // i::data statistics----------------------------------------------------------------------------START
+              $('#products_count_start_'+type).html(response.data.data.products_count_start);
+              $('#products_count_end_'+type).html(response.data.data.products_count_end);
+              $('#products_count_total_'+type).html(response.data.data.products_count_total);
+            // i::data statistics------------------------------------------------------------------------------END
+            // i::data pagination----------------------------------------------------------------------------START
+             if($(id_list+'-pagination').length){
+                template = '';
+                let max_page = Math.ceil(response.data.data.products_count_total/response.data.data.filter._limit);
+                template += 
+                `<div class="pagination">
+                    <a onclick="getDataPost(`+1+`,'`+type+`',`+displayTemp+`)"><i class="fas fa-angle-double-left"></i></a>
+                </div>`; 
+                if(response.data.data.filter._page > 1){
+                    template += 
+                    `<div class="pagination">
+                        <a onclick="getDataPost(`+(response.data.data.filter._page-1)+`,'`+type+`',`+displayTemp+`)">`+(response.data.data.filter._page-1)+`</a>
+                    </div>`; 
+                }
+    
+                template += 
+                `<div class="pagination">
+                    <a class="active">`+response.data.data.filter._page+`</a>
+                </div>`;
+                
+                if(response.data.data.filter._page < max_page){
+                    template += 
+                    `<div class="pagination">
+                        <a onclick="getDataPost(`+(response.data.data.filter._page+1)+`,'`+type+`',`+displayTemp+`)">`+(response.data.data.filter._page+1)+`</a>
+                    </div>`; 
+                }
+                if(response.data.data.filter._page+1 < max_page){
+                    template += 
+                    `<div class="pagination">
+                        <a onclick="getDataPost(`+(response.data.data.filter._page+2)+`,'`+type+`',`+displayTemp+`)">`+(response.data.data.filter._page+2)+`</a>
+                    </div>`; 
+                }
+                template += 
+                `<div class="pagination">
+                    <a onclick="getDataPost(`+max_page+`,'`+type+`',`+displayTemp+`)"><i class="fas fa-angle-double-right"></i>
+                    </a>
+                </div>`; 
+    
+                $(id_list+'-pagination').html(template);
+                $('[name="_page"]').val(response.data.data.filter._page);
+              }
+            // i::data pagination------------------------------------------------------------------------------END
+          }else{
+            $(id_list).html(`<center><i>tidak ada data</i></center>`);
+          }
+            
+      }else{
+        iziToast.warning({
+            title: "Gagal",
+            html: response.data.message,
+            position: 'center',
+            buttons: [
+                ['<button>OK</button>', function (instance, toast) {
+                    instance.hide({
+                        transitionOut: 'fadeOutUp',
+                    }, toast, 'Tombol OK');
+                }]
+            ],
+        });
+      }
+    })
+    .catch(function (error) {
+      iziToast.error({
+          title: "Gagal",
+          message: error.response?error.response.data.message:error.message,
+          position: 'center',
+          buttons: [
+              ['<button>OK</button>', function (instance, toast) {
+                  instance.hide({
+                      transitionOut: 'fadeOutUp',
+                  }, toast, 'Tombol OK');
+              }]
+          ],
+      });
+    });
 }
 
 $(function (){

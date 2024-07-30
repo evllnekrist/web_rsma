@@ -7716,7 +7716,7 @@ Portfolio Section
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  padding: 50px 0 70px;
+  padding: 50px 0 40px;
   z-index: 1;
 }
 
@@ -10644,7 +10644,7 @@ form .response .text-info{
 
 .main-footer .logo{
   position:relative;  
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 .main-footer .footer-logo figure{

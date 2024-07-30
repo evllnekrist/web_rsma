@@ -48,5 +48,5 @@ Route::post('/resourceSummary/{id}', [ResourceSummaryController::class, 'update'
 Route::resource('resourceSummary', ResourceSummaryController::class, ['except' => ['index', 'show']])->middleware(['auth:api']);
 
 Route::resource('satisfaction', SatisfactionController::class, ['only' => ['index', 'show']]);
-Route::post('/satisfaction/{id}', [SatisfactionController::class, 'update'])->middleware(['auth:api']);
-Route::resource('satisfaction', SatisfactionController::class, ['except' => ['index', 'show']])->middleware(['auth:api']);
+Route::post('/satisfaction/{id}', [SatisfactionController::class, 'update']);
+Route::resource('satisfaction', SatisfactionController::class, ['except' => ['index', 'show']]);

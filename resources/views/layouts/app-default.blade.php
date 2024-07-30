@@ -7,7 +7,7 @@
 
     <body>
         <div class="page-wrapper">
-            <div class="preloader"></div>
+            {{-- <div class="preloader"></div> --}}
             @include('components.default.nav-public')
             @yield('content')
             @include('components.default.footer')

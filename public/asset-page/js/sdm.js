@@ -1,15 +1,15 @@
 const id_list = '#data-list';
 const no_delete_items = [];
-const loadingElementImg = `<tr>
-                                <td colspan="100%"><center><img src="../../asset/images/loading.gif"></center></td>
-                            </tr>`; 
+loadingElementImg = `<tr>
+                        <td colspan="100%"><center><img src="../../asset/images/loading.gif"></center></td>
+                    </tr>`; 
 
 
-function getData(move_to_page=null){
+function getData(moveToPage=null){
   $(id_list).html(loadingElementImg);
 
-  if(move_to_page){
-    $('[name="_page"]').val(move_to_page);
+  if(moveToPage){
+    $('[name="_page"]').val(moveToPage);
   }
   let payload = {
     _type: 'human'

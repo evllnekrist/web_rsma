@@ -135,7 +135,7 @@ class SatisfactionController extends APIController
         $rules = [
             'star'  => 'required',
         ];
-        return $this->post_common($request, $this->model, $rules);
+        return $this->post_common($request, $this->model, $rules, []);
     }
 
     /**

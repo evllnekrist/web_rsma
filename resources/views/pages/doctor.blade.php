@@ -1,5 +1,5 @@
 @extends('layouts.app-default', ['breadcrumbs'=>[['label'=>'Dokter']]])
-@section('title', 'Dashboard')
+@section('title', 'Dokter')
 @section('content')
     
     <div class="py-5">

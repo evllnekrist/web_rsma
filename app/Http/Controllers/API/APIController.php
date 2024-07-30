@@ -126,7 +126,7 @@ class APIController extends Controller
               }
             }
             // dump($body);return;
-            $body['created_by'] = \Auth::user()->id;
+            $body['created_by'] = \Auth::user()?\Auth::user()->id:0;
             $body['created_at'] = new \DateTime();
             $item2              = null;
             $item               = app($model)->create($body);
