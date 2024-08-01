@@ -205,3 +205,17 @@ req {
 .link-space {
   scroll-margin-top: 5.2rem;
 }
+
+.x-ear{
+    background-color: #f9f9f9;
+    padding: 8px 3px;
+}
+
+.smaller{
+  font-size: 60%;
+}
+
+.textarea-compact{
+  height: 50px !important;
+  line-height: 1 !important;
+}

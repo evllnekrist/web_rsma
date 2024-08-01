@@ -36,7 +36,7 @@
             <i class="fa fa-smile mr-3 text-white" aria-hidden="true"></i>
             Survey Kepuasan
         </a>
-        <a  data-toggle="tooltip" data-placement="bottom" href="{{route('cms.web-info')}}" 
+        <a  data-toggle="tooltip" data-placement="bottom" href="{{route('cms.webInfo')}}" 
             title="Mengatur informasi konfigurasi web">
             <i class="fa fa-cog mr-3 text-white" aria-hidden="true"></i>
             Informasi Web

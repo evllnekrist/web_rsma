@@ -1734,6 +1734,9 @@ hr {
 ====================================================================
 
 ***/
+.input-file{
+  font-size: smaller;
+}
 
 .main-header{
   position: relative;

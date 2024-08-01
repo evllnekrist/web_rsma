@@ -82,8 +82,8 @@ function inputFile(event){
     let iii = event.target.getAttribute('data-index-input-file');
     const files = event.target.files
     let url='', template='';
-    // console.log('change input image');
-    // console.log(iii,event);
+    console.log('change input image');
+    console.log(iii,event);
     for(i = 0; i < files.length; i++){
         // console.log(i,event.target.files[i]);
         url = URL.createObjectURL(event.target.files[i]);
@@ -95,7 +95,7 @@ function inputFile(event){
                     <b>`+(event.target.files[i]['name']).split('.').pop().toUpperCase()+`</b>
                 </div>`;
         }
-        template += `<span>`+event.target.files[i]['name']+`</span>`;
+        template += `<br><span>`+event.target.files[i]['name']+`</span>`;
     }
     // console.log('template',template)
     $('#input-file-preview-'+iii).html(template);
@@ -279,7 +279,7 @@ function getDataPost(moveToPage=null, type='news', displayTemp=1){
                                             <a href="#" class="date">`+dayjs(item.created_at).format('D MMM YYYY')+`</a>
                                         </div>
                                         <div class="lower-content">
-                                            <h4><a href="blog-post-image.html">`+item.title+`</a></h4>
+                                            <h4><a href="`+templateUrl+`">`+item.title+`</a></h4>
                                             <div class="text">`+shorten(jQuery(item.content).text(), 200, "...", false)+`</div>
                                             <div class="post-info">
                                                 <div class="post-author"><small>Oleh `+(item.created_by_attr?item.created_by_attr.name:'-')+`</small></div>

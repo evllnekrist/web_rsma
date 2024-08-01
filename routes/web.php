@@ -93,9 +93,7 @@ Route::prefix('cms')->middleware('auth')->group(function () {
         Route::get('/', [CMSController::class, 'satisfactionIndex'])->name('cms.satisfaction');
     });
     Route::prefix('web')->group(function () {
-        Route::get('/', [CMSController::class, 'webInfoIndex'])->name('cms.web-info');
-        Route::get('/add', [CMSController::class, 'webInfoAdd']);
-        Route::get('/{id}', [CMSController::class, 'webInfoEdit']);
+        Route::get('/', [CMSController::class, 'webInfoManage'])->name('cms.webInfo');
     });
     Route::prefix('user')->group(function () {
         Route::get('/', [CMSController::class, 'userIndex'])->name('cms.user');

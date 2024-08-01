@@ -220,7 +220,7 @@ class CMSController extends Controller
                             ],
                             'value'=>'submitted',
                             'is_required'=>true,
-                            'is_hidden'=>true,
+                            // 'is_hidden'=>true,
                         ],
                         [
                             'label'=>'Judul',
@@ -749,7 +749,32 @@ class CMSController extends Controller
             $data['breadcrumbs'][1] = ['label'=>'Daftar Data'];
             return view('cms.default.index',['page_conf'=>$data]);
         }    
-    // ---------------------- END::org --------------------
+    // ---------------------- END::satisfaction --------------------
+    // -------------------- START::web --------------------
+        public function webInfoManage(){
+            $data['selected']   = [
+                'logo'              =>Option::where('type','WEB_LOGO')->first(),
+                'related_links'     =>Option::where('type','WEB_RELINK')->get(),
+                'sliders'           =>Option::where('type','WEB_SLIDER_CONTENT')->get(),
+                'desc'              =>Option::where('type','WEB_DESC')->first(),
+                'schedule'          =>Option::where('type','WEB_SCHEDULE')->first(),
+                'contact_phone'     =>Option::where('type','WEB_CONTACT_PHONE')->first(),
+                'contact_email'     =>Option::where('type','WEB_CONTACT_EMAIL')->first(),
+                'contact_address'   =>Option::where('type','WEB_CONTACT_ADDRESS')->first(),
+                'socmed_fb'         =>Option::where('type','WEB_SOCMED_FB')->first(),
+                'socmed_twitter'    =>Option::where('type','WEB_SOCMED_TWITTER')->first(),
+                'socmed_ig'         =>Option::where('type','WEB_SOCMED_IG')->first(),
+            ];
+            $data['page_conf']  = [
+                'object'=>'option',
+                'pk'=>'id',
+                'breadcrumbs'=>[
+                    ['label'=>'Survey Kepuasan','route'=>route('cms.webInfo')],
+                ],
+            ];
+            return view('cms.web-info',$data);
+        } 
+    // ---------------------- END::web --------------------
     // -------------------- START::user --------------------
         public function userPrepare(){
             $object = 'user';

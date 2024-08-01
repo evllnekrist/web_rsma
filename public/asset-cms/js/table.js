@@ -106,13 +106,13 @@ function getData(moveToPage=null){
                     template += `<td><center>`+(++num)+`</center></td>`;
                 }else if(val.type == 'action'){
                     template += `<td>`;
-                    template += `<a class="mr-3 flex items-center" href="`+baseUrl+'/cms/'+object+'/'+item[pk]+`">
+                    template += `<a class="mr-3 items-center" href="`+baseUrl+'/cms/'+object+'/'+item[pk]+`">
                                     <i class="fa fa-pen"></i>
                                 </a>`;
                     if(no_delete_items.includes(item[pk])){
                         template += `<i class="small text-muted2">tidak dapat dihapus</i>`;
                     }else{
-                        template += `<a onclick="doDelete(`+item.id+`,'`+item.name+`')" class="flex items-center text-danger">
+                        template += `<a onclick="doDelete(`+item.id+`,'`+item.name+`')" class="items-center text-danger">
                                         <i class="fa fa-trash"></i>
                                     </a>`;
                     }
