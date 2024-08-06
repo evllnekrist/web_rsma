@@ -10,6 +10,7 @@ use App\Http\Controllers\API\PageController;
 use App\Http\Controllers\API\ResourceDetailController;
 use App\Http\Controllers\API\ResourceSummaryController;
 use App\Http\Controllers\API\SatisfactionController;
+use App\Http\Controllers\API\WebInfoController;
 
 Route::prefix('user')->group(function () {
     Route::get('/users', function () { return $request->user(); });
@@ -50,3 +51,5 @@ Route::resource('resourceSummary', ResourceSummaryController::class, ['except' =
 Route::resource('satisfaction', SatisfactionController::class, ['only' => ['index', 'show']]);
 Route::post('/satisfaction/{id}', [SatisfactionController::class, 'update']);
 Route::resource('satisfaction', SatisfactionController::class, ['except' => ['index', 'show']]);
+
+Route::post('/web-info/manage', [WebInfoController::class, 'update']);

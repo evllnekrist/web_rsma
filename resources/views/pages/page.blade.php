@@ -5,19 +5,20 @@
     @php
       $layout_slices = explode("-",@$selected->layout);
     @endphp
+    
     @if(!$selected->layout || (((in_array('body',$layout_slices) && !$selected->body) || !in_array('body',$layout_slices)) 
-                            && ((in_array('img',$layout_slices) && !$selected->img) || !in_array('img',$layout_slices)) 
-                            && ((in_array('pdf',$layout_slices) && !$selected->pdf) || !in_array('pdf',$layout_slices))))
+                            && ((in_array('img',$layout_slices) && !$selected->img_main) || !in_array('img',$layout_slices)) 
+                            && ((in_array('pdf',$layout_slices) && !$selected->file_main) || !in_array('pdf',$layout_slices))))
       <center>Informasi Belum Tersedia</center>
     @else
       @foreach($layout_slices as $layout_item)
         @switch($layout_item)
           @case('body')    
-            {!! $selected['body'] !!}
+            {!! html_entity_decode($selected['body']) !!}
           @break
           @case('img')
             <div class="text-center">
-              <img src="{{$selected->img_main}}" class="img-fluid-80"/>
+              <img src="{{$selected->img_main}}" class="img-fluid-m"/>
             </div>
           @break
           @case('pdf')

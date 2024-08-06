@@ -72,7 +72,7 @@
                                     <li><a href="{{url('/sdm')}}">Sumber Daya Manusia</a></li>
                                 </ul>
                             </li>
-                            <li><a href="{{url('/p/contact-us')}}">Kontak dan Pengaduan</a></li>
+                            <li><a href="{{url('/contact')}}">Kontak dan Pengaduan</a></li>
                         </ul>
                     </nav>
                     <!-- Main Menu End-->

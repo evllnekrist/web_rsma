@@ -47,6 +47,9 @@ Route::get('/org', function () {
 Route::get('/sdm', function () {
     return view('pages.sdm');
 });
+Route::get('/contact', function () {
+    return view('pages.contact');
+});
 
 
 require __DIR__.'/auth.php';

@@ -120,7 +120,7 @@
                                                                     <i class="fas fa-file-alt" data-fa-transform="shrink-2 up-4"></i>
                                                                     <i class="fas fa-file-pdf" data-fa-transform="shrink-3 down-2 right-6 rotate-45"></i>
                                                                 </div>
-                                                                <div class="flex flex-auto mx-auto" id="input-file-preview-0">
+                                                                <div class="mx-auto" id="input-file-preview-0">
                                                                     @if(@$selected->img_main||@$selected->file_main)
                                                                         @if(in_array('.'.$extension,Config::get('app.accept_extensions')['img']))
                                                                             <img src="{{asset($selected[$input['var_name']])}}">
@@ -129,7 +129,7 @@
                                                                                 <b>{{strtoupper($extension)}}</b>
                                                                             </div>
                                                                         @endif
-                                                                        <span>{{$filename}}</span>
+                                                                        <br><span>{{$filename}}</span>
                                                                     @endif
                                                                 </div>
                                                                 <input type="file" id="file-upload" data-index-input-file="0" name="{{$input['var_name']}}" 
