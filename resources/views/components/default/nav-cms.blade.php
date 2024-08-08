@@ -3,7 +3,7 @@
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         
         <div class="logo">
-            <a href="{{url('/cms')}}"><img src="{{asset('asset/images/logo-rsma.webp')}}" style="height:120px" alt="logo RSUDMA"></a>
+            <a href="{{url('/cms')}}"><img src="{{asset(Cookie::get('logo')?Cookie::get('logo'):'asset/images/logo-rsma.webp')}}" style="height:120px" alt="logo RSUDMA"></a>
         </div>
         <hr style="background: black">
         <a  data-toggle="tooltip" data-placement="bottom" href="{{route('cms.page')}}" 

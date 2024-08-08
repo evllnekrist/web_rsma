@@ -1,16 +1,20 @@
 <?php
 
+use App\Http\Controllers\CMSController;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\CMSController;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\PublicController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
+Route::get('/', 
+// function () {
     // return view('welcome');
-    return view('index');
-});
+    // return view('index');
+// }
+[PublicController::class, 'index']
+);
 Route::fallback(function () {
     return view('errors.404', array(
         'title' => 'Yaah...',

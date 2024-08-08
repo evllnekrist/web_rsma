@@ -2,10 +2,9 @@
 @section('title', 'Pengaturan Informasi Web')
 @section('content')
 {{-- CONTENT::START --}}
-@php
-    dump($selected);
-    // die();
-@endphp
+{{-- @php --}}
+    {{-- // dump($selected); --}}
+{{-- @endphp --}}
     <section class="fun-fact-section-two">
         <div class="auto-container">
 
@@ -125,129 +124,122 @@
 
                 </div>
 
-                <div class="row justify-content-center">
-                    
-                    <div class="col-12">
-                        <div class="appointment-form default-form mt-5">
-                            <b class="text-muted small">Slider</b>
-                            <div class="row" id="data-slider-wrap" data-count="{{sizeof($selected['sliders'])}}">
-                                @php
-                                    $slider_count = 0;
-                                @endphp
-                                @foreach($selected['sliders'] as $item)
-                                @php                        
-                                    $filename   = strtolower(array_reverse(explode("/",asset($item['img_main'])))[0]); 
-                                @endphp
-                                <div class="form-group col-md-4" id="slider-item-{{$slider_count}}">
-                                    <div class="pull-left x-ear">
-                                        <button type="button" class="close" aria-label="Close" onclick="removeElement('slider',{{$slider_count}})">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div> 
-                                    <div class="upload-wrapper">
-                                        <div class="upload-container">
-                                            <div class="upload-container-in">
-                                                <div class="border-container-in">
-                                                    <div class="icons fa-4x mt-3 mb-5 {{(@$item['img_main']?'hidden':'')}}" id="input-file-none-slide-{{$slider_count}}">
-                                                        <i class="fas fa-file-image" data-fa-transform="shrink-3 down-2 left-6 rotate--45"></i>
-                                                        <i class="fas fa-file-alt" data-fa-transform="shrink-2 up-4"></i>
-                                                        <i class="fas fa-file-pdf" data-fa-transform="shrink-3 down-2 right-6 rotate-45"></i>
-                                                    </div>
-                                                    <div class="mx-auto mb-1" id="input-file-preview-slide-{{$slider_count}}">
-                                                        @if(@$item['img_main'])
-                                                            <img src="{{asset($item['img_main'])}}" style="height:120px">
-                                                            <br><small>{{$filename}}</small>
-                                                        @endif
-                                                    </div>
-                                                    <input type="file" id="file-upload" data-index-input-file="slide-{{$slider_count}}" name="sliders[{{$slider_count}}][img_main]" class="input-file input-sm" >
-                                                    <p class="mb-2"><small>Drag dan drop file, atau <a href="#" id="file-browser">cari disini</a>.</small></p>
-                                                    <textarea class="textarea-compact" placeholder="Judul" name="sliders[{{$slider_count}}][label]">{{$item['label']}}</textarea>
-                                                    <textarea class="textarea-compact" placeholder="Sub judul atas" name="sliders[{{$slider_count}}][value]">{{$item['value']}}</textarea>
-                                                    <textarea class="textarea-compact" placeholder="Sub judul bawah" name="sliders[{{$slider_count}}][description]">{{$item['description']}}</textarea>
-                                                    <input type="text" placeholder="Link tombol" name="sliders[{{$slider_count}}][value2]" value="{{$item['value2']}}" class="nospace_rw_hypen lowercase">
-                                                    <input type="text" placeholder="ID" name="sliders[{{$slider_count}}][id]" value="{{$item['id']}}" hidden>
-                                                    <span class="text-muted smaller">* isi, hanya jika, ingin bagian tersebut tampil</span>
-                                                </div>
+                <div class="appointment-form default-form mt-5">
+                    <b class="text-muted small">Slider</b>
+                    <div class="row" id="data-slider-wrap" style="min-width:80vw" data-count="{{sizeof($selected['sliders'])}}">
+                        @php
+                            $slider_count = 0;
+                        @endphp
+                        @foreach($selected['sliders'] as $item)
+                        @php                        
+                            $filename   = strtolower(array_reverse(explode("/",asset($item['img_main'])))[0]); 
+                        @endphp
+                        <div class="form-group col-md-4" id="slider-item-{{$slider_count}}">
+                            <div class="pull-left x-ear">
+                                <button type="button" class="close" aria-label="Close" onclick="removeElement('slider',{{$slider_count}})">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div> 
+                            <div class="upload-wrapper">
+                                <div class="upload-container">
+                                    <div class="upload-container-in">
+                                        <div class="border-container-in">
+                                            <div class="icons fa-4x mt-3 mb-5 {{(@$item['img_main']?'hidden':'')}}" id="input-file-none-slide-{{$slider_count}}">
+                                                <i class="fas fa-file-image" data-fa-transform="shrink-3 down-2 left-6 rotate--45"></i>
+                                                <i class="fas fa-file-alt" data-fa-transform="shrink-2 up-4"></i>
+                                                <i class="fas fa-file-pdf" data-fa-transform="shrink-3 down-2 right-6 rotate-45"></i>
                                             </div>
+                                            <div class="mx-auto mb-1" id="input-file-preview-slide-{{$slider_count}}">
+                                                @if(@$item['img_main'])
+                                                    <img src="{{asset($item['img_main'])}}" style="height:120px">
+                                                    <br><small>{{$filename}}</small>
+                                                @endif
+                                            </div>
+                                            <input type="file" id="file-upload" data-index-input-file="slide-{{$slider_count}}" name="sliders[{{$slider_count}}][img_main]" class="input-file input-sm" >
+                                            <p class="mb-2"><small>Drag dan drop file, atau <a href="#" id="file-browser">cari disini</a>.</small></p>
+                                            <textarea class="textarea-compact" placeholder="Judul" name="sliders[{{$slider_count}}][label]">{{$item['label']}}</textarea>
+                                            <textarea class="textarea-compact" placeholder="Sub judul atas" name="sliders[{{$slider_count}}][value]">{{$item['value']}}</textarea>
+                                            <textarea class="textarea-compact" placeholder="Sub judul bawah" name="sliders[{{$slider_count}}][description]">{{$item['description']}}</textarea>
+                                            <input type="text" placeholder="Link tombol" name="sliders[{{$slider_count}}][value2]" value="{{$item['value2']}}" class="nospace_rw_hypen lowercase">
+                                            <input type="text" placeholder="ID" name="sliders[{{$slider_count}}][id]" value="{{$item['id']}}" hidden>
+                                            <span class="text-muted smaller">* isi, hanya jika, ingin bagian tersebut tampil</span>
                                         </div>
-                                    </div>   
+                                    </div>
                                 </div>
-                                @php
-                                    $slider_count++;
-                                @endphp
-                                @endforeach
-                            </div>
-                            <div class="mt-3">
-                                <center>
-                                    <button class="theme-btn btn-style-four btn-block small" id="slider-add-btn" type="button">
-                                        <span class="btn-title"><i class="fas fa-plus"></i></span>
-                                    </button>
-                                </center>
-                            </div>
+                            </div>   
                         </div>
+                        @php
+                            $slider_count++;
+                        @endphp
+                        @endforeach
+                    </div>
+                    <div class="mt-3">
+                        <center>
+                            <button class="theme-btn btn-style-four btn-block small" id="slider-add-btn" type="button">
+                                <span class="btn-title"><i class="fas fa-plus"></i></span>
+                            </button>
+                        </center>
                     </div>
                 </div>
 
-                <div class="row justify-content-center">
-                    
-                    <div class="col-12">
-                        <div class="appointment-form default-form mt-5">
-                            <b class="text-muted small">Link Terkait</b>
-                            <div class="row" id="data-related-link-wrap" data-count="{{sizeof($selected['related_links'])}}">
-                                @php
-                                    $related_link_count = 0;
-                                @endphp
-                                @foreach($selected['related_links'] as $item)
-                                @php                        
-                                    $filename   = strtolower(array_reverse(explode("/",asset($item['img_main'])))[0]); 
-                                @endphp
-                                <div class="form-group col-md-4" id="related-link-item-{{$related_link_count}}">
-                                    <div class="pull-left x-ear">
-                                        <button type="button" class="close" aria-label="Close" onclick="removeElement('related-link',{{$related_link_count}})">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div> 
-                                    <div class="upload-wrapper">
-                                        <div class="upload-container">
-                                            <div class="upload-container-in">
-                                                <div class="border-container-in">
-                                                    <div class="icons fa-4x mt-3 mb-5 {{(@$item['img_main']?'hidden':'')}}" id="input-file-none-related-link-{{$related_link_count}}">
-                                                        <i class="fas fa-file-image" data-fa-transform="shrink-3 down-2 left-6 rotate--45"></i>
-                                                        <i class="fas fa-file-alt" data-fa-transform="shrink-2 up-4"></i>
-                                                        <i class="fas fa-file-pdf" data-fa-transform="shrink-3 down-2 right-6 rotate-45"></i>
-                                                    </div>
-                                                    <div class="mx-auto mb-1" id="input-file-preview-related-link-{{$related_link_count}}">
-                                                        @if(@$item['img_main'])
-                                                            <img src="{{asset($item['img_main'])}}" style="height:120px">
-                                                            <br><small>{{$filename}}</small>
-                                                        @endif
-                                                    </div>
-                                                    <input type="file" id="file-upload" data-index-input-file="related-link-{{$related_link_count}}" name="related_links[{{$slider_count}}][img_main]" class="input-file input-sm" >
-                                                    <p class="mb-2"><small>Drag dan drop file, atau <a href="#" id="file-browser">cari disini</a>.</small></p>
-                                                    <textarea class="textarea-compact" placeholder="Nama" name="related_links[{{$slider_count}}][label]">{{$item['label']}}</textarea>
-                                                    <input type="text" placeholder="Link" name="related_links[{{$slider_count}}][value2]" value="{{$item['value2']}}" class="nospace_rw_hypen lowercase">
-                                                    <input type="text" placeholder="ID" name="related_links[{{$slider_count}}][id]" value="{{$item['id']}}" hidden>
-                                                    <span class="text-muted smaller">* isi, hanya jika, ingin bagian tersebut tampil</span>
-                                                </div>
+                
+                <div class="appointment-form default-form mt-5">
+                    <b class="text-muted small">Link Terkait</b>
+                    <div class="row" id="data-related-link-wrap" style="min-width:80vw" data-count="{{sizeof($selected['related_links'])}}">
+                        @php
+                            $related_link_count = 0;
+                        @endphp
+                        @foreach($selected['related_links'] as $item)
+                        @php                        
+                            $filename   = strtolower(array_reverse(explode("/",asset($item['img_main'])))[0]); 
+                        @endphp
+                        <div class="form-group col-md-4" id="related-link-item-{{$related_link_count}}">
+                            <div class="pull-left x-ear">
+                                <button type="button" class="close" aria-label="Close" onclick="removeElement('related-link',{{$related_link_count}})">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div> 
+                            <div class="upload-wrapper">
+                                <div class="upload-container">
+                                    <div class="upload-container-in">
+                                        <div class="border-container-in">
+                                            <div class="icons fa-4x mt-3 mb-5 {{(@$item['img_main']?'hidden':'')}}" id="input-file-none-related-link-{{$related_link_count}}">
+                                                <i class="fas fa-file-image" data-fa-transform="shrink-3 down-2 left-6 rotate--45"></i>
+                                                <i class="fas fa-file-alt" data-fa-transform="shrink-2 up-4"></i>
+                                                <i class="fas fa-file-pdf" data-fa-transform="shrink-3 down-2 right-6 rotate-45"></i>
                                             </div>
+                                            <div class="mx-auto mb-1" id="input-file-preview-related-link-{{$related_link_count}}">
+                                                @if(@$item['img_main'])
+                                                    <img src="{{asset($item['img_main'])}}" style="height:120px">
+                                                    <br><small>{{$filename}}</small>
+                                                @endif
+                                            </div>
+                                            <input type="file" id="file-upload" data-index-input-file="related-link-{{$related_link_count}}" name="related_links[{{$related_link_count}}][img_main]" class="input-file input-sm" >
+                                            <p class="mb-2"><small>Drag dan drop file, atau <a href="#" id="file-browser">cari disini</a>.</small></p>
+                                            <textarea class="textarea-compact" placeholder="Nama" name="related_links[{{$related_link_count}}][label]">{{$item['label']}}</textarea>
+                                            <input type="text" placeholder="Link" name="related_links[{{$related_link_count}}][value2]" value="{{$item['value2']}}" class="nospace_rw_hypen lowercase">
+                                            <input type="text" placeholder="ID" name="related_links[{{$related_link_count}}][id]" value="{{$item['id']}}" hidden>
+                                            <input type="text" placeholder="ID" name="sliders[{{$related_link_count}}][id]" value="{{$item['id']}}" hidden>
+                                            <span class="text-muted smaller">* isi, hanya jika, ingin bagian tersebut tampil</span>
                                         </div>
-                                    </div>   
+                                    </div>
                                 </div>
-                                @php
-                                    $related_link_count++;
-                                @endphp
-                                @endforeach
-                            </div>
-                            <div class="mt-3">
-                                <center>
-                                    <button class="theme-btn btn-style-four btn-block small" id="related-link-add-btn" type="button">
-                                        <span class="btn-title"><i class="fas fa-plus"></i></span>
-                                    </button>
-                                </center>
-                            </div>
+                            </div>   
                         </div>
+                        @php
+                            $related_link_count++;
+                        @endphp
+                        @endforeach
+                    </div>
+                    <div class="mt-3">
+                        <center>
+                            <button class="theme-btn btn-style-four btn-block small" id="related-link-add-btn" type="button">
+                                <span class="btn-title"><i class="fas fa-plus"></i></span>
+                            </button>
+                        </center>
                     </div>
                 </div>
+                        
             </form>
 
         </div>

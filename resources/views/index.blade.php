@@ -4,33 +4,30 @@
             <!-- Bnner Section -->
             <section class="banner-section">
                 <div class="banner-carousel owl-carousel owl-theme default-arrows dark">
-                    <!-- Slide Item -->
-                    <div class="slide-item" style="background-image: url({{asset('asset/images/gallery/rsma-dji.webp')}});">
-                        <div class="auto-container">
-                            <div class="content-outer">
-                                <div class="content-box">
-                                    <span class="title">Selamat Datang di RSUD Mas Amsyar Kasongan</span>
-                                    <h2>Bekerja yang <span>seharusnya</span> bukan seperti yang biasanya</h2>
-                                    <div class="text">4 S "Senyum, Sapa, Sentuh, Sembuh"</div>
-                                    <div class="btn-box"><a href="/p/about-us" class="theme-btn btn-style-one bg-tealblue"><span class="btn-title">Tentang Kami</span></a></div>
+                    @foreach ($sliders as $item)
+                        <div class="slide-item" style="background-image: url({{asset($item->img_main)}});">
+                            <div class="auto-container">
+                                <div class="content-outer">
+                                    @if($item->value || $item->value2 || $item->label || $item->description)
+                                    <div class="content-box">
+                                        @if($item->value)
+                                            <span class="title">{!!$item->value!!}</span>
+                                        @endif
+                                        @if($item->label)
+                                            <h2>{!!$item->label!!}</h2>
+                                        @endif
+                                        @if($item->description)
+                                            <div class="text">{!!$item->description!!}</div>
+                                        @endif
+                                        @if($item->value2)
+                                            <div class="btn-box"><a href="{!!$item->value2!!}" class="theme-btn btn-style-one bg-tealblue"><span class="btn-title">Telusuri</span></a></div>
+                                        @endif
+                                    </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- Slide Item -->
-                    <div class="slide-item" style="background-image: url({{asset('asset/images/gallery/rsma-administrasi.webp')}});">
-                        <div class="auto-container">
-                            <div class="content-outer">
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Slide Item -->
-                    <div class="slide-item" style="background-image: url({{asset('asset/images/gallery/rsma-interior.webp')}});">
-                        <div class="auto-container">
-                            <div class="content-outer">
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </section>
             <!-- End Bnner Section -->
@@ -230,11 +227,9 @@
                     <div class="sponsors-outer">
                         <!--clients carousel-->
                         <ul class="clients-carousel owl-carousel owl-theme">
-                            <li class="slide-item"> <a href="#"><img src="{{asset('asset/images/clients/1.png')}}" alt=""></a> </li>
-                            <li class="slide-item"> <a href="#"><img src="{{asset('asset/images/clients/2.png')}}" alt=""></a> </li>
-                            <li class="slide-item"> <a href="#"><img src="{{asset('asset/images/clients/3.png')}}" alt=""></a> </li>
-                            <li class="slide-item"> <a href="#"><img src="{{asset('asset/images/clients/4.png')}}" alt=""></a> </li>
-                            <li class="slide-item"> <a href="#"><img src="{{asset('asset/images/clients/5.png')}}" alt=""></a> </li>
+                            @foreach ($related_links as $item)
+                                <li class="slide-item" title="{{$item->label}}"> <a href="{{$item->value2}}"><img src="{{asset($item->img_main)}}" alt=""></a> </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>

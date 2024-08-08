@@ -11,18 +11,15 @@
                         <div class="footer-column col-12">
                             <div class="footer-widget about-widget">
                                 <div class="logo">
-                                    <a href="index.html"><img src="{{asset('asset/images/logo-rsma.webp')}}" style="height:50px"></a>
+                                    <a href="index.html"><img src="{{asset(Cookie::get('logo')?Cookie::get('logo'):'asset/images/logo-rsma.webp')}}" style="height:50px"></a>
                                 </div>
                                 <div class="text smaller">
-                                    <p>
-                                        <b style="color:#004c2d">RSUD Mas Amsyar Kasongan.</b> Melaksanakan upaya kesehatan secara berdaya guna dan berhasil guna dengan mengutamakan penyembuhan (kuratif), pemulihan (rehabilitatif), 
-                                        upaya peningkatan (promotif), pencegahan terjadinya penyakit (preventif) dan melaksanakan upaya rujukan serta pelayanan yang bermutu sesuai standar pelayanan Rumah Sakit.
-                                    </p>
+                                    {!!Cookie::get('desc')!!}
                                 </div>
                                 <ul class="social-icon-three">
-                                    <li><a target="_blank" href="https://www.facebook.com/rsudmakasongan/"><span class="fab fa-facebook-f"></span></a></li>
-                                    <li><a target="_blank" href="https://twitter.com/rsudmakasongan"><span class="fab fa-twitter"></span></a></li>
-                                    <li><a target="_blank" href="https://www.instagram.com/rsudmakasongan/"><span class="fab fa-instagram"></span></a></li>
+                                    <li><a target="_blank" href="{{Cookie::get('socmed_fb')}}"><span class="fab fa-facebook-f"></span></a></li>
+                                    <li><a target="_blank" href="{{Cookie::get('socmed_twitter')}}"><span class="fab fa-twitter"></span></a></li>
+                                    <li><a target="_blank" href="{{Cookie::get('socmed_ig')}}"><span class="fab fa-instagram"></span></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -39,25 +36,33 @@
                                     <ul class="contact-list col-6">
                                         <li>
                                             <span class="icon flaticon-placeholder"></span>
-                                            <div class="text">{!!env('OBJ_ADDRESS')!!}</div>
+                                            <div class="text">{!!Cookie::get('contact_address')?Cookie::get('contact_address'):env('OBJ_ADDRESS')!!}</div>
                                         </li>
 
                                         <li>
                                             <span class="icon flaticon-back-in-time"></span>
-                                            <div class="text">{!!env('OBJ_WORKHOURS')!!}</div>
+                                            <div class="text">
+                                                @php
+                                                    if(Cookie::get('schedule')){
+                                                        foreach(json_decode(Cookie::get('schedule')) as $item){
+                                                            echo $item.'<br>';
+                                                        }
+                                                    }else{  echo env('OBJ_WORKHOURS');   }
+                                                @endphp
+                                            </div>
                                         </li>
                                     </ul>
                                     <ul class="contact-list col-6">
                                         <li>
                                             <span class="icon flaticon-call-1"></span>
                                             <div class="text">Telepon</div>
-                                            <a href="tel:{!!env('OBJ_PHONE')!!}"><strong>{!!env('OBJ_PHONE')!!}</strong></a>
+                                            <a href="tel:{{Cookie::get('contact_phone')}}"><strong>{{Cookie::get('contact_phone')}}</strong></a>
                                         </li>
 
                                         <li>
                                             <span class="icon flaticon-email"></span>
                                             <div class="text">Email<br>
-                                            <a href="mailto:{!!env('OBJ_EMAIL')!!}"><strong>{!!env('OBJ_EMAIL')!!}</strong></a></div>
+                                            <a href="mailto:{{Cookie::get('contact_email')}}"><strong>{{Cookie::get('contact_email')}}</strong></a></div>
                                         </li>
                                     </ul>
                                 </div>

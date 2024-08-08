@@ -394,6 +394,5 @@ function getDataPost(moveToPage=null, type='news', displayTemp=1){
 }
 
 $(function (){
-    
 });
   

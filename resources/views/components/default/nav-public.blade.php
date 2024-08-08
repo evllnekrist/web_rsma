@@ -7,18 +7,26 @@
             <div class="inner-container">
                 <div class="top-left">
                     <ul class="contact-list clearfix">
-                        <li><i class="flaticon-hospital-1"></i>{!!env('OBJ_ADDRESS')!!}</li>
-                        <li><i class="flaticon-back-in-time"></i>{!!env('OBJ_WORKHOURS')!!}</li>
+                        <li><i class="flaticon-hospital-1"></i>{!!Cookie::get('contact_address')?Cookie::get('contact_address'):env('OBJ_ADDRESS')!!}</li>
+                        <li><i class="flaticon-back-in-time"></i>
+                            @php
+                                if(Cookie::get('schedule')){
+                                    foreach(json_decode(Cookie::get('schedule')) as $item){
+                                        echo $item.'<br>';
+                                    }
+                                }else{  echo env('OBJ_WORKHOURS');   }
+                            @endphp
+                        </li>
                     </ul>
                 </div>
                 <div class="top-right">
                     <ul class="social-icon-one">
-                        <li><a target="_blank" href="https://www.facebook.com/rsudmakasongan/"><span class="fab fa-facebook-f"></span></a></li>
-                        <li><a target="_blank" href="https://twitter.com/rsudmakasongan"><span class="fab fa-twitter"></span></a></li>
-                        <li><a target="_blank" href="https://www.instagram.com/rsudmakasongan/"><span class="fab fa-instagram"></span></a></li>
+                        <li><a target="_blank" href="{{Cookie::get('socmed_fb')}}"><span class="fab fa-facebook-f"></span></a></li>
+                        <li><a target="_blank" href="{{Cookie::get('socmed_twitter')}}"><span class="fab fa-twitter"></span></a></li>
+                        <li><a target="_blank" href="{{Cookie::get('socmed_ig')}}"><span class="fab fa-instagram"></span></a></li>
                     </ul>
                     <div class="btn-box">
-                        <a href="tel:{!!env('OBJ_PHONE')!!}" title="{!!env('OBJ_PHONE')!!}" id="appointment-btn" class="theme-btn btn-style-three">
+                        <a href="tel:{{Cookie::get('contact_phone')}}" title="{{Cookie::get('contact_phone')}}" id="appointment-btn" class="theme-btn btn-style-three">
                             <span class="btn-title">Call Center</span>
                         </a>
                     </div>
@@ -35,7 +43,7 @@
             <div class="main-box">
 
                 <div class="logo-box">
-                    <div class="logo"><a href="{{url('/')}}"><img src="{{asset('asset/images/logo-rsma.webp')}}" style="height:120px" alt="logo RSUDMA"></a></div>
+                    <div class="logo"><a href="{{url('/')}}"><img src="{{asset(Cookie::get('logo')?Cookie::get('logo'):'asset/images/logo-rsma.webp')}}" style="height:120px" alt="logo RSUDMA"></a></div>
                 </div>
 
                 <!--Nav Box-->
@@ -90,7 +98,7 @@
         <div class="auto-container">            
             <div class="main-box">
                 <div class="logo-box">
-                    <div class="logo"><a href="index.html"><img src="{{asset('asset/images/logo-rsma.webp')}}" style="height:50px"></a></div>
+                    <div class="logo"><a href="index.html"><img src="{{asset(Cookie::get('logo')?Cookie::get('logo'):'asset/images/logo-rsma.webp')}}" style="height:50px"></a></div>
                 </div>
 
                 <!--Keep This Empty / Menu will come through Javascript-->
@@ -100,7 +108,7 @@
 
     <!-- Mobile Header -->
     <div class="mobile-header">
-        <div class="logo"><a href="index.html"><img src="{{asset('asset/images/logo-rsma.webp')}}" style="height:50px"></a></div>
+        <div class="logo"><a href="index.html"><img src="{{asset(Cookie::get('logo')?Cookie::get('logo'):'asset/images/logo-rsma.webp')}}" style="height:50px"></a></div>
 
         <!--Nav Box-->
         <div class="nav-outer clearfix">

@@ -77,7 +77,7 @@ class WebInfoController extends APIController
     {
         $default_folder     = strtolower($this->model);
         $data               = $request->all();
-        // DB::beginTransaction();
+        DB::beginTransaction();
         // try {
             
             $body['updated_by'] = \Auth::user()?\Auth::user()->id:'unknown';
@@ -104,7 +104,7 @@ class WebInfoController extends APIController
             foreach($this->payload['single_image'] as $key => $value){
                 // echo "SINGLE IMAGE";
                 // dump($value);
-                // echo '<br>>>>>value BFR';dump(@$data[$key]);
+                // echo '<br>>>>>value BFR';// dump(@$data[$key]);
                 $index_img = $key.'.img_main';
                 if($request->file($index_img)){
                     // echo '<br>>>>>>>exist';
@@ -114,9 +114,9 @@ class WebInfoController extends APIController
                     $filename_to_store = $key.'-img_main'.'.'.$extension;// date('Ymd-His')
                     $path = $request->file($index_img)->storeAs('public/'.$default_folder,$filename_to_store); // Upload Image
                     $data[$key]['img_main'] = '/storage/'.$default_folder.'/'.$filename_to_store;
-                    // $item[$key][$key2] = Option::where('type',$value['type'])->update($data[$key]);
+                    $item[$key][$key2] = Option::where('type',$value['type'])->update($data[$key]);
                 }
-                // echo '<br>>>>>value AFTER';dump(@$data[$key]);
+                // echo '<br>>>>>value AFTER';// dump(@$data[$key]);
                 // echo "<hr>";
             }
 
@@ -126,7 +126,7 @@ class WebInfoController extends APIController
                 $multi_image_id_exist = array();
                 foreach($data[$key] as $key2 => $value2){ 
                     // echo '<br>>>INSPECTING '.$key.' - '.$key2;
-                    // echo '<br>>>>>value BFR';dump($value2);
+                    // echo '<br>>>>>value BFR';// dump($value2);
                     $index_img = $key.'.'.$key2.'.img_main';
                     if($request->file($index_img)){
                         // echo '<br>>>>>>>exist';
@@ -137,7 +137,7 @@ class WebInfoController extends APIController
                         $path = $request->file($index_img)->storeAs('public/'.$default_folder,$filename_to_store); // Upload Image
                         $value2['img_main'] = '/storage/'.$default_folder.'/'.$filename_to_store;
                     }
-                    // echo '<br>>>>>value AFTER';dump($value2);
+                    // echo '<br>>>>>value AFTER';// dump($value2);
                     // NOW
                     if(@$value2['id']){
                         array_push($multi_image_id_exist,$value2['id']);
@@ -146,6 +146,7 @@ class WebInfoController extends APIController
                     }else{
                         $value2['type'] = $value['type'];
                         $item[$key][$key2] = Option::create($value2);
+                        array_push($multi_image_id_exist,$item[$key][$key2]['id']);
                     }
                 }
                 // DELETED
@@ -154,7 +155,8 @@ class WebInfoController extends APIController
                 $item[$key]['destroyed'] = Option::where('type',$value['type'])->whereNotIn('id', $multi_image_id_exist)->delete();
                 // echo "<hr>";
             }
-            // DB::commit();
+            $item['update_time'] = Option::where('type','WEB_INFO_UPDATE')->update(['value'=>time()]);
+            DB::commit();
             return response()->json(array('data'=>$item,'message'=>'Berhasil diubah!'), 200);
 
         // } catch(\Exception $exception) {
