@@ -20,4 +20,4 @@
 <script src="{{asset('asset/js/iziToast.js')}}"></script>
 <script src="{{asset('asset/js/select2.min.js')}}"></script>
 <script src="{{asset('asset/js/axios.min.js')}}"></script>
-<script src="{{asset('asset-page/js/app.js').'?v='.date('YmdH').'1' }}"></script>
+<script src="{{asset('asset-page/js/app.js').'?v='.date('YmdH').'2' }}"></script>
