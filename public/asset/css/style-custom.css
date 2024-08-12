@@ -117,13 +117,13 @@ select:read-only {
     opacity: 0.65;
   }
   
-  #file-browser {
+  .file-browser {
     text-decoration: none;
     color: rgb(22,42,255);
     border-bottom: 3px dotted rgba(22, 22, 255, 0.85);
   }
   
-  #file-browser:hover {
+  .file-browser:hover {
     color: rgb(0, 0, 255);
     border-bottom: 3px dotted rgba(0, 0, 255, 0.85);
   }
@@ -148,7 +148,6 @@ select:read-only {
   background: 
     linear-gradient(to left bottom, transparent 50%, rgba(0,0,0,.4) 0) no-repeat 100% 0 / 2em 2em,
     linear-gradient(-135deg, transparent 1.41em, #58a 0);
-  )
 }
 
 /* 60-degree folded corner */

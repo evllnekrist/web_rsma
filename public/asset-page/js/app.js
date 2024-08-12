@@ -394,5 +394,8 @@ function getDataPost(moveToPage=null, type='news', displayTemp=1){
 }
 
 $(function (){
+    if($('#reset-cookies-alert').length){
+        location.reload(true);
+    }
 });
   

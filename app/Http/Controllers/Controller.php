@@ -33,7 +33,7 @@ abstract class Controller
     }
 
     public function reset_home_cookie(){ // tdk boleh ada dump atau echo atau sejenisnya
-      echo '<div class="alert alert-warning alert-dismissible fade show" role="alert" style="margin:0">
+      echo '<div class="alert alert-warning alert-dismissible fade show" id="reset-cookies-alert" role="alert" style="margin:0">
               <strong>Hello!</strong> Home cookies are ready...
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>

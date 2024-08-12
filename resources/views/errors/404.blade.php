@@ -2,7 +2,6 @@
 @section('title', 'Dashboard')
 @section('content')
     <div class="my-5">	
-			<!-- ============================ User Dashboard ================================== -->
 			<section class="error-wrap">
 				<div class="container">
 					<div class="row justify-content-center">
