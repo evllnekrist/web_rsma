@@ -247,7 +247,7 @@ function getDataPost(moveToPage=null, type='news', displayTemp=1){
     // return;
     axios.get(baseUrl+'/api/post', {params: payload}, apiHeaders)
     .then(function (response) {
-      console.log('[DATA] response..',response.data);
+    //   console.log('[DATA] response..',response.data);
       if(response.data.status) {
           if(response.data.data.products && response.data.data.products.length > 0) {
             // i::data display-------------------------------------------------------------------------------START
