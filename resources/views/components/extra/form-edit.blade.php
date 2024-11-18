@@ -5,7 +5,7 @@
                 <a href="{{@$breadcrumbs[0]['route']}}" class="text-dark">{{$breadcrumbs[0]['label']}}&nbsp;&nbsp;</a>
                 <b class="text-white"><i class="fa fa-caret-right"></i>&nbsp;&nbsp;{{$breadcrumbs[1]['label']}}</b>
             </div>
-            <form action="#" method="post" id="form-edit" data-object="{{@$object}}" data-id="{{$id}}" class="row">
+            <form action="#" method="post" enctype="multipart/form-data" id="form-edit" data-object="{{@$object}}" data-id="{{$id}}" class="row">
                     @php
                         $file_count = 0;
                         $editor_count = 0;
@@ -112,15 +112,15 @@
                                                     $extension  = array_reverse(explode(".",$filename))[0];  
                                                 @endphp
                                                 <div class="upload-wrapper">
-                                                    <div class="upload-container">
+                                                    <div class="upload-container" data-index="{{$file_count}}">
                                                         <div class="upload-container-in">
                                                             <div class="border-container-in">
-                                                                <div class="icons fa-4x mt-3 {{(@$selected->img_main||@$selected->file_main)?'hidden':''}}" id="input-file-none-0">
+                                                                <div class="icons fa-4x mt-3 {{(@$selected->img_main||@$selected->file_main)?'hidden':''}}" id="input-file-none-{{$file_count}}">
                                                                     <i class="fas fa-file-image" data-fa-transform="shrink-3 down-2 left-6 rotate--45"></i>
                                                                     <i class="fas fa-file-alt" data-fa-transform="shrink-2 up-4"></i>
                                                                     <i class="fas fa-file-pdf" data-fa-transform="shrink-3 down-2 right-6 rotate-45"></i>
                                                                 </div>
-                                                                <div class="mx-auto" id="input-file-preview-0">
+                                                                <div class="mx-auto" id="input-file-preview-{{$file_count}}">
                                                                     @if(@$selected->img_main||@$selected->file_main)
                                                                         @if(in_array('.'.$extension,Config::get('app.accept_extensions')['img']))
                                                                             <img src="{{asset($selected[$input['var_name']])}}">
@@ -132,8 +132,7 @@
                                                                         <br><span>{{$filename}}</span>
                                                                     @endif
                                                                 </div>
-                                                                <input type="file" id="file-upload" data-index-input-file="0" name="{{$input['var_name']}}" 
-                                                                    class="input-file" {{@$input['is_required']?'required':''}}>
+                                                                <input type="file"  class="input-file" id="input-file-el-{{$file_count}}" data-index-input-file="{{$file_count}}" name="{{$input['var_name']}}" {{@$input['is_required']?'required':''}}>
                                                                 <p><small>Drag dan drop file, atau <a href="#" id="file-browser">cari disini</a>.</small></p>
                                                             </div>
                                                         </div>

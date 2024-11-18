@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 // use Symfony\Component\HttpKernel\Exception\HttpException;
+use Exception;
 use OpenApi\Annotations as OA;
 
 /**
@@ -111,6 +113,7 @@ class APIController extends Controller
     }
 
     public function post_common(Request $request, $model, $rules, $file_indexes){
+        DB::beginTransaction();
         try {
             $validator = Validator::make($request->all(), $rules); 
             if ($validator->fails()) {
@@ -143,12 +146,21 @@ class APIController extends Controller
                 }
                 foreach($file_indexes as $index){ // https://laracasts.com/discuss/channels/laravel/how-direct-upload-file-in-storage-folder
                   if($request->file($index)){
-                    $filename_with_ext = $request->file($index)->getClientOriginalName(); // Get filename with the extension
-                    $filename = pathinfo($filename_with_ext, PATHINFO_FILENAME); // Get just filename
-                    $extension = $request->file($index)->getClientOriginalExtension(); // Get just ext
-                    $filename_to_store = $id.'-'.$index.'.'.$extension;
-                    $path = $request->file($index)->storeAs('public/'.$default_folder,$filename_to_store); // Upload Image
-                    $body2[$index] = '/storage/'.$default_folder.'/'.$filename_to_store;
+                    if($request->file($index)->isValid()){
+                      $filename_with_ext = $request->file($index)->getClientOriginalName(); // Get filename with the extension
+                      $filename = pathinfo($filename_with_ext, PATHINFO_FILENAME); // Get just filename
+                      $extension = $request->file($index)->getClientOriginalExtension(); // Get just ext
+                      $filename_to_store = $id.'-'.$index.'.'.$extension;
+                      $path = $request->file($index)->storeAs('public/'.$default_folder,$filename_to_store); // Upload Image
+                      if (!$path) {
+                          $message  = 'File upload failed.';
+                          throw new Exception($message);
+                      }
+                      $body2[$index] = '/storage/'.$default_folder.'/'.$filename_to_store;
+                    }else{
+                      $message  = 'File given invalid.';
+                      throw new Exception($message);
+                    }
                   }
                 }
                 if($request->file($file_indexes[0])){
@@ -157,8 +169,10 @@ class APIController extends Controller
                 }
             }
 
+            DB::commit();
             return response()->json(array('data'=>($item2?$item2:$item),'message'=>'Berhasil ditambahkan!'), 200);
         } catch(\Exception $exception) {
+            DB::rollBack();
             // throw new HttpException(400, "Invalid data : {$exception->getMessage()}");
             return response()->json(array('message'=>"Invalid data : {$exception->getMessage()}"),400);
         }
@@ -175,6 +189,7 @@ class APIController extends Controller
     }
 
     public function put_common(Request $request, $id, $model, $rules, $file_indexes){
+        $message            = '';
         $default_folder     = strtolower($model);
         $model              = 'App\Models\\'.$model;
         $item               = $model::where(app($model)->getKeyName(),$id)->first();
@@ -182,6 +197,7 @@ class APIController extends Controller
             return response()->json(array('message'=>'Item tidak ditemukan'),404);
         }
         // dd($request->all());
+        DB::beginTransaction();
         try {
             $body               = $request->all();
             foreach (array_map('gettype', $body) as $key => $value) { // to find explodes value to be imploded before further action
@@ -199,20 +215,31 @@ class APIController extends Controller
 
             if(!empty($file_indexes)){
                 foreach($file_indexes as $index){ // https://laracasts.com/discuss/channels/laravel/how-direct-upload-file-in-storage-folder
-                  if($request->file($index)){
-                    $filename_with_ext = $request->file($index)->getClientOriginalName(); // Get filename with the extension
-                    $filename = pathinfo($filename_with_ext, PATHINFO_FILENAME); // Get just filename
-                    $extension = $request->file($index)->getClientOriginalExtension(); // Get just ext
-                    $filename_to_store = $id.'-'.$index.'.'.$extension;
-                    $path = $request->file($index)->storeAs('public/'.$default_folder,$filename_to_store); // Upload Image
-                    $body[$index] = '/storage/'.$default_folder.'/'.$filename_to_store;
+                  if($request->file($index)){ // check if data is really exist
+                    if($request->file($index)->isValid()){
+                      $filename_with_ext = $request->file($index)->getClientOriginalName(); // Get filename with the extension
+                      $filename = pathinfo($filename_with_ext, PATHINFO_FILENAME); // Get just filename
+                      $extension = $request->file($index)->getClientOriginalExtension(); // Get just ext
+                      $filename_to_store = $id.'-'.$index.'.'.$extension; 
+                      $path = $request->file($index)->storeAs('public/'.$default_folder,$filename_to_store); // Upload Image
+                      if (!$path) {
+                          $message  = 'File upload failed.';
+                          throw new Exception($message);
+                      }
+                      $body[$index] = '/storage/'.$default_folder.'/'.$filename_to_store;
+                    }else{
+                        $message  = 'File given invalid.';
+                        throw new Exception($message);
+                    }
                   }
                 }
             }
             $item->fill($body)->save();
+            DB::commit();
             return response()->json(array('data'=>$item,'message'=>'Berhasil diubah!'), 200);
 
         } catch(\Exception $exception) {
+          DB::rollBack();
           return response()->json(array('message'=>"Invalid data : {$exception->getMessage()}"),400);
         }
     }

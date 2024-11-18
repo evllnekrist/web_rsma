@@ -17,6 +17,11 @@ $(document).ready(function() {
 
 });
 
+$('.upload-container').on('click', function() {
+  console.log('upload window appeared');
+  var index = $(this).data('index'); // Get the index from data attribute
+  $('#input-file-el-' + index).trigger('click'); // Trigger the file input based on index
+});
 $(".input-file").css("opacity", "0");
 $(".file-browser").click(function(e) {
   e.preventDefault();

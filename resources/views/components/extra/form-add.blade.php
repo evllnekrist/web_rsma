@@ -92,7 +92,7 @@
                                             @break
                                         @case('file')
                                             <div class="upload-wrapper">
-                                                <div class="upload-container">
+                                                <div class="upload-container" data-index="{{$file_count}}">
                                                     <div class="upload-container-in">
                                                         <div class="border-container-in">
                                                             <div class="icons fa-4x mt-3" id="input-file-none-{{$file_count}}">
@@ -131,7 +131,7 @@
 <section class="services-section-two">
     <div class="auto-container">
 
-        <form action="#" method="post" id="form-add-custom" data-object="{{@$object}}">
+        <form action="#" method="post" enctype="multipart/form-data" id="form-add-custom" data-object="{{@$object}}">
             @if(@$custom_inputs) 
                 <textarea id="custom-inputs" hidden>{{json_encode($custom_inputs)}}</textarea>           
                 <div class="row justify-content-center">
